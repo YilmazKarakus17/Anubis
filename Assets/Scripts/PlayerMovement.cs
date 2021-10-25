@@ -7,11 +7,16 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D r2d;
     // Player variables
-    public float walkSpeed;
-    public float jumpMagnitude;
+    private float speed = 45;
+    private float jumpMagnitude = 15;
+    private float dashBoost = 5;
+
     // Private fields
     private float horizontalValue;
+
+    //Booleans
     private bool isJumping;
+    private bool allowDashing;
     private bool applyJump;
 
     // Start is called before the first frame update
@@ -35,9 +40,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
-        // When the player finally touches the ground, the player can jump once again.
-        if (collision.gameObject.name == "Ground") {
+    public void Dash(InputAction.CallbackContext value) {
+        // The player can only jump, whilst touching the ground.
+        if (value.performed && !allowDashing) {
+            allowDashing = true;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D otherCollider){
+        if (otherCollider.gameObject.tag == "Floor"){
             isJumping = false;
         }
     }
@@ -56,13 +67,21 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate() {
         // Move the player either left or right.
-        if (horizontalValue > 0f || horizontalValue < 0f) {
-            r2d.AddForce(new Vector2(horizontalValue * walkSpeed, 0f), ForceMode2D.Force);
+        if (horizontalValue != 0f) {
+            r2d.AddForce(new Vector2(horizontalValue * speed, 0f), ForceMode2D.Force);
         }
+
         // Jump force is only applied once.
         if (isJumping && applyJump) {
-            r2d.AddForce(new Vector2(0f, jumpMagnitude), ForceMode2D.Impulse);
+            r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
             applyJump = false;
         }
+
+        // Dash only applied
+        if (allowDashing) {
+            r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
+            allowDashing = false;
+        }
+        
     }
 }
