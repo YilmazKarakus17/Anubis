@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D r2d;
     // Player variables
-    private float speed = 45;
+    private float speed = 35;
     private float jumpMagnitude = 15;
     private float dashBoost = 5;
 
