@@ -19,9 +19,22 @@ public class PlayerMovement : MonoBehaviour
     private bool allowDashing;
     private bool applyJump;
 
+    // gets the animator object
+    Animator animator;
+    // to store the current animation state of the player
+    private string currentState;
+    // Constants that represent the animations in the game
+    const string PLAYER_IDLE = "playerIdle";
+    const string PLAYER_RUN = "playerRun";
+    const string PLAYER_JUMP = "playerJump";
+
+
+
     // Start is called before the first frame update
     void Start() {
         r2d = gameObject.GetComponent<Rigidbody2D>();
+
+        animator = GetComponent<Animator>();
     }
 
     public void Move(InputAction.CallbackContext value) {
@@ -60,6 +73,20 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = scaler;
     }
 
+
+    // changes the animation
+    void changeAnimationState(string newState){
+        // return if there's no state change
+        if (currentState==newState) return;
+
+        // play the animation
+        animator.Play(newState);
+
+        // update the current state
+        currentState = newState;
+    }
+
+
     // Update is called once per frame
     void Update() {
         
@@ -69,18 +96,27 @@ public class PlayerMovement : MonoBehaviour
         // Move the player either left or right.
         if (horizontalValue != 0f) {
             r2d.AddForce(new Vector2(horizontalValue * speed, 0f), ForceMode2D.Force);
+
+            if (!isJumping){
+                changeAnimationState(PLAYER_RUN);
+            }
         }
 
         // Jump force is only applied once.
         if (isJumping && applyJump) {
             r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
             applyJump = false;
+            changeAnimationState(PLAYER_JUMP);
         }
 
         // Dash only applied
         if (allowDashing) {
             r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
             allowDashing = false;
+        }
+
+        if (horizontalValue==0 && !isJumping){
+            changeAnimationState(PLAYER_IDLE);
         }
         
     }
