@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D r2d;
     // Player variables (set to public, so we can change the values in the unity editor)
     public float speed = 30;
-    public float jumpMagnitude = 15;
+    public float jumpMagnitude = 17;
     public float dashBoost = 5;
     public float slideBoost = 5;
 
