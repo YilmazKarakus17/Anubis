@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
 
     //Booleans
     private bool isGrounded;
-    private bool isJumping;
-    private bool isDashing;
-    private bool isSliding;
+    private bool performJump;
+    private bool performDash;
+    private bool performSlide;
 
     // gets the animator object
     Animator animator;
@@ -51,21 +51,21 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext value) {
         // The player can only jump, whilst touching the ground.
         if (value.performed && isGrounded) {
-            isJumping = true;
+            performJump = true;
         }
     }
 
     public void Dash(InputAction.CallbackContext value) {
-        // The player can only jump, whilst touching the ground.
-        if (value.performed && !isDashing) {
-            isDashing = true;
+        // The player can only dash if they are not already dashing
+        if (value.performed && !performDash) {
+            performDash = true;
         }
     }
 
     public void Slide(InputAction.CallbackContext value) {
-        // The player can only jump, whilst touching the ground.
-        if (value.performed && !isSliding) {
-            isSliding = true;
+        // The player can only slide, whilst touching the ground.
+        if (value.performed && !performSlide && isGrounded) {
+            performSlide = true;
         }
     } 
 
@@ -112,17 +112,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Jump force is only applied once.
-        if (isJumping && isGrounded) {
+        if (performJump && isGrounded) {
             r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
             isGrounded = false;
-            isJumping = false;
+            performJump = false;
             changeAnimationState(PLAYER_JUMP);
         }
 
         // Dash only applied
-        if (isDashing) {
+        if (performDash) {
             r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
-            isDashing = false;
+            performDash = false;
         }
 
         if (horizontalValue==0 && isGrounded){
