@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D r2d;
-    // Player variables
-    private float speed = 35;
-    private float jumpMagnitude = 15;
-    private float dashBoost = 5;
-    private float slideBoost = 5;
+    // Player variables (set to public, so we can change the values in the unity editor)
+    public float speed = 30;
+    public float jumpMagnitude = 15;
+    public float dashBoost = 5;
+    public float slideBoost = 5;
 
     // Private fields
     private float horizontalValue;
@@ -31,13 +31,11 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_JUMP = "playerJump";
     const string PLAYER_SLIDE = "playerSlide";
     const string PLAYER_DASH ="playerDash";
-    const string PLAYER_JUMP_DASH = "playerJumpDash";
 
 
     // Start is called before the first frame update
     void Start() {
         r2d = gameObject.GetComponent<Rigidbody2D>();
-
         animator = GetComponent<Animator>();
     }
 
@@ -105,16 +103,18 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate() {
         // Move the player either left or right.
         if (horizontalValue != 0f) {
-            r2d.AddForce(new Vector2(horizontalValue * speed, 0f), ForceMode2D.Force);
-
-            if (isGrounded){
+            // The player is unable to go beyond the given maximum speed.
+            Vector2 movement = new Vector2(horizontalValue, 0);
+            r2d.velocity = Vector2.ClampMagnitude(r2d.velocity, speed);
+            r2d.AddForce(movement * speed, ForceMode2D.Force);
+            if (isGrounded) {
                 changeAnimationState(PLAYER_RUN);
             }
         }
 
         // Jump force is only applied once.
         if (performJump) {
-            r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
+            r2d.AddForce(new Vector2(0, jumpMagnitude), ForceMode2D.Impulse);
             isGrounded = false;
             performJump = false;
             changeAnimationState(PLAYER_JUMP);
@@ -124,11 +124,6 @@ public class PlayerMovement : MonoBehaviour
         if (performDash) {
             r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
             performDash = false;
-
-            if (!isGrounded){
-                changeAnimationState(PLAYER_JUMP_DASH);
-            }
-
             //changeAnimationState(PLAYER_DASH);
         }
 

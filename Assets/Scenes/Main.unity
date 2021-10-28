@@ -554,7 +554,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.2, y: -2.9, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1347960593}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -570,6 +571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27388c4fdb011504fb7afa5087d74422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 30
+  jumpMagnitude: 15
+  dashBoost: 5
+  slideBoost: 5
 --- !u!114 &1200118992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +688,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 01121bea-b77c-47fd-a9c3-773ab4de2ec0
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6861a7a0-3265-47b5-bbd1-2c696bbe3fc4
+    m_ActionName: Player/Slide[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 10738b65-d7a9-493c-bab0-49320a3d746a
+    m_ActionName: Player/Attack[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -841,5 +854,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c017f652f4e15604b9592a912b6a0450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 20
+  smoothTime: 320
   TargetObject: {fileID: 811370177}
+--- !u!1 &1347960592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347960593}
+  m_Layer: 0
+  m_Name: AttackCentre
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1347960593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347960592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1200118990}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
