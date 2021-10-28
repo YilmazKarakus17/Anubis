@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext value) {
         // The player can only slide, whilst touching the ground.
-        if (value.performed && !performSlide && isGrounded) {
+        if (value.performed && performSlide==false && isGrounded) {
             performSlide = true;
         }
     } 
@@ -112,17 +112,25 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Jump force is only applied once.
-        if (performJump && isGrounded) {
+        if (performJump) {
             r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
             isGrounded = false;
             performJump = false;
             changeAnimationState(PLAYER_JUMP);
         }
 
-        // Dash only applied
+        // Applies a dash on the player object and changes the animation to be that of dashing
         if (performDash) {
             r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
             performDash = false;
+            //changeAnimationState(PLAYER_DASH);
+        }
+
+        // Applies a slide on the player object and changes the animation to be that of sliding
+        if (performSlide) {
+            //r2d.AddForce(new Vector2((horizontalValue)*slideBoost,0f), ForceMode2D.Impulse);
+            //changeAnimationState(PLAYER_SLIDE);
+            performSlide = false;
         }
 
         if (horizontalValue==0 && isGrounded){
