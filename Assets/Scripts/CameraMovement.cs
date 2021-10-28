@@ -11,6 +11,9 @@ public class CameraMovement : MonoBehaviour
 
     public GameObject TargetObject;
 
+    public GameObject player;
+    public PlayerScript playerScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +21,16 @@ public class CameraMovement : MonoBehaviour
         Vector3 targetV3 = transform.position; // Gets the current 3D position of the GameObject it's assigned to, in this case it's the camera
         targetV3.x = targetV2.x; targetV3.y = targetV2.y; //Only changes the x and y so that the cameras original z position isn't affected.
         this.target = targetV3;
+
+        //Setting PlayerScript from Player GameObject
+        playerScript = player.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, this.target, ref currentVelocity, smoothTime);
+        if (!playerScript.isPlayerDead()){
+            transform.position = Vector3.SmoothDamp(transform.position, this.target, ref currentVelocity, smoothTime);
+        }
     }
 }

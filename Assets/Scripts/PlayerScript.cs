@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
+    //Variables containing Objects
     private Rigidbody2D r2d;
+    Animator animator;
+
     // Player variables (set to public, so we can change the values in the unity editor)
     public float speed = 30;
     public float jumpMagnitude = 17;
@@ -21,9 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private bool performDash;
     private bool performSlide;
     private bool playerIsDead = false;
-
-    // gets the animator object
-    Animator animator;
 
     // to store the current animation state of the player
     private string currentState;
@@ -87,10 +87,19 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherCollider){
         if (otherCollider.gameObject.tag == "SpikeTrap")
         {
-            playerIsDead = true;
+            setPlayerIsDeadTrue();
             timeOfDeath = 0;
         }
+    }
 
+    //sets the playerIsDead instance variable to true
+    public void setPlayerIsDeadTrue(){
+        playerIsDead = true;
+    }
+
+    //Returns true if player is dead
+    public bool isPlayerDead(){
+        return playerIsDead;
     }
 
     void flip() {

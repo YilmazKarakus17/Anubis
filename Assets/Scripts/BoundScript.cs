@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bound : MonoBehaviour
+public class BoundScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,8 @@ public class Bound : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherCollider){
         if (otherCollider.gameObject.tag == "Player")
         {
-            Destroy(otherCollider.gameObject);
+            PlayerScript playerScript = otherCollider.gameObject.GetComponent<PlayerScript>();
+            playerScript.setPlayerIsDeadTrue();
         }
             
     }
