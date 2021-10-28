@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_JUMP = "playerJump";
     const string PLAYER_SLIDE = "playerSlide";
     const string PLAYER_DASH ="playerDash";
+    const string PLAYER_JUMP_DASH = "playerJumpDash";
 
 
     // Start is called before the first frame update
@@ -123,6 +124,11 @@ public class PlayerMovement : MonoBehaviour
         if (performDash) {
             r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
             performDash = false;
+
+            if (!isGrounded){
+                changeAnimationState(PLAYER_JUMP_DASH);
+            }
+
             //changeAnimationState(PLAYER_DASH);
         }
 
