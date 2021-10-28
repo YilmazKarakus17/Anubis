@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_SLIDE = "playerSlide";
     const string PLAYER_DASH ="playerDash";
     const string PLAYER_DEATH = "playerDeath";
+    const string PLAYER_JUMP_DASH = "playerJumpDash";
 
     // Floats used to wait for the animation to finish before destroying player object 
     public float deathAnimationWaitTime = 1f;
@@ -148,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
                 isGrounded = false;
                 performJump = false;
                 changeAnimationState(PLAYER_JUMP);
+
             }
 
             // Applies a dash on the player object and changes the animation to be that of dashing
@@ -155,6 +157,10 @@ public class PlayerMovement : MonoBehaviour
                 r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
                 performDash = false;
                 //changeAnimationState(PLAYER_DASH);
+
+                if (!isGrounded){
+                    changeAnimationState(PLAYER_JUMP_DASH);
+                }
             }
 
             // Applies a slide on the player object and changes the animation to be that of sliding
