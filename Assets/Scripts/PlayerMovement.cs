@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D r2d;
-    // Player variables
-    private float speed = 35;
-    private float jumpMagnitude = 15;
-    private float dashBoost = 5;
-    private float slideBoost = 5;
+    // Player variables (set to public, so we can change the values in the unity editor)
+    public float speed = 30;
+    public float jumpMagnitude = 15;
+    public float dashBoost = 5;
+    public float slideBoost = 5;
 
     // Private fields
     private float horizontalValue;
@@ -20,24 +20,29 @@ public class PlayerMovement : MonoBehaviour
     private bool performJump;
     private bool performDash;
     private bool performSlide;
+    private bool playerIsDead = false;
 
     // gets the animator object
     Animator animator;
+
     // to store the current animation state of the player
     private string currentState;
+
     // Constants that represent the animations in the game
     const string PLAYER_IDLE = "playerIdle";
     const string PLAYER_RUN = "playerRun";
     const string PLAYER_JUMP = "playerJump";
     const string PLAYER_SLIDE = "playerSlide";
     const string PLAYER_DASH ="playerDash";
-    const string PLAYER_JUMP_DASH = "playerJumpDash";
+    const string PLAYER_DEATH = "playerDeath";
 
+    // Floats used to wait for the animation to finish before destroying player object 
+    public float deathAnimationWaitTime = 1f;
+    private float timeOfDeath;
 
     // Start is called before the first frame update
     void Start() {
         r2d = gameObject.GetComponent<Rigidbody2D>();
-
         animator = GetComponent<Animator>();
     }
 
@@ -45,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
         horizontalValue = value.ReadValue<float>();
         // The player model looks in the same direction that the player is moving in.
         if ((horizontalValue > 0 && transform.localScale.x < 0) || (horizontalValue < 0 && transform.localScale.x > 0)) {
-            flip();
+            if (!playerIsDead){
+                flip();
+            }        
         }
     }
 
@@ -76,6 +83,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D otherCollider){
+        if (otherCollider.gameObject.tag == "SpikeTrap")
+        {
+            playerIsDead = true;
+            timeOfDeath = 0;
+        }
+
+    }
+
     void flip() {
         // Flip the player's model, so that the player is facing in the correct direction.
         Vector3 scaler = transform.localScale;
@@ -96,6 +112,14 @@ public class PlayerMovement : MonoBehaviour
         currentState = newState;
     }
 
+    //Method called when player dies
+    void playerDeath(){
+        changeAnimationState(PLAYER_DEATH);
+        timeOfDeath += Time.deltaTime;
+        if (timeOfDeath > deathAnimationWaitTime){
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update() {
@@ -103,45 +127,46 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-        // Move the player either left or right.
-        if (horizontalValue != 0f) {
-            r2d.AddForce(new Vector2(horizontalValue * speed, 0f), ForceMode2D.Force);
-
-            if (isGrounded){
-                changeAnimationState(PLAYER_RUN);
-            }
+        if (playerIsDead){
+            playerDeath();
         }
-
-        // Jump force is only applied once.
-        if (performJump) {
-            r2d.AddForce(Vector2.up*jumpMagnitude, ForceMode2D.Impulse);
-            isGrounded = false;
-            performJump = false;
-            changeAnimationState(PLAYER_JUMP);
-        }
-
-        // Applies a dash on the player object and changes the animation to be that of dashing
-        if (performDash) {
-            r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
-            performDash = false;
-
-            if (!isGrounded){
-                changeAnimationState(PLAYER_JUMP_DASH);
+        else{
+            // Move the player either left or right.
+            if (horizontalValue != 0f) {
+                // The player is unable to go beyond the given maximum speed.
+                Vector2 movement = new Vector2(horizontalValue, 0);
+                r2d.velocity = Vector2.ClampMagnitude(r2d.velocity, speed);
+                r2d.AddForce(movement * speed, ForceMode2D.Force);
+                if (isGrounded) {
+                    changeAnimationState(PLAYER_RUN);
+                }
             }
 
-            //changeAnimationState(PLAYER_DASH);
-        }
+            // Jump force is only applied once.
+            if (performJump) {
+                r2d.AddForce(new Vector2(0, jumpMagnitude), ForceMode2D.Impulse);
+                isGrounded = false;
+                performJump = false;
+                changeAnimationState(PLAYER_JUMP);
+            }
 
-        // Applies a slide on the player object and changes the animation to be that of sliding
-        if (performSlide) {
-            //r2d.AddForce(new Vector2((horizontalValue)*slideBoost,0f), ForceMode2D.Impulse);
-            //changeAnimationState(PLAYER_SLIDE);
-            performSlide = false;
-        }
+            // Applies a dash on the player object and changes the animation to be that of dashing
+            if (performDash) {
+                r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
+                performDash = false;
+                //changeAnimationState(PLAYER_DASH);
+            }
 
-        if (horizontalValue==0 && isGrounded){
-            changeAnimationState(PLAYER_IDLE);
+            // Applies a slide on the player object and changes the animation to be that of sliding
+            if (performSlide) {
+                //r2d.AddForce(new Vector2((horizontalValue)*slideBoost,0f), ForceMode2D.Impulse);
+                //changeAnimationState(PLAYER_SLIDE);
+                performSlide = false;
+            }
+
+            if (horizontalValue==0 && isGrounded){
+                changeAnimationState(PLAYER_IDLE);
+            }
         }
-        
     }
 }
