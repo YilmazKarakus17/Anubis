@@ -167,7 +167,7 @@ public class PlayerScript : MonoBehaviour
                 performDash = false;
                 //changeAnimationState(PLAYER_DASH);
 
-                if (!isGrounded){
+                if (!isGrounded && horizontalValue!=0f){
                     changeAnimationState(PLAYER_JUMP_DASH);
                 }
             }
