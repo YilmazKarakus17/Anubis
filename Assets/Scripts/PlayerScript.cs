@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     Animator animator;
 
     // Player variables (set to public, so we can change the values in the unity editor)
+    public float health = 100;
     public float speed = 30;
     public float jumpMagnitude = 17;
     public float dashBoost = 5;
@@ -90,6 +91,24 @@ public class PlayerScript : MonoBehaviour
             setPlayerIsDeadTrue();
             timeOfDeath = 0;
         }
+        if (otherCollider.gameObject.tag == "FireTrap")
+        {
+            minusOneHealth();
+            if (checkIfPlayerNeedsToDie()){
+                setPlayerIsDeadTrue();
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D otherCollider)
+    {
+        if (otherCollider.gameObject.tag == "FireTrap")
+        {
+            minusOneHealth();
+            if (checkIfPlayerNeedsToDie()){
+                setPlayerIsDeadTrue();
+            }
+        }
     }
 
     //sets the playerIsDead instance variable to true
@@ -97,9 +116,21 @@ public class PlayerScript : MonoBehaviour
         playerIsDead = true;
     }
 
+    //removes 1 HP from the player object
+    public void minusOneHealth(){
+        this.health = this.health - 1;
+    }
+
     //Returns true if player is dead
     public bool isPlayerDead(){
         return playerIsDead;
+    }
+
+    public bool checkIfPlayerNeedsToDie(){
+        if (this.health <= 0){
+            return true;
+        }
+        return false;
     }
 
     void flip() {
@@ -128,6 +159,16 @@ public class PlayerScript : MonoBehaviour
         timeOfDeath += Time.deltaTime;
         if (timeOfDeath > deathAnimationWaitTime){
             Destroy(gameObject);
+        }
+    }
+
+    void playerDash(){
+        r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
+        performDash = false;
+        //changeAnimationState(PLAYER_DASH);
+
+        if (!isGrounded && horizontalValue!=0f){
+            changeAnimationState(PLAYER_JUMP_DASH);
         }
     }
 
@@ -163,13 +204,7 @@ public class PlayerScript : MonoBehaviour
 
             // Applies a dash on the player object and changes the animation to be that of dashing
             if (performDash) {
-                r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
-                performDash = false;
-                //changeAnimationState(PLAYER_DASH);
-
-                if (!isGrounded && horizontalValue!=0f){
-                    changeAnimationState(PLAYER_JUMP_DASH);
-                }
+                playerDash();
             }
 
             // Applies a slide on the player object and changes the animation to be that of sliding
