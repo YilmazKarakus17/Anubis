@@ -1721,8 +1721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 125
-  jumpMagnitude: 42
+  speed: 115
+  jumpMagnitude: 40
   jumpPowerUpMagnitude: 0
   dashBoost: 20
   numberOfDashs: 0
@@ -1889,7 +1889,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 5
   m_AngularDrag: 5
-  m_GravityScale: 18
+  m_GravityScale: 15
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
