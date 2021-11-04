@@ -107,10 +107,15 @@ public class PlayerScript : MonoBehaviour
         }
         if (otherCollider.gameObject.tag == "FireTrap")
         {
-            minusOneHealth();
-            if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
-                setPlayerIsDeadTrue();
+            if (!checkIfPlayerNeedsToDie()){
+                minusOneHealth();
             }
+            else{
+                if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
+                    setPlayerIsDeadTrue();
+                }
+            }
+
         }
         if (otherCollider.gameObject.tag == "JumpPowerUps")
         {
@@ -137,9 +142,13 @@ public class PlayerScript : MonoBehaviour
     {
         if (otherCollider.gameObject.tag == "FireTrap")
         {
-            minusOneHealth();
-            if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
-                setPlayerIsDeadTrue();
+            if (!checkIfPlayerNeedsToDie()){
+                minusOneHealth();
+            }
+            else{
+                if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
+                    setPlayerIsDeadTrue();
+                }
             }
         }
     }
@@ -183,6 +192,11 @@ public class PlayerScript : MonoBehaviour
     //Adds 1 to the overall number of dashses
     public void addOneDash(){
         this.numberOfDashs += 1;
+    }
+
+    //Adds 1 to the overall number of souls
+    public void addOneSoul(){
+        this.soulCount += 1;
     }
 
     //removes 1 from the overall number of dashses
@@ -251,7 +265,6 @@ public class PlayerScript : MonoBehaviour
         transform.localScale = scaler;
     }
 
-
     // changes the animation
     void changeAnimationState(string newState){
         // return if there's no state change
@@ -312,12 +325,13 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    //Applies necessary forces and animations to make the player object to die
+    //Called to perform the player object's death
     void playerDeath(){
         changeAnimationState(PLAYER_DEATH);
         timeOfDeath += Time.deltaTime;
         if (timeOfDeath > deathAnimationWaitTime){
             Destroy(gameObject);
+            //Scene restart goes here.
         }
     }
 
