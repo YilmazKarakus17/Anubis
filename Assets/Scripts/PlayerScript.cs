@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  
 
 public class PlayerScript : MonoBehaviour
 {
@@ -332,7 +333,8 @@ public class PlayerScript : MonoBehaviour
         changeAnimationState(PLAYER_DEATH);
         timeOfDeath += Time.deltaTime;
         if (timeOfDeath > deathAnimationWaitTime){
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
             //Scene restart goes here.
         }
     }
