@@ -108,7 +108,8 @@ public class PlayerScript : MonoBehaviour
         if (otherCollider.gameObject.tag == "FireTrap")
         {
             if (!checkIfPlayerNeedsToDie()){
-                minusOneHealth();
+                // Fire traps deal one damage on entering collision
+                minusHealth(1);
             }
             else{
                 if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
@@ -143,7 +144,8 @@ public class PlayerScript : MonoBehaviour
         if (otherCollider.gameObject.tag == "FireTrap")
         {
             if (!checkIfPlayerNeedsToDie()){
-                minusOneHealth();
+                // Fire traps deal consecutive damage whilst the player is standing on it.
+                minusHealth(1);
             }
             else{
                 if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
@@ -160,8 +162,8 @@ public class PlayerScript : MonoBehaviour
     }
 
     //removes 1 HP from the player object
-    public void minusOneHealth(){
-        this.health = this.health - 1;
+    public void minusHealth(float damage){
+        this.health = this.health - damage;
     }
 
     //Sets the jumpPowerUpMagnitude to be that of the given value
