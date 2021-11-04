@@ -27,7 +27,8 @@ public class PlayerScript : MonoBehaviour
     private bool allowBoostedJump;
     private bool performDash;
     private bool performSlide;
-    private bool playerIsDead = false;
+    private bool playerIsDead;
+    private bool invulnerable;
 
     // to store the current animation state of the player
     private string currentState;
@@ -45,13 +46,11 @@ public class PlayerScript : MonoBehaviour
     public float deathAnimationWaitTime = 1f;
     private float timeOfDeath;
 
-    // Start is called before the first frame update
-    void Start() {
-        r2d = gameObject.GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        this.numberOfDashs = 0;
-    }
+    // Floats used to countdown the amount of time the player object is invulnerabile
+    public float invulnerabilityCountDownTime;
+    private float timeOfInvulnerability;
 
+    //=================================================== User Action Bindings =============================================//
     public void Move(InputAction.CallbackContext value) {
         horizontalValue = value.ReadValue<float>();
         // The player model looks in the same direction that the player is moving in.
@@ -83,6 +82,8 @@ public class PlayerScript : MonoBehaviour
         }
     } 
 
+    /*============================================== Collider and Trigger Methods =============================================*/
+
     void OnCollisionEnter2D(Collision2D otherCollider){
         if (otherCollider.gameObject.tag == "Floor"){
             isGrounded = true;
@@ -92,13 +93,15 @@ public class PlayerScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherCollider){
         if (otherCollider.gameObject.tag == "SpikeTrap")
         {
-            setPlayerIsDeadTrue();
-            timeOfDeath = 0;
+            if (!isInvulnerable()){
+                setPlayerIsDeadTrue();
+                timeOfDeath = 0;
+            }
         }
         if (otherCollider.gameObject.tag == "FireTrap")
         {
             minusOneHealth();
-            if (checkIfPlayerNeedsToDie()){
+            if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
                 setPlayerIsDeadTrue();
             }
         }
@@ -114,6 +117,13 @@ public class PlayerScript : MonoBehaviour
             addOneDash();
             Destroy(otherCollider.gameObject);
         }
+        if (otherCollider.gameObject.tag == "InvulnerabilityPowerUp")
+        {
+            Invulnerability invulnerability = otherCollider.gameObject.GetComponent<Invulnerability>();
+            startInvulnerabilityTimer(invulnerability.getInvulnerabilityTime());
+            allowInvulnerability();
+            Destroy(otherCollider.gameObject);
+        }
     }
 
     void OnTriggerStay2D(Collider2D otherCollider)
@@ -121,12 +131,13 @@ public class PlayerScript : MonoBehaviour
         if (otherCollider.gameObject.tag == "FireTrap")
         {
             minusOneHealth();
-            if (checkIfPlayerNeedsToDie()){
+            if (checkIfPlayerNeedsToDie() && !isInvulnerable()){
                 setPlayerIsDeadTrue();
             }
         }
     }
 
+    /*============================================== Getter and Setter Methods =============================================*/
     //sets the playerIsDead instance variable to true
     public void setPlayerIsDeadTrue(){
         playerIsDead = true;
@@ -145,6 +156,16 @@ public class PlayerScript : MonoBehaviour
     //Sets allowBoostedJump variable to true
     public void allowJumpBoost(){
         this.allowBoostedJump = true;
+    }
+
+    //Sets in invulnerable variable to true
+    public void allowInvulnerability(){
+        this.invulnerable = true;
+    }
+
+    //Sets in invulnerable variable to false
+    public void disallowInvulnerability(){
+        this.invulnerable = false;
     }
 
     //Sets allowBoostedJump variable to false
@@ -172,6 +193,12 @@ public class PlayerScript : MonoBehaviour
         return this.allowBoostedJump;
     }
 
+    
+    //Returns true if player is invulnerable
+    public bool isInvulnerable(){
+        return this.invulnerable;
+    }
+
     //Returns true if player is allowed to dash
     public bool isAllowedDash(){
         if (this.numberOfDashs > 0){
@@ -185,6 +212,14 @@ public class PlayerScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    /*==================================================== Auxiliary Methods =============================================*/
+
+    //starts a count down for the time the player is allowed to be invulnerable
+    public void startInvulnerabilityTimer(float timeForInvulnerability){
+        this.invulnerabilityCountDownTime = timeForInvulnerability;
+        this.timeOfInvulnerability = 0f;
     }
 
     void flip() {
@@ -207,16 +242,8 @@ public class PlayerScript : MonoBehaviour
         currentState = newState;
     }
 
-    //Method called when player dies
-    void playerDeath(){
-        changeAnimationState(PLAYER_DEATH);
-        timeOfDeath += Time.deltaTime;
-        if (timeOfDeath > deathAnimationWaitTime){
-            Destroy(gameObject);
-        }
-    }
-
-    //Used to have player object perform a jump 
+    /*==================================================== Player Actions ====================================================*/
+    //Applies necessary forces and animations to make the player object perform a jump action
     void playerJump(){
         float magnitude = this.jumpMagnitude;
         if (isAllowedBoostedJump()){
@@ -229,7 +256,7 @@ public class PlayerScript : MonoBehaviour
         changeAnimationState(PLAYER_JUMP);
     }
 
-
+    //Applies necessary forces and animations to make the player object perform a dash action
     void playerDash(){
         r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
         performDash = false;
@@ -241,12 +268,41 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Applies necessary forces and animations to make the player object to die
+    void playerDeath(){
+        changeAnimationState(PLAYER_DEATH);
+        timeOfDeath += Time.deltaTime;
+        if (timeOfDeath > deathAnimationWaitTime){
+            Destroy(gameObject);
+        }
+    }
+
+    //Checks if player is still allowed to be invulerable and if it's not it calls a method to disallow invulerability
+    void checkInvulnerabilityIsAllowed(){
+        timeOfInvulnerability += Time.deltaTime;
+        if (timeOfInvulnerability >= invulnerabilityCountDownTime){
+            disallowInvulnerability();
+        }
+    }
+
+    /*==================================================== Special Unity Methods ====================================================*/
+    // Start is called before the first frame update
+    void Start() {
+        r2d = gameObject.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        this.numberOfDashs = 0;
+        this.playerIsDead = false;
+        this.invulnerable = false;
+    }
+
     // Update is called once per frame
     void Update() {
         
     }
 
     void FixedUpdate() {
+        checkInvulnerabilityIsAllowed();
+
         if (playerIsDead){
             playerDeath();
         }

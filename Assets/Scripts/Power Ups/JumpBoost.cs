@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpBoost : MonoBehaviour
 {
-    public float boostMagnitude = 5;
+    public float boostMagnitude = 30;
 
     public float getBoostMagnitude(){
         return this.boostMagnitude;

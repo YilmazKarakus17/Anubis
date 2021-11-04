@@ -8,6 +8,9 @@ TagManager:
   - SpikeTrap
   - Bound
   - FireTrap
+  - JumpPowerUps
+  - Dash
+  - InvulnerabilityPowerUp
   layers:
   - Default
   - TransparentFX
