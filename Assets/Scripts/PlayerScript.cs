@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     public float dashBoost = 20;
     public float numberOfDashs;
     public float slideBoost = 5;
+    public float soulCount = 0;
 
     // Private fields
     private float horizontalValue;
@@ -49,6 +51,11 @@ public class PlayerScript : MonoBehaviour
     // Floats used to countdown the amount of time the player object is invulnerabile
     public float invulnerabilityCountDownTime;
     private float timeOfInvulnerability;
+    
+    //UI variables
+    public Text hpText;
+    public Text dashText;
+    public Text soulText;
 
     //=================================================== User Action Bindings =============================================//
     public void Move(InputAction.CallbackContext value) {
@@ -183,6 +190,21 @@ public class PlayerScript : MonoBehaviour
         this.numberOfDashs -= 1;
     }
 
+    //Returns the value of player health
+    public float getHealth(){
+        return this.health;
+    }
+
+    //Returns the value of the amount of dashes a player currently has
+    public float getDashCount(){
+        return this.numberOfDashs;
+    }
+
+    //Returns the value of the amount of souls ashes a player currently has
+    public float getSoulCount(){
+        return this.soulCount;
+    }
+
     //Returns true if player is dead
     public bool isPlayerDead(){
         return playerIsDead;
@@ -192,7 +214,6 @@ public class PlayerScript : MonoBehaviour
     public bool isAllowedBoostedJump(){
         return this.allowBoostedJump;
     }
-
     
     //Returns true if player is invulnerable
     public bool isInvulnerable(){
@@ -207,6 +228,7 @@ public class PlayerScript : MonoBehaviour
         return false;
     }
 
+    //Returns true if the player health drops to 0 or below
     public bool checkIfPlayerNeedsToDie(){
         if (this.health <= 0){
             return true;
@@ -240,6 +262,28 @@ public class PlayerScript : MonoBehaviour
 
         // update the current state
         currentState = newState;
+    }
+
+    /*==================================================== User Interface Methods =============================================*/
+    void updateTexts(){
+        updateHPText();
+        updateDashText();
+        updateSoulsText();
+    }
+
+    private void updateHPText()
+    {
+        this.hpText.text = "HP: " + getHealth().ToString();
+    }
+
+    private void updateDashText()
+    {
+        this.dashText.text = "Dash Count: " + getDashCount().ToString();
+    }
+
+    private void updateSoulsText()
+    {
+        this.soulText.text = "Souls: " + getSoulCount().ToString();
     }
 
     /*==================================================== Player Actions ====================================================*/
@@ -302,6 +346,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate() {
         checkInvulnerabilityIsAllowed();
+        updateTexts();
 
         if (playerIsDead){
             playerDeath();
