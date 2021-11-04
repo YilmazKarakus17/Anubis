@@ -11,9 +11,11 @@ public class PlayerScript : MonoBehaviour
 
     // Player variables (set to public, so we can change the values in the unity editor)
     public float health = 100;
-    public float speed = 30;
-    public float jumpMagnitude = 17;
-    public float dashBoost = 5;
+    public float speed = 125;
+    public float jumpMagnitude = 40;
+    public float jumpPowerUpMagnitude;
+    public float dashBoost = 20;
+    public float numberOfDashs;
     public float slideBoost = 5;
 
     // Private fields
@@ -22,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     //Booleans
     private bool isGrounded;
     private bool performJump;
+    private bool allowBoostedJump;
     private bool performDash;
     private bool performSlide;
     private bool playerIsDead = false;
@@ -46,6 +49,7 @@ public class PlayerScript : MonoBehaviour
     void Start() {
         r2d = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        this.numberOfDashs = 0;
     }
 
     public void Move(InputAction.CallbackContext value) {
@@ -67,7 +71,7 @@ public class PlayerScript : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext value) {
         // The player can only dash if they are not already dashing
-        if (value.performed && !performDash) {
+        if (value.performed && !performDash && isAllowedDash()) {
             performDash = true;
         }
     }
@@ -98,6 +102,18 @@ public class PlayerScript : MonoBehaviour
                 setPlayerIsDeadTrue();
             }
         }
+        if (otherCollider.gameObject.tag == "JumpPowerUps")
+        {
+            JumpBoost jumpBoost = otherCollider.gameObject.GetComponent<JumpBoost>();
+            setJumpPowerUpMagnitude(jumpBoost.getBoostMagnitude());
+            Destroy(otherCollider.gameObject);
+            allowJumpBoost();
+        }
+        if (otherCollider.gameObject.tag == "Dash")
+        {
+            addOneDash();
+            Destroy(otherCollider.gameObject);
+        }
     }
 
     void OnTriggerStay2D(Collider2D otherCollider)
@@ -121,9 +137,47 @@ public class PlayerScript : MonoBehaviour
         this.health = this.health - 1;
     }
 
+    //Sets the jumpPowerUpMagnitude to be that of the given value
+    public void setJumpPowerUpMagnitude(float magnitude){
+        this.jumpPowerUpMagnitude = magnitude;
+    }
+
+    //Sets allowBoostedJump variable to true
+    public void allowJumpBoost(){
+        this.allowBoostedJump = true;
+    }
+
+    //Sets allowBoostedJump variable to false
+    public void disallowJumpBoost(){
+        this.allowBoostedJump = false;
+    }
+
+    //Adds 1 to the overall number of dashses
+    public void addOneDash(){
+        this.numberOfDashs += 1;
+    }
+
+    //removes 1 from the overall number of dashses
+    public void removeOneDash(){
+        this.numberOfDashs -= 1;
+    }
+
     //Returns true if player is dead
     public bool isPlayerDead(){
         return playerIsDead;
+    }
+
+    //Returns true if player is allowed to perform a boosted jump
+    public bool isAllowedBoostedJump(){
+        return this.allowBoostedJump;
+    }
+
+    //Returns true if player is allowed to dash
+    public bool isAllowedDash(){
+        if (this.numberOfDashs > 0){
+            return true;
+        }
+        return false;
     }
 
     public bool checkIfPlayerNeedsToDie(){
@@ -162,9 +216,24 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Used to have player object perform a jump 
+    void playerJump(){
+        float magnitude = this.jumpMagnitude;
+        if (isAllowedBoostedJump()){
+            magnitude = magnitude + this.jumpPowerUpMagnitude;
+            disallowJumpBoost();
+        }
+        r2d.AddForce(new Vector2(0, magnitude), ForceMode2D.Impulse);
+        isGrounded = false;
+        performJump = false;
+        changeAnimationState(PLAYER_JUMP);
+    }
+
+
     void playerDash(){
         r2d.AddForce(new Vector2((horizontalValue)*dashBoost,0f), ForceMode2D.Impulse);
         performDash = false;
+        removeOneDash();
         //changeAnimationState(PLAYER_DASH);
 
         if (!isGrounded && horizontalValue!=0f){
@@ -195,11 +264,7 @@ public class PlayerScript : MonoBehaviour
 
             // Jump force is only applied once.
             if (performJump) {
-                r2d.AddForce(new Vector2(0, jumpMagnitude), ForceMode2D.Impulse);
-                isGrounded = false;
-                performJump = false;
-                changeAnimationState(PLAYER_JUMP);
-
+                playerJump();
             }
 
             // Applies a dash on the player object and changes the animation to be that of dashing
