@@ -70,6 +70,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "f5c06965-71ff-43d7-b790-c22bb2fb9be4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Horizontal Axis",
                     "id": "2eb774c6-3b44-4cb5-8624-3252377bc413",
                     "path": "1DAxis",
@@ -103,6 +114,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Horizontal Arrow Axis",
+                    "id": "0c0eefae-6708-4d6c-90cd-d0b393e82e1a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "5ff4cc39-c247-42e4-9fe3-f9d52c2d57c2",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e576d6d7-6764-4205-aacc-b301c3e2dd7c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "c0867e52-d28d-408b-92da-e06047d3bf7e",
                     "path": "<Keyboard>/shift",
@@ -126,8 +170,8 @@
                 },
                 {
                     "name": "",
-                    "id": "a7162ccf-f821-4586-8f19-1cfeb56293c0",
-                    "path": "<Keyboard>/space",
+                    "id": "6dd2f22e-c778-4619-ac40-7af4854bb829",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

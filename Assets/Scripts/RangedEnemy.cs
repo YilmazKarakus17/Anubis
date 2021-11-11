@@ -21,6 +21,8 @@ public class RangedEnemy : MonoBehaviour
         // The enemy takes damage and will die if its health reaches 0.
         health -= playerAttackDamage;
         if (health <= 0) {
+            PlayerScript playerScript = playerObject.GetComponent<PlayerScript>();
+            playerScript.addOneSoul();
             Destroy(gameObject);
         }
     }

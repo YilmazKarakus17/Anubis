@@ -293,7 +293,12 @@ public class PlayerScript : MonoBehaviour
 
     private void updateHPText()
     {
-        this.hpText.text = "HP: " + getHealth().ToString();
+        if (getHealth() < 0){
+            this.hpText.text = "HP: 0";
+        }
+        else{
+            this.hpText.text = "HP: " + getHealth().ToString();
+        }  
     }
 
     private void updateDashText()
@@ -380,7 +385,7 @@ public class PlayerScript : MonoBehaviour
                 Vector2 movement = new Vector2(horizontalValue, 0);
                 r2d.velocity = Vector2.ClampMagnitude(r2d.velocity, speed);
                 r2d.AddForce(movement * speed, ForceMode2D.Force);
-                if (isGrounded) {
+                if (isGrounded && !isAttacking && Time.time > waitTime) {
                     changeAnimationState(PLAYER_RUN);
                 }
             }

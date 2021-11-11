@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 target;
 
     public float smoothTime;
+    public float maxSpeed;
 
     public GameObject TargetObject;
 
@@ -30,7 +31,7 @@ public class CameraMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (!playerScript.isPlayerDead()){
-            transform.position = Vector3.SmoothDamp(transform.position, this.target, ref currentVelocity, smoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, this.target, ref currentVelocity, smoothTime, maxSpeed);
         }
     }
 }
