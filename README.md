@@ -2,9 +2,9 @@
 A 2D combat-based platformer for our Multi-Platform Games Development (ECS657U) Group Project. 
 
 ## Game Controls
-WASD - move
-Space - Attack
-Shift - Dash
+WASD - move  
+Space - Attack  
+Shift - Dash  
 
 ## Game Design
 The base game concept that our group has decided to design and implement from is concept number 4. The game is to be a 2D combat-based platformer where the player defeats enemies, in order to proceed higher and higher. The will of the gods shall not determine the fate of our protagonist. Defy the gods and ascend higher than the gods themselves!
