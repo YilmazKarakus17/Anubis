@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
     // Combat variables
     public float health = 100;
-    public float attackDamage = 25;
 
     // Reference to player.
     public GameObject playerObject;
     
     // projectile --> the bullet being shot by the enemy (obtainable from prefabs in Unity).
     public GameObject projectile;
-    public float fireRate = 5f;
-    public float shotMagnitude = 50;
+    public float fireRate;
+    public float shotMagnitude;
     private float shootNext = 0;
 
     public void TakeDamage(float playerAttackDamage) {
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate() {
         if(Time.time > shootNext) {
             shootNext = Time.time + fireRate;
-            GameObject shot = Instantiate(projectile, gameObject.transform.position, Quaternion.identity);
+            GameObject shot = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,90));
             shot.GetComponent<Rigidbody2D>().AddForce(new Vector2(ProjectileDirection()*shotMagnitude, 0), ForceMode2D.Impulse);
         }
     }
