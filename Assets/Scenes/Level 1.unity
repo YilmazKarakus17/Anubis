@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  attackDamage: 25
   playerObject: {fileID: 1200118988}
   projectile: {fileID: 4228803039149145300, guid: bb1b059c3abacaf4090ee31d934f450f, type: 3}
   fireRate: 5
@@ -2609,6 +2610,7 @@ MonoBehaviour:
   numberOfDashs: 0
   slideBoost: 5
   soulCount: 0
+  isAttacking: 0
   deathAnimationWaitTime: 1
   invulnerabilityCountDownTime: 0
   hpText: {fileID: 1919623808}
@@ -2785,7 +2787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 50
   attackCentre: {fileID: 1621571699}
-  attackRange: 7.5
+  attackRange: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -12332,6 +12334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  attackDamage: 25
   playerObject: {fileID: 1200118988}
   projectile: {fileID: 7708675242713198287, guid: 4021774ec689a5648ab813ebd5e82846, type: 3}
   fireRate: 2.5

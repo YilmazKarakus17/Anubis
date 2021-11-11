@@ -9,6 +9,8 @@ public class PlayerCombat : MonoBehaviour
     private Rigidbody2D r2d;
     // Combat variables
     public float attackDamage = 50;
+    private float attackRate = 0.25f;
+    private float nextAttack = 0;
 
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
@@ -20,21 +22,18 @@ public class PlayerCombat : MonoBehaviour
     private bool knockback;
     private float knockbackDirection;
 
-    // gets the animator object
-    Animator animator;
-    // to store the current animation state of the player
-    private string currentState;
-    // Constants that represent the animations in the game
-    const string PLAYER_ATTACK1 = "playerAttack1";
-
     // Normal attack performed by pressing the attack button once.
     public void Attack(InputAction.CallbackContext value) {
         if (value.performed) {
-            Debug.Log("Attack 1 Performed!");
-            // Run the attack animation and detect all enemies that intersect with the attack hit-circle. Then apply damage to all enemies that were hit.
-            enemiesHit = Physics2D.OverlapCircleAll(attackCentre.position, attackRange, enemyLayers);
-            for (int i = 0; i < enemiesHit.Length; i++) {
-                enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage);
+            // Player has to wait for the animation finish, until it can attack again.
+            if (Time.time > nextAttack) {
+                nextAttack = Time.time + attackRate;
+                player.isAttacking = true;
+                // Run the attack animation and detect all enemies that intersect with the attack hit-circle. Then apply damage to all enemies that were hit.
+                enemiesHit = Physics2D.OverlapCircleAll(attackCentre.position, attackRange, enemyLayers);
+                for (int i = 0; i < enemiesHit.Length; i++) {
+                    enemiesHit[i].GetComponent<RangedEnemy>().TakeDamage(attackDamage);
+                }
             }
         }
     }
@@ -42,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
     void OnCollisionEnter2D(Collision2D otherCollider){
         // Layer 6 is the enemy layer.
         if (otherCollider.gameObject.layer == 6){
-            ReceiveDamage(otherCollider.gameObject.GetComponent<Enemy>().attackDamage);
+            ReceiveDamage(otherCollider.gameObject.GetComponent<RangedEnemy>().attackDamage);
             // The player will be knockback away from the enemy. -1 = left, 1 = right.
             if (gameObject.transform.position.x < otherCollider.gameObject.transform.position.x) {
                 knockbackDirection = -1;

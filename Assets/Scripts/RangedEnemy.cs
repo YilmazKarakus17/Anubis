@@ -6,6 +6,7 @@ public class RangedEnemy : MonoBehaviour
 {
     // Combat variables
     public float health = 100;
+    public float attackDamage = 25;
 
     // Reference to player.
     public GameObject playerObject;

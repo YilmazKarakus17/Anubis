@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     Animator animator;
 
     // Player variables (set to public, so we can change the values in the unity editor)
-    public float health = 100;
+    public float health = 100; // NOTE: make it so that player health cannot drop below zero!!!
     public float speed = 125;
     public float jumpMagnitude = 40;
     public float jumpPowerUpMagnitude;
@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
     public float numberOfDashs;
     public float slideBoost = 5;
     public float soulCount = 0;
+
+    private float waitTime = 0;
 
     // Private fields
     private float horizontalValue;
@@ -32,6 +34,7 @@ public class PlayerScript : MonoBehaviour
     private bool performSlide;
     private bool playerIsDead;
     private bool invulnerable;
+    public bool isAttacking;
 
     // to store the current animation state of the player
     private string currentState;
@@ -44,6 +47,7 @@ public class PlayerScript : MonoBehaviour
     const string PLAYER_DASH ="playerDash";
     const string PLAYER_DEATH = "playerDeath";
     const string PLAYER_JUMP_DASH = "playerJumpDash";
+    const string PLAYER_ATTACK ="playerAttack";
 
     // Floats used to wait for the animation to finish before destroying player object 
     public float deathAnimationWaitTime = 1f;
@@ -398,8 +402,16 @@ public class PlayerScript : MonoBehaviour
                 performSlide = false;
             }
 
-            if (horizontalValue==0 && isGrounded){
+            if (horizontalValue==0 && isGrounded && !isAttacking && Time.time > waitTime){
                 changeAnimationState(PLAYER_IDLE);
+            }
+
+            if (isAttacking) {
+                // NOTE: The attack animate works as intended when the player doesn't move but the animate cuts short when the player is moving.
+                // waitTime = the duration of the attack animation.
+                changeAnimationState(PLAYER_ATTACK);
+                waitTime = Time.time + 0.25f;
+                isAttacking = false;
             }
         }
     }
