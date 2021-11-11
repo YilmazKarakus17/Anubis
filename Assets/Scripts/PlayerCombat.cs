@@ -53,7 +53,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void ReceiveDamage(float damage) {
+    public void ReceiveDamage(float damage) {
         player.minusHealth(damage);
         knockback = true;
         // If the players health drops to 0, the player will die.
