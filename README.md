@@ -3,17 +3,17 @@ A 2D combat-based platformer for our Multi-Platform Games Development (ECS657U) 
 
 ## Instructions
 ### Movement Keys
-To Move Up: **W** or **Space Bar** or **Up Arrow**
-To Move Left: **A** or **Left Arrow**
-To Move Right: **D** or **Right Arrow**
+##### To Move Up: **W** or **Space Bar** or **Up Arrow**
+##### To Move Left: **A** or **Left Arrow**
+##### To Move Right: **D** or **Right Arrow**
 
-To Dash: **L+Shift**\n
-To Attack: **Left Mouse Click**
+##### To Dash: **L+Shift**
+##### To Attack: **Left Mouse Click**
 
 ### Powerups
-Invulnerability: Makes the player invulnerable for a limited amount of time
-Dash: Allows the player to dash once, can be collected.
-Jump Boost: Allows for greater jump magnitude.
+##### Invulnerability: Makes the player invulnerable for a limited amount of time
+##### Dash: Allows the player to dash once, can be collected.
+##### Jump Boost: Allows for greater jump magnitude.
 
 ### Level 1 is the scene that needs to be run first
 
