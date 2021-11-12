@@ -1,7 +1,7 @@
 # Anubis
 A 2D combat-based platformer for our Multi-Platform Games Development (ECS657U) Group Project. 
 
-# Game Link
+## Game Link
 https://yilmazkarakus17.github.io/Anubis/build/index.html
 
 ## Instructions
