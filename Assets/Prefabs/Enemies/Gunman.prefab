@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 180232511179637907}
   - component: {fileID: 180232511179637908}
   - component: {fileID: 180232511179637909}
+  - component: {fileID: 5677946525449084377}
   - component: {fileID: 180232511179637910}
   m_Layer: 6
   m_Name: Gunman
@@ -101,6 +102,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &5677946525449084377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180232511179637911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32fbeb6548f33564ebc574cf1153e23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  attackDamage: 25
 --- !u!114 &180232511179637910
 MonoBehaviour:
   m_ObjectHideFlags: 0

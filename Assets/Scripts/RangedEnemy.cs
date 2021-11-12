@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class RangedEnemy : MonoBehaviour
 {
-    // Combat variables
-    public float health = 100;
-    public float attackDamage = 25;
-
     // Reference to player.
     public GameObject playerObject;
     
@@ -16,16 +12,6 @@ public class RangedEnemy : MonoBehaviour
     public float fireRate;
     public float shotMagnitude;
     private float shootNext = 0;
-
-    public void TakeDamage(float playerAttackDamage) {
-        // The enemy takes damage and will die if its health reaches 0.
-        health -= playerAttackDamage;
-        if (health <= 0) {
-            PlayerScript playerScript = playerObject.GetComponent<PlayerScript>();
-            playerScript.addOneSoul();
-            Destroy(gameObject);
-        }
-    }
 
     private float ProjectileDirection() {
         // The object that the enemy needs to shoot at is left of the enemy

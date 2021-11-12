@@ -17384,7 +17384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c017f652f4e15604b9592a912b6a0450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 1000
+  smoothTime: 22
   maxSpeed: 4
   TargetObject: {fileID: 811370177}
   player: {fileID: 1200118988}

@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
                 // Run the attack animation and detect all enemies that intersect with the attack hit-circle. Then apply damage to all enemies that were hit.
                 enemiesHit = Physics2D.OverlapCircleAll(attackCentre.position, attackRange, enemyLayers);
                 for (int i = 0; i < enemiesHit.Length; i++) {
-                    enemiesHit[i].GetComponent<RangedEnemy>().TakeDamage(attackDamage);
+                    enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage);
                 }
             }
         }
@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
     void OnCollisionEnter2D(Collision2D otherCollider){
         // Layer 6 is the enemy layer.
         if (otherCollider.gameObject.layer == 6){
-            ReceiveDamage(otherCollider.gameObject.GetComponent<RangedEnemy>().attackDamage);
+            ReceiveDamage(otherCollider.gameObject.GetComponent<Enemy>().attackDamage);
             // The player will be knockback away from the enemy. -1 = left, 1 = right.
             if (gameObject.transform.position.x < otherCollider.gameObject.transform.position.x) {
                 knockbackDirection = -1;
