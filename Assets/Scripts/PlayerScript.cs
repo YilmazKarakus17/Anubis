@@ -374,6 +374,9 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate() {
         checkInvulnerabilityIsAllowed();
         updateTexts();
+        if (checkIfPlayerNeedsToDie()){
+            setPlayerIsDeadTrue();
+        }
 
         if (playerIsDead){
             playerDeath();

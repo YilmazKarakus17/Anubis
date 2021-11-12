@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float playerAttackDamage) {
         // The enemy takes damage and will die if its health reaches 0.
         health -= playerAttackDamage;
+        Debug.Log(health);
         if (health <= 0) {
             Destroy(gameObject);
         }
