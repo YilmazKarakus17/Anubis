@@ -1,6 +1,9 @@
 # Anubis
 A 2D combat-based platformer for our Multi-Platform Games Development (ECS657U) Group Project. 
 
+# Most Recent Branch
+Prototype_v0.7 https://github.com/YilmazKarakus17/Anubis/tree/Prototype_v0.7
+
 ## Game Controls
 WASD - move  
 Space - Attack  
