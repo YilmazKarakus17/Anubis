@@ -6,17 +6,17 @@ Prototype_v0.7 https://github.com/YilmazKarakus17/Anubis/tree/Prototype_v0.7
 
 ## Instructions
 ### Movement Keys
-To Move Up: **W** or **Space Bar** or **Up Arrow**
-To Move Left: **A** or **Left Arrow**
-To Move Right: **D** or **Right Arrow**
+##### To Move Up: **W** or **Space Bar** or **Up Arrow**
+##### To Move Left: **A** or **Left Arrow**
+##### To Move Right: **D** or **Right Arrow**
 
-To Dash: **L+Shift**
-To Attack: **Left Mouse Click**
+##### To Dash: **L+Shift**
+##### To Attack: **Left Mouse Click**
 
 ### Powerups
-Invulnerability: Makes the player invulnerable for a limited amount of time
-Dash: Allows the player to dash once, can be collected.
-Jump Boost: Allows for greater jump magnitude.
+##### Invulnerability: Makes the player invulnerable for a limited amount of time
+##### Dash: Allows the player to dash once, can be collected.
+##### Jump Boost: Allows for greater jump magnitude.
 
 ### Level 1 is the scene that needs to be run first
 
