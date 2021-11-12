@@ -1,6 +1,22 @@
 # Anubis
 A 2D combat-based platformer for our Multi-Platform Games Development (ECS657U) Group Project. 
 
+##Instructions
+### Movement Keys
+To Move Up: **W** or **Space Bar** or **Up Arrow**
+To Move Left: **A** or **Left Arrow**
+To Move Right: **D** or **Right Arrow**
+
+To Dash: **L+Shift**
+To Attack: **Left Mouse Click**
+
+### Powerups
+Invulnerability: Makes the player invulnerable for a limited amount of time
+Dash: Allows the player to dash once, can be collected.
+Jump Boost: Allows for greater jump magnitude.
+
+### Level1 is the scene that needs to be run first
+
 ## Game Design
 The base game concept that our group has decided to design and implement from is concept number 4. The game is to be a 2D combat-based platformer where the player defeats enemies, in order to proceed higher and higher. The will of the gods shall not determine the fate of our protagonist. Defy the gods and ascend higher than the gods themselves!
 
