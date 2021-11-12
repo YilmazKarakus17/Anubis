@@ -128,9 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67e10d3ec35e3942bf08a77b120a5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  attackDamage: 25
   playerObject: {fileID: 0}
   projectile: {fileID: 4228803039149145300, guid: bb1b059c3abacaf4090ee31d934f450f, type: 3}
-  fireRate: 5
+  fireRate: 2.5
   shotMagnitude: 15
