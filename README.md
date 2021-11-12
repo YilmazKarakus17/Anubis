@@ -7,7 +7,7 @@ To Move Up: **W** or **Space Bar** or **Up Arrow**
 To Move Left: **A** or **Left Arrow**
 To Move Right: **D** or **Right Arrow**
 
-To Dash: **L+Shift**
+To Dash: **L+Shift**\n
 To Attack: **Left Mouse Click**
 
 ### Powerups
