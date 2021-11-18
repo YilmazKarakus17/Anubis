@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;  
 
 public class PlayerScript : MonoBehaviour
@@ -56,11 +55,6 @@ public class PlayerScript : MonoBehaviour
     // Floats used to countdown the amount of time the player object is invulnerabile
     public float invulnerabilityCountDownTime;
     private float timeOfInvulnerability;
-    
-    //UI variables
-    public Text hpText;
-    public Text dashText;
-    public Text soulText;
 
     //=================================================== User Action Bindings =============================================//
     public void Move(InputAction.CallbackContext value) {
@@ -284,32 +278,7 @@ public class PlayerScript : MonoBehaviour
         currentState = newState;
     }
 
-    /*==================================================== User Interface Methods =============================================*/
-    void updateTexts(){
-        updateHPText();
-        updateDashText();
-        updateSoulsText();
-    }
 
-    private void updateHPText()
-    {
-        if (getHealth() < 0){
-            this.hpText.text = "HP: 0";
-        }
-        else{
-            this.hpText.text = "HP: " + getHealth().ToString();
-        }  
-    }
-
-    private void updateDashText()
-    {
-        this.dashText.text = "Dash Count: " + getDashCount().ToString();
-    }
-
-    private void updateSoulsText()
-    {
-        this.soulText.text = "Souls: " + getSoulCount().ToString();
-    }
 
     /*==================================================== Player Actions ====================================================*/
     //Applies necessary forces and animations to make the player object perform a jump action
@@ -373,7 +342,6 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate() {
         checkInvulnerabilityIsAllowed();
-        updateTexts();
         if (checkIfPlayerNeedsToDie()){
             setPlayerIsDeadTrue();
         }
