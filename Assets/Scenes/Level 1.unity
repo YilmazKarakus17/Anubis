@@ -2571,6 +2571,7 @@ GameObject:
   - component: {fileID: 1200118994}
   - component: {fileID: 1200118992}
   - component: {fileID: 1200118993}
+  - component: {fileID: 1200118997}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2668,9 +2669,6 @@ MonoBehaviour:
   isAttacking: 0
   deathAnimationWaitTime: 1
   invulnerabilityCountDownTime: 0
-  hpText: {fileID: 1919623808}
-  dashText: {fileID: 37945747}
-  soulText: {fileID: 1154723892}
 --- !u!114 &1200118992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2893,6 +2891,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.27}
   m_EdgeRadius: 0
+--- !u!114 &1200118997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200118988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5852c9869a96745a495278b55892e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpText: {fileID: 1919623808}
+  dashText: {fileID: 37945747}
+  soulText: {fileID: 1154723892}
 --- !u!1 &1234043192
 GameObject:
   m_ObjectHideFlags: 0
