@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     /*========================== Instance Variables ==========================*/
-    public Player player;
+    private Player player;
     private Rigidbody2D rigidbody;
+
+    //Particle Effects
+    public GameObject dashEffect;
 
     //Horizontal Movement Variables
     private bool allowed_to_horizontally_move = true;
@@ -17,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool in_combat;
 
     //Player Jump Variables
-    private bool jump_input;
+    private bool jumpInput;
     public float jumpForce = 15;
     private bool isGrounded;
     public int extra_jumps_allowed = 2;
@@ -27,8 +30,12 @@ public class PlayerController : MonoBehaviour
     public Transform feetPos;
     public float checkRadius;
     public LayerMask whatIsGround;
-    
 
+    //Player Dash Variables
+    private bool dashInput;
+    public float dashSpeed;
+    private float dashTimeCounter; //How long the dash should last
+    public float dashTime; //Used to as a count down timer
     /*========================== Getter and Setter Methods ==========================*/
     public void setInCombatStatus(bool in_combat){
         this.in_combat = in_combat;
@@ -63,7 +70,13 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext value) {
         if (value.performed){
-            this.jump_input = true;
+            this.jumpInput = true;
+        }
+    }
+
+    public void Dash(InputAction.CallbackContext value) {
+        if (value.performed){
+            this.dashInput = true;
         }
     }
 
@@ -73,7 +86,7 @@ public class PlayerController : MonoBehaviour
         this.rigidbody.velocity = new Vector2(
             this.horiztonal_movement_input*this.horizontal_movement_speed,
             this.rigidbody.velocity.y
-            );
+        );
     }
 
     //Applies vertical upwards force
@@ -82,18 +95,38 @@ public class PlayerController : MonoBehaviour
         this.extra_jumps_remaining--;
     }
 
-    /*========================== Auxiliary Methods   ==========================*/
+    //Applies horiztonal force equivalent to a dash in the direction direction inputted by the user
+    private void dash(){
+        if(this.dashTimeCounter <= 0){
+            this.dashTimeCounter = this.dashTime;
+            this.rigidbody.velocity = Vector2.zero;
+        }
+        else{
+            Instantiate(this.dashEffect, this.transform.position, Quaternion.identity);
+            this.dashTimeCounter -= Time.deltaTime;
+            this.rigidbody.AddForce(new Vector2((this.horiztonal_movement_input)*this.dashSpeed,0f), ForceMode2D.Impulse);
+        }
+    }
+    /*========================== Player Movement Instance Methods  (Auxiliary Methods) ==========================*/
     //Checks if the player is allowed to perform a jump
     public bool isAllowedToJump(){
-        if ((this.isGrounded && this.jump_input) || (this.jump_input && this.extra_jumps_remaining > 0)){
+        if ((this.isGrounded && this.jumpInput) || (this.jumpInput && this.extra_jumps_remaining > 0)){
             return true;
         }
 
         return false;
     }
 
+    //Checks if the player is allowed to perform a dash
+    public bool isAllowedToDash(){
+        if (this.dashInput){
+            return true;
+        }
+        return false;
+    }
+
+    // Flip the player's model, so that the player
     void flip() {
-        // Flip the player's model, so that the player is facing in the correct direction.
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
@@ -104,6 +137,7 @@ public class PlayerController : MonoBehaviour
         this.rigidbody = GetComponent<Rigidbody2D>();
         this.player = gameObject.GetComponent<Player>();
         this.extra_jumps_remaining = this.extra_jumps_allowed;
+        this.dashTimeCounter = this.dashTime; 
     }
 
     void FixedUpdate(){
@@ -119,8 +153,12 @@ public class PlayerController : MonoBehaviour
 
         if (this.isAllowedToJump()){
             this.jump();
+            this.jumpInput = false;
         }
 
-        this.jump_input = false;
+        if (this.dashInput && this.dashTimeCounter > 0){
+            this.dash();
+            this.dashInput = false;
+        }
     }
 }
