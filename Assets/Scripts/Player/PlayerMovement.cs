@@ -104,7 +104,12 @@ public class PlayerMovement : MonoBehaviour
         else{
             Instantiate(this.dashEffect, this.transform.position, Quaternion.identity);
             this.dashTimeCounter -= Time.deltaTime;
-            this.rigidbody.AddForce(new Vector2((this.horiztonal_movement_input)*this.dashSpeed,0f), ForceMode2D.Impulse);
+            if (this.horiztonal_movement_input == -1){
+                this.rigidbody.velocity = Vector2.left * this.dashSpeed;
+            }
+            else if (this.horiztonal_movement_input == 1){
+                this.rigidbody.velocity = Vector2.right * this.dashSpeed;
+            }
         }
     }
     /*========================== Player Movement Instance Methods  (Auxiliary Methods) ==========================*/
