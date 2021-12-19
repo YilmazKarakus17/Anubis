@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     /*========================== Instance Variables ==========================*/
     private Player player;
+    private Animator animator;
     private Rigidbody2D rigidbody;
 
     //Particle Effects
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed;
     private float dashTimeCounter; //How long the dash should last
     public float dashTime; //Used to as a count down timer
+
     /*========================== Getter and Setter Methods ==========================*/
     public void setInCombatStatus(bool in_combat){
         this.in_combat = in_combat;
@@ -119,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     /*========================== Player Movement Instance Methods  (Auxiliary Methods) ==========================*/
     //Checks if the player is allowed to perform a jump
     public bool isAllowedToJump(){
-        if ((this.isGrounded && this.jumpInput) || (this.jumpInput && this.extra_jumps_remaining > 0)){
+        if ((this.isGrounded && this.jumpInput) || (this.jumpInput && this.extra_jumps_remaining >= 0)){
             return true;
         }
 
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
     /*========================== Special Unity Methods  ==========================*/
     void Start(){
+        this.animator = GetComponent<Animator>();
         this.rigidbody = GetComponent<Rigidbody2D>();
         this.player = gameObject.GetComponent<Player>();
         this.extra_jumps_remaining = this.extra_jumps_allowed;
@@ -157,10 +160,12 @@ public class PlayerMovement : MonoBehaviour
         //isGrounded is only set to true if the feetPost collides with a ground object
         this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
         if (this.isGrounded){
+            this.animator.Play("PlayerIdle");
             this.extra_jumps_remaining = this.extra_jumps_allowed;
         }
 
         if (this.isAllowedToJump()){
+            this.animator.Play("PlayerJump");
             this.jump();
         }
 
