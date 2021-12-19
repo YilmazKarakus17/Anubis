@@ -13,14 +13,13 @@ public class IcicleSpawner : MonoBehaviour
     public float delay;
     private float countdownTimer;
 
-    public void start(){
-        this.generate = true;
+    void OnTriggerEnter2D(Collider2D otherCollider){
+        if (otherCollider.gameObject.tag == "Player"){
+            this.generate = false;
+            Destroy(gameObject);
+        }
     }
 
-    public void stop(){
-        this.generate = false;
-        this.countdownTimer = delay;
-    }
 
     // Start is called before the first frame update
     void Start()

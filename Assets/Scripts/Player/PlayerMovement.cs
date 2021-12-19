@@ -7,18 +7,18 @@ public class PlayerMovement : MonoBehaviour
 {
     /*========================== Instance Variables ==========================*/
     private Player player;
-    private Animator animator;
+    private PlayerAnimator animator;
     private Rigidbody2D rigidbody;
 
-    //Particle Effects
+    //Particle Effect Variables
     public GameObject dashEffect;
 
     //Horizontal Movement Variables
     private bool allowed_to_horizontally_move = true;
-    private float horiztonal_movement_input;
+    private float horizontal_movement_input;
     public float horizontal_movement_speed = 7;
     public float in_combat_horizontal_movement_speed = 2;
-    public bool in_combat;
+    public bool inCombat;
 
     //Player Jump Variables
     private bool jumpInput;
@@ -39,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
     public float dashTime; //Used to as a count down timer
 
     /*========================== Getter and Setter Methods ==========================*/
-    public void setInCombatStatus(bool in_combat){
-        this.in_combat = in_combat;
+    public void setInCombatStatus(bool inCombat){
+        this.inCombat = inCombat;
     }
 
     public void setInCombatHorizontalSpeed(float speed){
@@ -52,11 +52,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public float getHorizontalMovementInput() {
-        return this.horiztonal_movement_input;
+        return this.horizontal_movement_input;
     }
 
     public bool getInCombatStatus(){
-        return this.in_combat;
+        return this.inCombat;
     }
 
     public bool getAllowedToHorizontallyMove(){
@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
 
     /*========================== User Action Bindings ==========================*/
     public void Move(InputAction.CallbackContext value) {
-        this.horiztonal_movement_input = value.ReadValue<float>();
+        this.horizontal_movement_input = value.ReadValue<float>();
         // The player model looks in the same direction that the player is moving in.
-        if ((this.horiztonal_movement_input > 0 && transform.localScale.x < 0) || (this.horiztonal_movement_input < 0 && transform.localScale.x > 0)) {
+        if ((this.horizontal_movement_input > 0 && transform.localScale.x < 0) || (this.horizontal_movement_input < 0 && transform.localScale.x > 0)) {
             if (this.player.isPlayerAlive()){
                 this.flip();
             }        
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     //Applies horiztonal force to the player in the direction inputted by the user
     private void move(){
         this.rigidbody.velocity = new Vector2(
-            this.horiztonal_movement_input*this.horizontal_movement_speed,
+            this.horizontal_movement_input*this.horizontal_movement_speed,
             this.rigidbody.velocity.y
         );
     }
@@ -110,10 +110,10 @@ public class PlayerMovement : MonoBehaviour
         else{
             Instantiate(this.dashEffect, this.transform.position, Quaternion.identity);
             this.dashTimeCounter -= Time.deltaTime;
-            if (this.horiztonal_movement_input == -1){
+            if (this.horizontal_movement_input == -1){
                 this.rigidbody.velocity = Vector2.left * this.dashSpeed;
             }
-            else if (this.horiztonal_movement_input == 1){
+            else if (this.horizontal_movement_input == 1){
                 this.rigidbody.velocity = Vector2.right * this.dashSpeed;
             }
         }
@@ -145,34 +145,48 @@ public class PlayerMovement : MonoBehaviour
 
     /*========================== Special Unity Methods  ==========================*/
     void Start(){
-        this.animator = GetComponent<Animator>();
         this.rigidbody = GetComponent<Rigidbody2D>();
         this.player = gameObject.GetComponent<Player>();
+        this.animator = gameObject.GetComponent<PlayerAnimator>();
         this.extra_jumps_remaining = this.extra_jumps_allowed;
-        this.dashTimeCounter = this.dashTime; 
+        this.dashTimeCounter = this.dashTime;
+        this.inCombat = false;
     }
 
     void FixedUpdate(){
-        if (this.getAllowedToHorizontallyMove()){
-            this.move();  
-        }
+        if (player.isPlayerAlive()){
+            //isGrounded is only set to true if the feetPost collides with a ground object
+            this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
 
-        //isGrounded is only set to true if the feetPost collides with a ground object
-        this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
-        if (this.isGrounded){
-            this.animator.Play("PlayerIdle");
-            this.extra_jumps_remaining = this.extra_jumps_allowed;
-        }
+            if (this.horizontal_movement_input==0 && this.isGrounded && this.inCombat == false){
+                this.animator.playIdleAnimation();
+            }
+            else if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
+                this.move();
+                if (this.isGrounded && this.inCombat == false) {
+                    this.animator.playRunAnimation();
+                }
+            }
 
-        if (this.isAllowedToJump()){
-            this.animator.Play("PlayerJump");
-            this.jump();
-        }
 
-        if (this.dashInput && this.dashTimeCounter > 0){
-            this.dash();
-        }
 
+            if (this.isGrounded){
+                this.extra_jumps_remaining = this.extra_jumps_allowed;
+            }
+
+            if (!this.isGrounded && !this.jumpInput){
+                this.animator.playJumpAnimation();
+            }
+
+            if (this.isAllowedToJump()){
+                this.animator.playFallAnimation();
+                this.jump();
+            }
+
+            if (this.dashInput && this.dashTimeCounter > 0){
+                this.dash();
+            }
+        }
 
         this.jumpInput = false;
         this.dashInput = false;

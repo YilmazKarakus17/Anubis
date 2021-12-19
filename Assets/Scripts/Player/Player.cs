@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     //Player Scripts Variables
     private PlayerMovement movement;
+    private PlayerActionManager actionManager;
+    private Player player;
 
     //Player Stats Variables
     public float maxHealth = 100;
@@ -76,7 +78,8 @@ public class Player : MonoBehaviour
         this.currentStamina -= staminaPoints;
     }
 
-    /*========================== Invulnerability Methods ==========================*/
+    /*========================== Instance Methods ==========================*/
+    /*============ Invulnerability Methods ============*/
     //Returns true if the player is still alive
     public bool isPlayerAlive()
     {
@@ -105,11 +108,14 @@ public class Player : MonoBehaviour
         //Instantiating 
         this.alive = true;
         this.invulnerable = false;
+
+        //Instantiating Player Script
+        this.movement = GetComponent<PlayerMovement>();
+        this.actionManager = GetComponent<PlayerActionManager>();
+        this.player = GetComponent<Player>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void FixedUpdate(){
         
     }
 }
