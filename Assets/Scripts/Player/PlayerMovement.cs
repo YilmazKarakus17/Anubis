@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
         this.allowed_to_horizontally_move = allowed;
     }
 
+    public float getHorizontalMovementInput() {
+        return this.horiztonal_movement_input;
+    }
+
     public bool getInCombatStatus(){
         return this.in_combat;
     }

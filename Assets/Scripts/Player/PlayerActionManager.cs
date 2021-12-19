@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerActionManager : MonoBehaviour
 {
     public Animator animator;
+    public PlayerMovement movement;
     public bool isAttacking = false;
     public static PlayerActionManager instance;
     private Rigidbody2D r2d;
@@ -55,13 +56,23 @@ public class PlayerActionManager : MonoBehaviour
 
     IEnumerator AddShockwaveDelay(float positionIncrease, float rangeIncrease, float waitTime) {
         yield return new WaitForSeconds(waitTime);
-        GameObject shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,90));
-        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(20, 0), ForceMode2D.Impulse);
+        GameObject shockwave;
+        float horizontalDirection;
+        if (transform.localScale.x < 0) {
+            shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,180));
+            horizontalDirection = -1;
+        }
+        else {
+            shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));
+            horizontalDirection = 1;
+        }
+        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalDirection*20, 0), ForceMode2D.Impulse);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        movement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
         r2d = GetComponent<Rigidbody2D>();
     }
