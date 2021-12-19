@@ -158,12 +158,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (this.isAllowedToJump()){
             this.jump();
-            this.jumpInput = false;
         }
 
         if (this.dashInput && this.dashTimeCounter > 0){
             this.dash();
-            this.dashInput = false;
         }
+
+
+        this.jumpInput = false;
+        this.dashInput = false;
     }
 }
