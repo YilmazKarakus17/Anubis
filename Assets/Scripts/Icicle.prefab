@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1057535906645470455}
   - component: {fileID: 1486331154963518341}
   - component: {fileID: 1730363542516113114}
+  - component: {fileID: 2634563002788023873}
   m_Layer: 0
   m_Name: Icicle
   m_TagString: Untagged
@@ -132,3 +133,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2634563002788023873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102804587676997432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1794e215c65a742a5ec840b9749a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
