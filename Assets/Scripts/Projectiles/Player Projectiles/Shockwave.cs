@@ -18,6 +18,9 @@ public class Shockwave : MonoBehaviour
             Destroy(gameObject);
             otherCollider.GetComponent<Enemy>().TakeDamage(player.attackDamage/5);
         }
+        else if ((otherCollider.gameObject.tag == "Wall")) {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

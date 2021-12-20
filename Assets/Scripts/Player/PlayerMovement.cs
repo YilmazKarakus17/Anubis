@@ -167,8 +167,7 @@ public class PlayerMovement : MonoBehaviour
         if (player.isPlayerAlive()){
             //isGrounded is only set to true if the feetPost collides with a ground object
             this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
-
-            if ((this.crntY - this.prevY) < 0){
+            if ((this.crntY - this.prevY) < 0 && this.inCombat == false){
                 this.animator.playFallAnimation();
             }
             else{

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - LargeProjectileDespawner
+  - Wall
   layers:
   - Default
   - TransparentFX
