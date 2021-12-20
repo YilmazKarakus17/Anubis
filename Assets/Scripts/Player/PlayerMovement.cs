@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     public int extra_jumps_allowed = 2;
     private int extra_jumps_remaining;
+    private float prevY;
+    private float crntY;
     
     //Variables for checking if Player's feet is touching a ground object
     public Transform feetPos;
@@ -151,37 +153,40 @@ public class PlayerMovement : MonoBehaviour
         this.extra_jumps_remaining = this.extra_jumps_allowed;
         this.dashTimeCounter = this.dashTime;
         this.inCombat = false;
+        this.prevY = this.crntY = this.transform.position.y;
     }
 
     void FixedUpdate(){
+        this.crntY = this.transform.position.y;
+
         if (player.isPlayerAlive()){
             //isGrounded is only set to true if the feetPost collides with a ground object
             this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
 
-            if (this.horizontal_movement_input==0 && this.isGrounded && this.inCombat == false){
-                this.animator.playIdleAnimation();
+            if ((this.crntY - this.prevY) < 0){
+                this.animator.playFallAnimation();
             }
-            else if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
-                this.move();
-                if (this.isGrounded && this.inCombat == false) {
-                    this.animator.playRunAnimation();
+            else{
+                if (this.horizontal_movement_input==0 && this.isGrounded && this.inCombat == false){
+                    this.animator.playIdleAnimation();
+                }
+                else if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
+                    this.move();
+                    if (this.isGrounded && this.inCombat == false) {
+                        this.animator.playRunAnimation();
+                    }
                 }
             }
-
-
-
+            
             if (this.isGrounded){
                 this.extra_jumps_remaining = this.extra_jumps_allowed;
             }
 
-            if (!this.isGrounded && !this.jumpInput){
-                this.animator.playJumpAnimation();
-            }
-
             if (this.isAllowedToJump()){
-                this.animator.playFallAnimation();
+                this.animator.playJumpAnimation();
                 this.jump();
             }
+
 
             if (this.dashInput && this.dashTimeCounter > 0){
                 this.dash();
@@ -190,5 +195,6 @@ public class PlayerMovement : MonoBehaviour
 
         this.jumpInput = false;
         this.dashInput = false;
+        this.prevY = this.crntY;
     }
 }

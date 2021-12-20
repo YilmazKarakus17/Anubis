@@ -6,19 +6,25 @@ public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
     private string currentState;
+    // Constants that represent the animations in the game
+    const string PLAYER_IDLE = "PlayerIdle";
+    const string PLAYER_RUN = "PlayerRun";
+    const string PLAYER_JUMP = "PlayerJump";
+    const string PLAYER_DEATH = "PlayerDeath";
+    const string PLAYER_FALL = "PlayerFall";
 
     /*============ Animate Method ============*/
-    public void playJumpAnimation(){ this.changeAnimationState("PlayerJump"); }
-    public void playDeathAnimation(){ this.changeAnimationState("PlayerDeath"); }
-    public void playRunAnimation(){ this.changeAnimationState("PlayerRun"); }
-    public void playFallAnimation(){ this.changeAnimationState("PlayerFall"); }
-    public void playIdleAnimation(){ this.changeAnimationState("PlayerIdle"); }
+    public void playJumpAnimation(){ this.changeAnimationState(PLAYER_JUMP); }
+    public void playDeathAnimation(){ this.changeAnimationState(PLAYER_DEATH); }
+    public void playRunAnimation(){ this.changeAnimationState(PLAYER_RUN); }
+    public void playFallAnimation(){ this.changeAnimationState(PLAYER_FALL); }
+    public void playIdleAnimation(){ this.changeAnimationState(PLAYER_IDLE); }
 
 
     //Changes the animation
     public void changeAnimationState(string newState){
         // return if there's no state change
-        if (this.currentState==newState) return;
+        if (this.currentState==newState && newState != PLAYER_FALL) return;
 
         // play the animation
         animator.Play(newState);
