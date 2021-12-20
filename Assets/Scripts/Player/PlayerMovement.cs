@@ -32,8 +32,14 @@ public class PlayerMovement : MonoBehaviour
     
     //Variables for checking if Player's feet is touching a ground object
     public Transform feetPos;
-    public float checkRadius;
+    public float feetCheckRadius;
     public LayerMask whatIsGround;
+
+    //Variables for checking if Player's hand is touching a WallJump object
+    private bool isHanging;
+    public Transform handPos;
+    public float handCheckRadius;
+    public LayerMask whatIsWallJump;
 
     //Player Dash Variables
     private bool dashInput;
@@ -165,24 +171,43 @@ public class PlayerMovement : MonoBehaviour
         this.crntY = this.transform.position.y;
 
         if (player.isPlayerAlive()){
-            //isGrounded is only set to true if the feetPost collides with a ground object
-            this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.checkRadius, this.whatIsGround);
-            if ((this.crntY - this.prevY) < 0 && this.inCombat == false){
-                this.animator.playFallAnimation();
+
+            //Regardless of whether the player is grounded or in the air, they must be allowed to move
+            if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
+                this.move();
             }
-            else{
-                if (this.horizontal_movement_input==0 && this.isGrounded && this.inCombat == false){
+
+            //isGrounded is only set to true if the feetPost collides with a ground object
+            this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.feetCheckRadius, this.whatIsGround);
+
+            //isHanging is only set to true if the feetPost collides with a ground object
+            this.isHanging = Physics2D.OverlapCircle(this.handPos.position, this.handCheckRadius, this.whatIsWallJump);
+
+            //If the player is NOT touching the ground they must either be hanging, or falling
+            if (!this.isGrounded){
+                if (this.isHanging){
+                    this.animator.playHangAnimation();
+                }
+                else if ((this.crntY - this.prevY) < 0 && !this.inCombat){
+                    this.animator.playFallAnimation();
+                }
+
+            }
+            else {
+                //if the player is grounded and doesn't wish to horizontally and is not in combat they must be IDLE
+                if (this.horizontal_movement_input==0 && !this.inCombat){
                     this.animator.playIdleAnimation();
                 }
+                //If the payer is grounded and is allowed to move horizontally and wish to move horizontally then they must be RUNNING 
                 else if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
-                    this.move();
-                    if (this.isGrounded && this.inCombat == false) {
+                    if (this.isGrounded && !this.inCombat) {
                         this.animator.playRunAnimation();
                     }
                 }
             }
+
             
-            if (this.isGrounded){
+            if (this.isGrounded || this.isHanging){
                 this.extra_jumps_remaining = this.extra_jumps_allowed;
             }
 
@@ -190,7 +215,6 @@ public class PlayerMovement : MonoBehaviour
                 this.animator.playJumpAnimation();
                 this.jump();
             }
-
 
             if (this.dashInput && this.dashTimeCounter > 0){
                 this.dash();
