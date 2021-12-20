@@ -26,6 +26,9 @@ public class TransitionOneBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (PlayerMovement.instance.getAllowedToHorizontallyMove() && (PlayerMovement.instance.getHorizontalMovementInput() != 0) && !PlayerActionManager.instance.isAttacking) {
+            PlayerActionManager.instance.animator.Play("PlayerRun");
+        }
         PlayerActionManager.instance.isAttacking = false;
         PlayerActionManager.instance.isShockwaveActive = false;
     }

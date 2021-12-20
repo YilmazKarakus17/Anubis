@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     /*========================== Instance Variables ==========================*/
+    public static PlayerMovement instance; // Used in IdleBehaviour to check if player is in combat.
     private Player player;
     private PlayerAnimator animator;
     private Rigidbody2D rigidbody;
@@ -156,6 +157,10 @@ public class PlayerMovement : MonoBehaviour
         this.prevY = this.crntY = this.transform.position.y;
     }
 
+    void Awake() {
+        instance = this;
+    }
+
     void FixedUpdate(){
         this.crntY = this.transform.position.y;
 
@@ -182,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
                 this.extra_jumps_remaining = this.extra_jumps_allowed;
             }
 
-            if (this.isAllowedToJump()){
+            if (this.isAllowedToJump() && !this.inCombat){
                 this.animator.playJumpAnimation();
                 this.jump();
             }

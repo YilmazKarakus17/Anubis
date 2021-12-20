@@ -14,6 +14,7 @@ public class PlayerActionManager : MonoBehaviour
 
     // Combat variables
     public float attackDamage = 25;
+    private float horizontalDirection;
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
     public float attackRange = 1.25f;
@@ -57,16 +58,13 @@ public class PlayerActionManager : MonoBehaviour
     IEnumerator AddShockwaveDelay(float positionIncrease, float rangeIncrease, float waitTime) {
         yield return new WaitForSeconds(waitTime);
         GameObject shockwave;
-        float horizontalDirection;
-        if (transform.localScale.x < 0) {
+        if (this.horizontalDirection < 0) {
             shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,180));
-            horizontalDirection = -1;
         }
         else {
             shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));
-            horizontalDirection = 1;
         }
-        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalDirection*20, 0), ForceMode2D.Impulse);
+        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(this.horizontalDirection*20, 0), ForceMode2D.Impulse);
     }
 
     // Start is called before the first frame update
@@ -84,8 +82,14 @@ public class PlayerActionManager : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if (transform.localScale.x < 0) {
+            this.horizontalDirection = -1;
+        }
+        else {
+            this.horizontalDirection = 1;
+        }
         if (applyAttackThrust) {
-            r2d.AddForce(new Vector2(10, 0), ForceMode2D.Impulse);
+            r2d.AddForce(new Vector2(this.horizontalDirection*10, 0), ForceMode2D.Impulse);
             applyAttackThrust = false;
         }
     }

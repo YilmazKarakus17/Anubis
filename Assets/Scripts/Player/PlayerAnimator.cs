@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     // Constants that represent the animations in the game
     const string PLAYER_IDLE = "PlayerIdle";
     const string PLAYER_RUN = "PlayerRun";
-    const string PLAYER_JUMP = "PlayerJump";
+    const string PLAYER_JUMP = "PlayerInitialJumpCharge";
     const string PLAYER_DEATH = "PlayerDeath";
     const string PLAYER_FALL = "PlayerFall";
 
