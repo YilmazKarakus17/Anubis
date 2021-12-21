@@ -1128,7 +1128,7 @@ MonoBehaviour:
   easyBtn: {fileID: 340311789}
   normalBtn: {fileID: 372497576}
   hardBtn: {fileID: 1778909302}
-  currentDifficulty: 0
+  currentDifficulty: -1
 --- !u!1 &498339661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDifficulty: 0
+  playerHealth: 0
+  playerStamina: 0
+  playerSouls: 0
 --- !u!4 &630790771
 Transform:
   m_ObjectHideFlags: 0

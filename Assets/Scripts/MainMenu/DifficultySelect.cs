@@ -45,6 +45,10 @@ public class DifficultySelect : MonoBehaviour
     public void easyMode()
     {
         SaveManager.instance.currentDifficulty = 0;
+        SaveManager.instance.playerHealth = 200;
+        SaveManager.instance.playerStamina = 100;
+        SaveManager.instance.playerSouls = 0;
+
         SaveManager.instance.Save();
 
         if (SaveManager.instance.currentDifficulty==0)
@@ -57,6 +61,9 @@ public class DifficultySelect : MonoBehaviour
     public void normalMode()
     {
         SaveManager.instance.currentDifficulty = 1;
+        SaveManager.instance.playerHealth = 150;
+        SaveManager.instance.playerStamina = 75;
+        SaveManager.instance.playerSouls = 0;
         SaveManager.instance.Save();
         if (SaveManager.instance.currentDifficulty==1)
         {
@@ -68,6 +75,9 @@ public class DifficultySelect : MonoBehaviour
     public void hardMode()
     {
         SaveManager.instance.currentDifficulty = 2;
+        SaveManager.instance.playerHealth = 100;
+        SaveManager.instance.playerStamina = 50;
+        SaveManager.instance.playerSouls = 0;
         SaveManager.instance.Save();
         if (SaveManager.instance.currentDifficulty==2)
         {

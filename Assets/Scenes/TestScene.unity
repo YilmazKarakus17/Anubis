@@ -792,6 +792,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f0e2630c-5d31-4be3-abbc-0099d807163e
     m_ActionName: Player/Shockwave[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bcbddfa9-f260-4412-af39-f072d7558140
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

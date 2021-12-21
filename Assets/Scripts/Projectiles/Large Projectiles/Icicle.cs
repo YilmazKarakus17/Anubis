@@ -10,6 +10,14 @@ public class Icicle : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D otherCollider){
+        if (otherCollider.gameObject.tag == "Player"){
+            otherCollider.gameObject.GetComponent<Player>().killPlayerFORCE();
+            //Destroy(gameObject);
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

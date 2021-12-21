@@ -9,7 +9,9 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance { get; private set; }
 
     public int currentDifficulty;
-
+    public float playerHealth;
+    public float playerStamina;
+    public float playerSouls;
 
     private void Awake()
     {
@@ -32,6 +34,9 @@ public class SaveManager : MonoBehaviour
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
             currentDifficulty = data.currentDifficulty;
+            playerHealth = data.playerHealth;
+            playerStamina = data.playerStamina;
+            playerSouls = data.playerSouls;
 
             file.Close();
         }
@@ -45,6 +50,9 @@ public class SaveManager : MonoBehaviour
         PlayerData_Storage data = new PlayerData_Storage();
 
         data.currentDifficulty = currentDifficulty;
+        data.playerHealth = playerHealth;
+        data.playerStamina = playerStamina;
+        data.playerSouls = playerSouls;
 
         bf.Serialize(file, data);
         file.Close();
@@ -57,4 +65,7 @@ public class SaveManager : MonoBehaviour
 class PlayerData_Storage
 {
     public int currentDifficulty;
+    public float playerHealth;
+    public float playerStamina;
+    public float playerSouls;
 }

@@ -191,7 +191,6 @@ public class PlayerMovement : MonoBehaviour
                 else if ((this.crntY - this.prevY) < 0 && !this.inCombat){
                     this.animator.playFallAnimation();
                 }
-
             }
             else {
                 //if the player is grounded and doesn't wish to horizontally and is not in combat they must be IDLE
@@ -205,7 +204,6 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
-
             
             if (this.isGrounded || this.isHanging){
                 this.extra_jumps_remaining = this.extra_jumps_allowed;
