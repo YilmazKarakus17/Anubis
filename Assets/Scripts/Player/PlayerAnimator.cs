@@ -28,7 +28,9 @@ public class PlayerAnimator : MonoBehaviour
     public void changeAnimationState(string newState){
         // return if there's no state change
         if (this.currentState==newState && newState != PLAYER_FALL) return;
-
+        // return if the animator is told to play something other then hurt if the player is currently hurt
+        if (this.gameObject.GetComponent<Player>().isHurt && newState != PLAYER_HURT) return;
+        
         // play the animation
         animator.Play(newState);
 

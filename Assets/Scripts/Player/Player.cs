@@ -20,22 +20,28 @@ public class Player : MonoBehaviour
     public float staminaRegenTime;
     private float staminaRegenCountDown;
     public float souls;
+    
 
     //Boolean Variables
     private bool invulnerable;
     private bool alive;
     public bool disregardStamina = false;
+    public bool isHurt;
 
     // variables used to wait for the animation to finish before destroying player object
     private bool alreadyCalledDeathMethod;
     public float deathAnimationWaitTime;
     private float timeOfDeath;
 
+    //Player Hurt Animation
+    public float hurtAnimationLength = 0.2f;
+    private float hurtAnimationTimer;
+
     // health bar and stamina bar variables
     public HealthBar healthBar;
     public StaminaBar staminaBar;
 
-    /*========================== Instance Methods ==========================*/
+    /*========================== Instance Methods ==========================*/    
     private void updateAliveStatus(){
         if (this.currentHealth > 0){
             this.alive = true;
@@ -85,7 +91,6 @@ public class Player : MonoBehaviour
     //Decreases the players health by the given health points if they are not invulnerable
     public void decreaseHealthByPoint(float healthPoints){ 
         if (!this.isInvulnerable()){
-            movement.setHurt(true);
             float hp = this.currentHealth - healthPoints;
             if (hp <= 0){
                 this.currentHealth = 0;
@@ -93,6 +98,7 @@ public class Player : MonoBehaviour
             else{
                 this.currentHealth = hp;
             }
+            this.isHurt = true;
             this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
         } 
@@ -107,6 +113,7 @@ public class Player : MonoBehaviour
         else{
             this.currentHealth = hp;
         }
+        this.isHurt = true;
         this.updateHealthBar(); // updating the health bar health
         this.updateAliveStatus();
     }
@@ -236,6 +243,8 @@ public class Player : MonoBehaviour
         this.alreadyCalledDeathMethod = false;
         this.deathAnimationWaitTime = 1f;
         this.staminaRegenCountDown = this.staminaRegenTime;
+        this.isHurt = false;
+        this.hurtAnimationTimer = this.hurtAnimationLength;
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);
@@ -250,5 +259,16 @@ public class Player : MonoBehaviour
             this.staminaRegenCountDown = this.staminaRegenTime;
         }
         
+
+        if (this.isHurt){
+            this.hurtAnimationTimer -= Time.deltaTime;
+            if (this.hurtAnimationTimer <= 0){
+                this.isHurt = false;
+                this.hurtAnimationTimer = this.hurtAnimationLength;
+            }
+            else{
+                this.animator.playHurtAnimation();
+            }
+        }
     }
 }

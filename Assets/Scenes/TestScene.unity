@@ -724,9 +724,8 @@ MonoBehaviour:
   horizontal_movement_speed: 11
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
-  hurt: 0
   jumpForce: 40
-  extra_jumps_allowed: 0
+  extra_jumps_allowed: 2
   feetPos: {fileID: 563523768}
   feetCheckRadius: 0.3
   whatIsGround:
@@ -758,7 +757,9 @@ MonoBehaviour:
   staminaRegenTime: 2
   souls: 0
   disregardStamina: 0
+  isHurt: 0
   deathAnimationWaitTime: 1
+  hurtAnimationLength: 0.2
   healthBar: {fileID: 1034650351}
   staminaBar: {fileID: 2101663480}
 --- !u!114 &284938945
