@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public float horizontal_movement_speed = 7;
     public float in_combat_horizontal_movement_speed = 2;
     public bool inCombat;
+    public bool hurt;
 
     //Player Jump Variables
     private bool jumpInput;
@@ -58,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void setAllowedToHorizontallyMove(bool allowed){
         this.allowed_to_horizontally_move = allowed;
+    }
+
+    public void setHurt(bool hurt) {
+        this.hurt = hurt;
     }
 
     public float getHorizontalMovementInput() {

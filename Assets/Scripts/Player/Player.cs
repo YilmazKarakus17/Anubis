@@ -84,7 +84,8 @@ public class Player : MonoBehaviour
     /*============ Decrease player health Methods ============*/
     //Decreases the players health by the given health points if they are not invulnerable
     public void decreaseHealthByPoint(float healthPoints){ 
-        if (!this.isInvulnerable()){ 
+        if (!this.isInvulnerable()){
+            movement.setHurt(true);
             float hp = this.currentHealth - healthPoints;
             if (hp <= 0){
                 this.currentHealth = 0;

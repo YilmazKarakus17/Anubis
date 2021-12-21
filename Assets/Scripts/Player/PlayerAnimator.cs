@@ -13,6 +13,7 @@ public class PlayerAnimator : MonoBehaviour
     const string PLAYER_DEATH = "PlayerDeath";
     const string PLAYER_FALL = "PlayerFall";
     const string PLAYER_HANG = "PlayerHanging";
+    const string PLAYER_HURT = "PlayerHurt";
 
     /*============ Animate Method ============*/
     public void playJumpAnimation(){ this.changeAnimationState(PLAYER_JUMP); }
@@ -21,6 +22,7 @@ public class PlayerAnimator : MonoBehaviour
     public void playFallAnimation(){ this.changeAnimationState(PLAYER_FALL); }
     public void playIdleAnimation(){ this.changeAnimationState(PLAYER_IDLE); }
     public void playHangAnimation(){ this.changeAnimationState(PLAYER_HANG); }
+    public void playHurtAnimation(){ this.changeAnimationState(PLAYER_HURT); }
 
     //Changes the animation
     public void changeAnimationState(string newState){
