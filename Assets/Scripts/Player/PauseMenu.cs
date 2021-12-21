@@ -8,25 +8,31 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public bool isPaused;
 
+    public void Pause(InputAction.CallbackContext value) {
+        if (value.performed && !this.isPaused){
+            this.isPaused = true;
+        }
+        else if (value.performed && this.isPaused){
+            this.isPaused = false;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
+        this.isPaused = false;
     }
 
     // Update is called once per frame
-    void Update(InputAction.CallbackContext value)
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (this.isPaused)
         {
-            if (isPaused)
-            {
-                resumeGame();
-            }
-            else 
-            {
-                pauseGame();
-            }
+            pauseGame();
+        }
+        else 
+        {
+            resumeGame();
         }
     }
 

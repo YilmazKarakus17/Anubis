@@ -236,6 +236,7 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
-        
+        healthBar.setHealth(maxHealth);
+        staminaBar.setStamina(maxStamina);
     }
 }
