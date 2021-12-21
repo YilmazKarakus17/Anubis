@@ -92,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
     public void Dash(InputAction.CallbackContext value) {
         if (value.performed){
             this.dashInput = true;
+            this.player.decreaseStaminaByPoint(5); // BILAL CHANGED HERE!
         }
     }
 

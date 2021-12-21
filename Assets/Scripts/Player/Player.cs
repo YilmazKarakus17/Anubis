@@ -29,6 +29,10 @@ public class Player : MonoBehaviour
     public float deathAnimationWaitTime;
     private float timeOfDeath;
 
+    // health bar and stamina bar variables
+    public HealthBar healthBar;
+    public StaminaBar staminaBar;
+
     /*========================== Instance Methods ==========================*/
     private void updateAliveStatus(){
         if (this.currentHealth > 0){
@@ -98,6 +102,7 @@ public class Player : MonoBehaviour
     public void decreaseHealthByPercentage(float percentageOfDamage){ 
         if (!this.isInvulnerable()){ 
             this.currentHealth = this.currentHealth*(1-(percentageOfDamage/100)); 
+            healthBar.setHealth(currentHealth); // updating the health bar health
             this.updateAliveStatus();
         } 
     }
@@ -105,6 +110,7 @@ public class Player : MonoBehaviour
     //Decreases the players health by the given percentage regardless of invulnerability
     public void decreaseHealthByPercentageFORCE(float percentageOfDamage){ 
         this.currentHealth = this.currentHealth*(1-(percentageOfDamage/100)); 
+        healthBar.setHealth(currentHealth); // updating the health bar health
         this.updateAliveStatus();
     }
 
@@ -158,6 +164,7 @@ public class Player : MonoBehaviour
         if (this.currentStamina >= staminaPoints){
             if (!this.disregardStamina){ 
                 this.currentStamina -= staminaPoints; 
+                staminaBar.setStamina(currentStamina); // sets the stamina of the HUD
             } 
             return true;
         }
@@ -175,6 +182,7 @@ public class Player : MonoBehaviour
     public bool decreaseStaminaByPointFORCE(float staminaPoints){
         if (this.currentStamina >= staminaPoints){
             this.currentStamina -= staminaPoints;
+            staminaBar.setStamina(currentStamina); // sets the stamina of the HUD
             return true;
         }
         this.currentStamina = 0;
@@ -221,6 +229,10 @@ public class Player : MonoBehaviour
         this.invulnerable = false;
         this.alreadyCalledDeathMethod = false;
         this.deathAnimationWaitTime = 1f;
+
+        // setting the health bar
+        healthBar.setMaxHealth(maxHealth);
+        staminaBar.setMaxStamina(maxStamina);
     }
 
     void FixedUpdate(){
