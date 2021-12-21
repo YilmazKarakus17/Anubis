@@ -3195,7 +3195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 284938942}
-  speed: 4
+  speed: 0
   focusPlayerOnDeath: 0
   points:
   - {fileID: 941400753}

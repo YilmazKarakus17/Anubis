@@ -11,9 +11,11 @@ public class PauseMenu : MonoBehaviour
     public void Pause(InputAction.CallbackContext value) {
         if (value.performed && !this.isPaused){
             this.isPaused = true;
+            pauseGame();
         }
         else if (value.performed && this.isPaused){
             this.isPaused = false;
+            resumeGame();
         }
     }
 
@@ -26,14 +28,6 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.isPaused)
-        {
-            pauseGame();
-        }
-        else 
-        {
-            resumeGame();
-        }
     }
 
     public void pauseGame()
