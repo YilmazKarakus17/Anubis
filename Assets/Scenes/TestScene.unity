@@ -751,7 +751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   maxStamina: 50
+  currentStamina: 0
+  staminaRegenTime: 2
   souls: 0
   disregardStamina: 0
   deathAnimationWaitTime: 1
@@ -1558,8 +1561,9 @@ GameObject:
   - component: {fileID: 501823185}
   - component: {fileID: 501823184}
   - component: {fileID: 501823183}
+  - component: {fileID: 501823186}
   - component: {fileID: 501823182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlyingEyeBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1594,7 +1598,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019695967, y: -0.051865965}
+  m_Offset: {x: 0.026210617, y: -0.051865965}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1605,7 +1609,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16091895, y: 0.20152032}
+  m_Size: {x: 0.16752946, y: 0.20152032}
   m_EdgeRadius: 0
 --- !u!212 &501823184
 SpriteRenderer:
@@ -1674,6 +1678,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &501823186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501823181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca6d9072a7c1af4c8201cbb69b40f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  attackDamage: 15
 --- !u!1 &563523767
 GameObject:
   m_ObjectHideFlags: 0

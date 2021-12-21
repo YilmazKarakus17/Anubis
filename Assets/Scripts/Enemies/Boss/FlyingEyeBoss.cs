@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FlyingEyeBoss : MonoBehaviour
 {
-    private Transform player;
     public Transform eye;
 
     public float timeBtwShots;
@@ -15,7 +14,6 @@ public class FlyingEyeBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.player = GameObject.FindGameObjectWithTag("Player").transform;
         this.countdownTimeBtwShots = this.timeBtwShots;
     }
 

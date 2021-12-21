@@ -14,9 +14,11 @@ public class Player : MonoBehaviour
 
     //Player Stats Variables
     public float maxHealth;
-    private float currentHealth;
+    public float currentHealth;
     public float maxStamina;
-    private float currentStamina;
+    public float currentStamina;
+    public float staminaRegenTime;
+    private float staminaRegenCountDown;
     public float souls;
 
     //Boolean Variables
@@ -58,73 +60,53 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*============ Health Manipulation Methods ============*/
-    //===== Increase player health =====//
+    /*============ Increase player health Methods ============*/
     //Resets the health
     public void resetHealth(){ 
         this.currentHealth = this.maxHealth;
+        this.updateHealthBar();
         this.updateAliveStatus();
     }
 
-    //Increases the players health by the given percentage
-    public void increaseHealthByPercentage(float percentage){ 
-        float hp = this.currentHealth*(1+(percentage/100));
+    //Increases the players health by the given health points
+    public void increaseHealthByPoint(float healthPoints){ 
+        float hp = this.currentHealth + healthPoints;
         if (hp > this.maxHealth){
             this.currentHealth = this.maxHealth;
         }
         else{
             this.currentHealth = hp;
         }
+        this.updateHealthBar();
         this.updateAliveStatus();
     }
 
-    //Increases the players health by the given health points
-    public void increaseHealthByPoint(float healthPoints){ 
-        this.currentHealth += healthPoints; 
-        this.updateAliveStatus();
-    }
-
-    //===== Upgrade Player Health =====//
-    //Upgrades/Increases the players max health by the given percentage
-    public void updateHealthByPercentage(float percentage){ 
-        this.maxHealth = this.maxHealth*(1+(percentage/100));
-        //WRITE CODE
-    }
-
-    //Upgrades/Increases the players max health by the given health points
-    public void upgradeHealthByPoint(float healthPoints){ 
-        this.maxHealth += healthPoints;
-        //WRITE CODE
-    }
-
-    //===== Decrease player health =====//
-    //Decreases the players health by the given percentage if they are not invulnerable
-    public void decreaseHealthByPercentage(float percentageOfDamage){ 
-        if (!this.isInvulnerable()){ 
-            this.currentHealth = this.currentHealth*(1-(percentageOfDamage/100)); 
-            healthBar.setHealth(currentHealth); // updating the health bar health
-            this.updateAliveStatus();
-        } 
-    }
-
-    //Decreases the players health by the given percentage regardless of invulnerability
-    public void decreaseHealthByPercentageFORCE(float percentageOfDamage){ 
-        this.currentHealth = this.currentHealth*(1-(percentageOfDamage/100)); 
-        healthBar.setHealth(currentHealth); // updating the health bar health
-        this.updateAliveStatus();
-    }
-
+    /*============ Decrease player health Methods ============*/
     //Decreases the players health by the given health points if they are not invulnerable
     public void decreaseHealthByPoint(float healthPoints){ 
         if (!this.isInvulnerable()){ 
-            this.currentHealth -= healthPoints;
+            float hp = this.currentHealth - healthPoints;
+            if (hp <= 0){
+                this.currentHealth = 0;
+            }
+            else{
+                this.currentHealth = hp;
+            }
+            this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
         } 
     }
 
     //Decreases the players health by the given health points regardless of invulnerability
     public void decreaseHealthByPointFORCE(float healthPoints){ 
-        this.currentHealth -= healthPoints;
+        float hp = this.currentHealth - healthPoints;
+        if (hp <= 0){
+            this.currentHealth = 0;
+        }
+        else{
+            this.currentHealth = hp;
+        }
+        this.updateHealthBar(); // updating the health bar health
         this.updateAliveStatus();
     }
 
@@ -132,45 +114,52 @@ public class Player : MonoBehaviour
     //Kils the Player if they are not invulnerable
     public void killPlayer(){ 
         if (!this.isInvulnerable()){ 
-            this.decreaseHealthByPercentageFORCE(100);
+            this.currentHealth = 0;
+            this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
         } 
     }
 
     //Kils the Player regardless of invulnerability
     public void killPlayerFORCE(){
-        this.decreaseHealthByPercentageFORCE(100);
-        this.alive = false;
+        this.currentHealth = 0;
+        this.updateHealthBar(); // updating the health bar health
+        this.updateAliveStatus();
         this.updateAliveStatus();
     }
 
     /*============ Stamina Manipulation Methods ============*/
     //===== Increase player stamina =====//
     //Resets the staming value
-    public void resetStamina(){ this.currentStamina = this.maxStamina; }
-
-    //Increases the players stamina by the given percentage
-    public void increaseStaminaByPercentage(float percentage){ this.currentStamina = this.currentStamina*(1+(percentage/100)); }
+    public void resetStamina(){ 
+        this.currentStamina = this.maxStamina; 
+        this.updateStaminaBar();
+    }
 
     //Increases the players stamina by the given stamina points
-    public void increaseStaminaByPoint(float staminaPoints){ this.currentStamina += staminaPoints; }
+    public void increaseStaminaByPoint(float staminaPoints){ 
+        float st = this.currentStamina + staminaPoints; 
+        if (st <= this.maxStamina){
+            this.currentStamina = st;
+        }
+        else{
+            this.resetStamina();
+        }
+    }
 
     //===== Decrease  the players stamina =====//
     /*  Decreases the players stamina by the given stamina points if stamina is not disregarded
         Returns true if the points is not more than the current stamina points and decreases the current points by the given stamina points
         Returns false if the points exceed the current stamina points, and decreases the current points by 0
     */
-    public bool decreaseStaminaByPoint(float staminaPoints){ 
+    public bool decreaseStaminaByPoint(float staminaPoints){
+        //Checks that the staminaPoints isn't larger than the currentStamina because we can't have negative stamina
         if (this.currentStamina >= staminaPoints){
             if (!this.disregardStamina){ 
-                this.currentStamina -= staminaPoints; 
-                staminaBar.setStamina(currentStamina); // sets the stamina of the HUD
-            } 
+                this.takeStamina(this.currentStamina - staminaPoints); 
+            }
             return true;
         }
-        if (!this.disregardStamina){ 
-            this.currentStamina = 0;
-        } 
         return false;
     }
 
@@ -180,19 +169,22 @@ public class Player : MonoBehaviour
         Returns false if the points exceed the current stamina points, and decreases the current points by 0
     */
     public bool decreaseStaminaByPointFORCE(float staminaPoints){
-        if (this.currentStamina >= staminaPoints){
-            this.currentStamina -= staminaPoints;
-            staminaBar.setStamina(currentStamina); // sets the stamina of the HUD
+        if (this.currentStamina > staminaPoints){
+            this.takeStamina(this.currentStamina - staminaPoints); 
             return true;
         }
-        this.currentStamina = 0;
         return false;
     }
 
-    //Decreases the players stamina by the given percentage if stamina is not disregarded
-    public void decreaseStaminaByPercentage(float percentage){ if (!this.disregardStamina){ this.currentStamina = this.currentStamina*(1-(percentage/100)); } }
-    //Decreases the players stamina by the given percentage regardless of if the stamina is not disregarded
-    public void decreaseStaminaByPercentageFORCE(float percentage){ this.currentStamina = this.currentStamina*(1-(percentage/100)); }
+    public void takeStamina(float st){
+        if (st <=0){
+            this.currentStamina = 0;
+        }
+        else{
+            this.currentStamina = st;
+        }
+        this.updateStaminaBar();
+    }
 
     /*========================== Instance Methods ==========================*/
     /*============ Invulnerability Methods ============*/
@@ -206,6 +198,19 @@ public class Player : MonoBehaviour
     public bool isInvulnerable(){
         return this.invulnerable;
     }
+
+
+    /*========================== User Interface Methods ==========================*/
+    public void updateHealthBar(){
+        healthBar.setMaxHealth(maxHealth);
+        healthBar.setHealth(currentHealth); 
+    }
+
+    public void updateStaminaBar(){
+        staminaBar.setMaxStamina(maxStamina);
+        staminaBar.setStamina(this.currentStamina);
+    }
+    
 
     /*========================== Special Unity Methods  ==========================*/
     // Start is called before the first frame update
@@ -229,14 +234,20 @@ public class Player : MonoBehaviour
         this.invulnerable = false;
         this.alreadyCalledDeathMethod = false;
         this.deathAnimationWaitTime = 1f;
+        this.staminaRegenCountDown = this.staminaRegenTime;
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);
         staminaBar.setMaxStamina(maxStamina);
     }
 
-    void FixedUpdate(){
-        healthBar.setHealth(maxHealth);
-        staminaBar.setStamina(maxStamina);
+    void Update(){
+        this.staminaRegenCountDown -= Time.deltaTime;
+        if (this.staminaRegenCountDown <=0){
+            this.increaseStaminaByPoint(3);
+            this.updateStaminaBar();
+            this.staminaRegenCountDown = this.staminaRegenTime;
+        }
+        
     }
 }

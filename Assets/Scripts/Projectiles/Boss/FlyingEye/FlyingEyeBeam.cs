@@ -11,6 +11,7 @@ public class FlyingEyeBeam : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Player")){
+            other.gameObject.GetComponent<Player>().decreaseHealthByPoint(5);
             this.DestroyProjectile();
         }
     }
@@ -24,7 +25,7 @@ public class FlyingEyeBeam : MonoBehaviour
     {
         this.player = GameObject.FindGameObjectWithTag("Player").transform;
         target = new Vector2(player.position.x, player.position.y);
-        this.speed = 5;
+        this.speed = 15;
     }
 
     // Update is called once per frame
