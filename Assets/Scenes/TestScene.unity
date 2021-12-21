@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashEffect: {fileID: 3044135490299284828, guid: 45ed5608f79d5f444b2534e941de089a, type: 3}
-  horizontal_movement_speed: 20
+  horizontal_movement_speed: 11
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
   jumpForce: 40
@@ -3844,7 +3844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1922149540
 Transform:
   m_ObjectHideFlags: 0
@@ -4407,13 +4407,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042914855}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4876d94d0c0731a4cbbf269f8bf7d9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  yOffset: 4
+  Player: {fileID: 284938942}
+  yOffset: 2
 --- !u!20 &2042914859
 Camera:
   m_ObjectHideFlags: 0
@@ -4464,7 +4464,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042914855}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0c39be4b350de44ca8bc0c32f05466a, type: 3}
   m_Name: 
