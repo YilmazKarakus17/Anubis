@@ -58,7 +58,7 @@ public class FlyingEyeBoss : MonoBehaviour
         this.player.GetComponent<Player>().decreaseHealthByPoint(GetComponent<Enemy>().getMeleeAttackDamage());
 
         //Pushes the player back
-        this.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackDirection*100, 0), ForceMode2D.Impulse);
+        this.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackDirection*50, 7), ForceMode2D.Impulse);
     }
 
     //Ensures the Flying Eye always looks at the direction of the player
