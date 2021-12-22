@@ -27,6 +27,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void performSinlgeMeleeAttack(GameObject Player, float x, float y){
+        Player.GetComponent<Player>().decreaseHealthByPoint(this.meleeAttackDamage);
+        // If the enemy is left of the player, knockback the player to the right and vice versa.
+        if (transform.position.x < Player.transform.position.x) {
+            Player.GetComponent<Player>().Knockback(x, y);
+        }
+        else {
+            Player.GetComponent<Player>().Knockback(-x, y);
+        }
+    }
+
     IEnumerator ChangeColour() {
         renderer.material.SetColor("_Color", Color.red);
         yield return new WaitForSeconds(0.25f);

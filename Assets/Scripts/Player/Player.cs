@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private bool invulnerable;
     private bool alive;
     public bool disregardStamina = false;
-    public bool isHurt;
+    public bool knockedBack;
 
     // variables used to wait for the animation to finish before destroying player object
     private bool alreadyCalledDeathMethod;
@@ -37,7 +37,12 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public StaminaBar staminaBar;
 
-    /*========================== Instance Methods ==========================*/    
+    /*========================== Instance Methods ==========================*/   
+    public bool isKockedBack(){
+        return this.knockedBack;
+    }
+
+
     private void updateAliveStatus(){
         if (this.currentHealth > 0){
             this.alive = true;
@@ -199,9 +204,17 @@ public class Player : MonoBehaviour
     /*========================== Instance Methods ==========================*/
     /*============ Knockback Methods ============*/
     public void Knockback(float x, float y) {
+        StartCoroutine(knockBack());
         this.rigidbody.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
     }
     
+
+    IEnumerator knockBack() {
+        this.knockedBack = true;
+        yield return new WaitForSeconds(0.3f);
+        this.knockedBack = false;
+    }
+
     /*============ Invulnerability Methods ============*/
     //Returns true if the player is still alive
     public bool isPlayerAlive()
@@ -250,6 +263,7 @@ public class Player : MonoBehaviour
         this.alreadyCalledDeathMethod = false;
         this.deathAnimationWaitTime = 1f;
         this.staminaRegenCountDown = this.staminaRegenTime;
+        this.knockedBack = false;
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);

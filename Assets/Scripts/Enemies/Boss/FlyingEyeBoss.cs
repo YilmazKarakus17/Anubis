@@ -45,17 +45,7 @@ public class FlyingEyeBoss : MonoBehaviour
     //Performs a melee attack and plays its animation
     void performMeleeAttack(){
         this.playMeleeAnimation();
-
-        //Finds the direction in which the knockback should push the player to
-        float knockbackDirection = 0;
-        if (gameObject.transform.position.x < this.player.transform.position.x) { knockbackDirection = -1; }
-        else { knockbackDirection = 1; }
-
-        //Damages player health by the melee attack damage set in the Enemy Script
-        this.player.GetComponent<Player>().decreaseHealthByPoint(GetComponent<Enemy>().getMeleeAttackDamage());
-
-        //Pushes the player back
-        this.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackDirection*50, 7), ForceMode2D.Impulse);
+        GetComponent<Enemy>().performSinlgeMeleeAttack(this.player, 20, 10);
     }
 
     //================================================ Unity Special Methods ================================================//
