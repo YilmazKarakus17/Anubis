@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class FlyingEyeBoss : MonoBehaviour
 {
-    
-    private Animator animator;
-    private string currentState;
+    //GameObject Variables
+    public GameObject player;
+    public GameObject projectile;
+
+    //Variables for Boss Movement
+    public float movementDelay;
+    private float movementDelayTimer;
+    public float speed;
+    public Transform[] locations;
+    private int indexLocations;
 
     //Variables for shooting/air attacking
     public Transform eye;
@@ -18,14 +25,12 @@ public class FlyingEyeBoss : MonoBehaviour
     private float meleeAttackDuration;
     private float meleeAttackTimer;
 
-    //GameObject Variables
-    public GameObject player;
-    public GameObject projectile;
-
     //Variable For looking at players direction
     private bool lookingLeft;
 
     //Animation Variables
+    private Animator animator;
+    private string currentState;
     const string IDLE = "FlyingEyeIdle";
     const string ATTACK_MELEE = "FlyingEyeAttackMelee";
 
@@ -101,6 +106,8 @@ public class FlyingEyeBoss : MonoBehaviour
         this.isMeleeAttacking = false;
         this.meleeAttackDuration = 1f;
         this.meleeAttackTimer = 0;
+
+        this.movementDelayTimer = this.movementDelay;
     }
 
 
@@ -126,6 +133,20 @@ public class FlyingEyeBoss : MonoBehaviour
                 this.playIdleAnimation();
             }
         }
-        
+
+        this.movementDelayTimer -= Time.deltaTime;
+        if (this.movementDelayTimer <= 0){
+            if (Vector2.Distance(transform.position, this.locations[this.indexLocations].position) < 0.02f)
+            {
+                this.indexLocations += 1;
+                if (this.indexLocations==locations.Length-1){ this.indexLocations=0; }
+                this.movementDelayTimer = this.movementDelay;
+            }
+            
+            transform.position = Vector2.MoveTowards(transform.position, locations[this.indexLocations].position, speed * Time.deltaTime);
+        }
+        else{
+            
+        }
     }
 }
