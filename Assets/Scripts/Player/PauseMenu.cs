@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public static bool isPaused;
+    public static bool isPaused = false;
 
     public void Pause(InputAction.CallbackContext value) {
-        if (value.performed && !isPaused){
-            isPaused = true;
+        Debug.Log("Boogaloo");
+        Debug.Log(isPaused);
+        if (value.performed && (isPaused==false)){
             pauseGame();
         }
-        else if (value.performed && isPaused){
-            isPaused = false;
+        else if (value.performed && (isPaused==true)){
             resumeGame();
         }
     }
@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isPaused = false;
     }
 
     // Update is called once per frame
@@ -33,21 +32,27 @@ public class PauseMenu : MonoBehaviour
 
     public void pauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
         isPaused = true;
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
     }
     
     public void resumeGame()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
         isPaused = false;
+        if (!DialogueManager.isActive)
+        {
+            Time.timeScale = 1f;
+        }
+        pauseMenu.SetActive(false);
+
+        
     }
 
     public void goToMainMenu()
     {
         Time.timeScale = 1f;
+        isPaused = false;
         SceneManager.LoadScene("MainMenu");
     }
 
