@@ -7,7 +7,11 @@ public class Enemy : MonoBehaviour
     private new Renderer renderer;
     // Combat variables
     public float health = 100;
-    public float attackDamage = 25;
+    public float meleeAttackDamage = 25;
+
+    public float getMeleeAttackDamage(){
+        return this.meleeAttackDamage;
+    }
 
     public void TakeDamage(float playerAttackDamage) {
         // The enemy takes damage and will die if its health reaches 0.
