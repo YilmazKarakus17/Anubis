@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
             }
             this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
+            StartCoroutine(ChangeColour());
         } 
     }
 
@@ -110,6 +111,13 @@ public class Player : MonoBehaviour
         }
         this.updateHealthBar(); // updating the health bar health
         this.updateAliveStatus();
+        StartCoroutine(ChangeColour());
+    }
+
+    IEnumerator ChangeColour() {
+        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        yield return new WaitForSeconds(0.25f);
+        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
     }
 
     //===== Kill player =====//
@@ -189,6 +197,11 @@ public class Player : MonoBehaviour
     }
 
     /*========================== Instance Methods ==========================*/
+    /*============ Knockback Methods ============*/
+    public void Knockback(float x, float y) {
+        this.rigidbody.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
+    }
+    
     /*============ Invulnerability Methods ============*/
     //Returns true if the player is still alive
     public bool isPlayerAlive()
@@ -200,7 +213,6 @@ public class Player : MonoBehaviour
     public bool isInvulnerable(){
         return this.invulnerable;
     }
-
 
     /*========================== User Interface Methods ==========================*/
     public void updateHealthBar(){
@@ -223,6 +235,7 @@ public class Player : MonoBehaviour
         this.movement = GetComponent<PlayerMovement>();
         this.actionManager = GetComponent<PlayerActionManager>();
         this.animator = gameObject.GetComponent<PlayerAnimator>();
+        this.rigidbody = GetComponent<Rigidbody2D>();
 
         //Instantiating Player Stats Variables
         //this.maxHealth = SaveManager.instance.playerHealth;

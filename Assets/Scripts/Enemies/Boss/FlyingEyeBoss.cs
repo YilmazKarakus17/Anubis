@@ -25,9 +25,6 @@ public class FlyingEyeBoss : MonoBehaviour
     private float meleeAttackDuration;
     private float meleeAttackTimer;
 
-    //Variable For looking at players direction
-    private bool lookingLeft;
-
     //Animation Variables
     private Animator animator;
     private string currentState;
@@ -61,27 +58,6 @@ public class FlyingEyeBoss : MonoBehaviour
         this.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackDirection*50, 7), ForceMode2D.Impulse);
     }
 
-    //Ensures the Flying Eye always looks at the direction of the player
-    void lookTowardsPlayer(){
-        Vector3 scaler = transform.localScale;
-
-        if (this.lookingLeft && player.transform.position.x > transform.position.x){
-            this.lookingLeft = false;
-            this.flip();
-        }
-        else if (!this.lookingLeft && player.transform.position.x < transform.position.x){
-            this.lookingLeft = true;
-            this.flip();
-        }
-    }
-
-    //Flips the Flying Eye horizontally
-    void flip(){
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1;
-        transform.localScale = scaler;
-    }
-
     //================================================ Unity Special Methods ================================================//
 
     //Collider checks if the player has made contact with the Flying Eye and sets meleeAttack to true
@@ -101,7 +77,6 @@ public class FlyingEyeBoss : MonoBehaviour
         
         this.player = GameObject.FindGameObjectWithTag("Player");
         this.countdownTimeBtwShots = this.timeBtwShots;
-        this.lookingLeft = true;
 
         this.isMeleeAttacking = false;
         this.meleeAttackDuration = 1f;
@@ -114,8 +89,6 @@ public class FlyingEyeBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.lookTowardsPlayer();
-
         this.meleeAttackTimer -= Time.deltaTime;
 
         if (this.meleeAttackTimer > 0){
