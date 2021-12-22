@@ -854,7 +854,7 @@ MonoBehaviour:
   staminaRegenTime: 2
   souls: 0
   disregardStamina: 0
-  isHurt: 0
+  knockedBack: 0
   deathAnimationWaitTime: 1
   healthBar: {fileID: 1034650351}
   staminaBar: {fileID: 2101663480}
