@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class GoblinBomb : MonoBehaviour
 {
-    [SerializeField]
-    private Animator animator;
-    [SerializeField]
-    private float speedX;
-    [SerializeField]
-    private float speedY;
-    [SerializeField]
-    private float range;
-    [SerializeField]
+    [SerializeField] private Animator animator;
+    
+    [SerializeField] private float speedX;
+    
+    [SerializeField] private float speedY;
+    
+    [SerializeField] private float range;
+    
+    
     private GameObject player;
-    [SerializeField]
-    private float damage;
-    [SerializeField]
-    private float knockBackX;
-    [SerializeField]
-    private float knockBacky;
+
+    [SerializeField] private float damage;
+    
+    [SerializeField] private float knockBackX;
+    
+    [SerializeField] private float knockBacky;
+    
 
     // Start is called before the first frame update
     void Start()
