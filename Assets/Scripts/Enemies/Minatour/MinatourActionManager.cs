@@ -11,7 +11,7 @@ public class MinatourActionManager : MonoBehaviour
     public float attackRange = 2f;
 
     // Enemy combat variables
-    public float attackDamage = 25;
+    public float attackDamage;
     public bool isAttacking;
     public bool isCharging;
 

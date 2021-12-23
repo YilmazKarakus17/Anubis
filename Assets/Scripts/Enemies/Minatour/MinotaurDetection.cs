@@ -6,30 +6,36 @@ public class MinotaurDetection : MonoBehaviour
 {
     public GameObject player;
     private MinatourActionManager actionManager;
+    public float attackRate;
+    private float timeBetweenAttacks;
+    private bool detectable;
     
     // Start is called before the first frame update
     void Start()
     {
         actionManager = transform.parent.gameObject.GetComponent<MinatourActionManager>();
         player = GameObject.Find("Player");
-    }
-
-    void OnTriggerEnter2D(Collider2D otherCollider) {
-        if (otherCollider.gameObject.tag == "Player" && !actionManager.getIsCharging()) {
-            actionManager.setIsAttacking(true);
-        }
+        this.attackRate = 2.25f;
+        this.timeBetweenAttacks = 0f;
+        this.detectable = true;
     }
 
     void OnTriggerStay2D(Collider2D otherCollider) {
-        
-        if (otherCollider.gameObject.tag == "Player" && !actionManager.getIsCharging()) {
+        if (this.detectable && otherCollider.gameObject.tag == "Player" && !actionManager.getIsCharging()) {
             actionManager.setIsAttacking(true);
+            this.detectable = false;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!this.detectable && this.timeBetweenAttacks > 0) {
+            timeBetweenAttacks -= Time.deltaTime;
+        }
+        else if (this.timeBetweenAttacks <= 0) {
+            this.detectable = true;
+            this.timeBetweenAttacks = this.attackRate;
+        }
     }
 }
