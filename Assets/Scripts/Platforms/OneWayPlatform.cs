@@ -5,9 +5,14 @@ using UnityEngine.InputSystem;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    public float surfaceArc;
-    public bool collided;
-    public bool drop;
+    [SerializeField]
+    private float surfaceArc;
+
+    [SerializeField]
+    private bool allowedToDrop;
+
+    private bool collided;
+    private bool drop;
 
     public void Drop(InputAction.CallbackContext value) {
         if (value.performed){
@@ -33,7 +38,7 @@ public class OneWayPlatform : MonoBehaviour
     }
 
     public void Update(){
-        if (this.collided && this.drop){
+        if (this.collided && this.drop && this.allowedToDrop){
             GetComponent<PlatformEffector2D>().surfaceArc = 0f;
             StartCoroutine(Wait());
             this.drop = false;
