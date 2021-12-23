@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5919433}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: AttackCentre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1715,7 +1715,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   attackCentre: {fileID: 5919433}
   attackRange: 2.25
-  attackDamage: 25
+  attackDamage: 20
   isAttacking: 0
   isCharging: 0
 --- !u!114 &340271282
@@ -1731,8 +1731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 284938942}
-  health: 300
-  meleeAttackDamage: 50
+  health: 250
+  meleeAttackDamage: 20
   lookingLeft: 0
 --- !u!1 &345752515
 GameObject:
@@ -2804,7 +2804,7 @@ GameObject:
   - component: {fileID: 817649490}
   - component: {fileID: 817649489}
   - component: {fileID: 817649488}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PlayerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2838,6 +2838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 284938942}
+  attackRate: 0
 --- !u!61 &817649489
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2851,7 +2852,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.035714194, y: 0}
+  m_Offset: {x: 0.2193628, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2862,7 +2863,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0714283, y: 1}
+  m_Size: {x: 1.4388257, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &817649490
 SpriteRenderer:
