@@ -8,7 +8,7 @@ public class MinotaurDetection : MonoBehaviour
     private MinatourActionManager actionManager;
     public float attackRate;
     private float timeBetweenAttacks;
-    private bool detectable;
+    public bool detectable;
     
     // Start is called before the first frame update
     void Start()

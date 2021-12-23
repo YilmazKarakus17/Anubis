@@ -17,7 +17,7 @@ public class SkeletonIdleBehaviour : StateMachineBehaviour
         if (enemy.getIsAttacking()) {
             enemy.setIsCharging(true);
             enemy.animator.Play("SkeletonAttack1");
-            enemy.ApplyDamage(0.6f);
+            enemy.ApplyDamage(0.5f, 0.6f);
         }
     }
 

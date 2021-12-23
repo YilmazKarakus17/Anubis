@@ -16,8 +16,19 @@ public class SkeletonActionManager : MonoBehaviour
     public bool isCharging;
 
     /*========================== Enemy Attack Related Functions ==========================*/
-    public void ApplyDamage(float waitTime) {
-        StartCoroutine(AddAttackDelay(waitTime));
+    public void ApplyDamage(float dashWaitTime, float attackWaitTime) {
+        StartCoroutine(AddDashDelay(dashWaitTime));
+        StartCoroutine(AddAttackDelay(attackWaitTime));
+    }
+
+    IEnumerator AddDashDelay(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        if (gameObject.GetComponent<Enemy>().lookingLeft) {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1500, 0), ForceMode2D.Impulse);
+        }
+        else {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(1500, 0), ForceMode2D.Impulse);
+        }
     }
 
     IEnumerator AddAttackDelay(float waitTime) {
@@ -28,10 +39,10 @@ public class SkeletonActionManager : MonoBehaviour
             player[i].GetComponent<Player>().decreaseHealthByPoint(attackDamage);
             // If the enemy is left of the player, knockback the player to the right and vice versa.
             if (transform.position.x < player[i].transform.position.x) {
-                player[i].GetComponent<Player>().Knockback(20, 5);
+                player[i].GetComponent<Player>().Knockback(10f, 0);
             }
             else {
-                player[i].GetComponent<Player>().Knockback(-20, 5);
+                player[i].GetComponent<Player>().Knockback(-10f, 0);
             }
         }
     }

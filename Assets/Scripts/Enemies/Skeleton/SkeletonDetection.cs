@@ -15,7 +15,7 @@ public class SkeletonDetection : MonoBehaviour
     {
         actionManager = transform.parent.gameObject.GetComponent<SkeletonActionManager>();
         player = GameObject.Find("Player");
-        this.attackRate = 2.25f;
+        this.attackRate = 3f;
         this.timeBetweenAttacks = 0f;
         this.detectable = true;
     }
