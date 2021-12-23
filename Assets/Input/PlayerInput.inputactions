@@ -30,7 +30,7 @@
                     "interactions": "Press"
                 },
                 {
-                    "name": "Slide",
+                    "name": "Drop",
                     "type": "Button",
                     "id": "6861a7a0-3265-47b5-bbd1-2c696bbe3fc4",
                     "expectedControlType": "Button",
@@ -188,7 +188,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Slide",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
