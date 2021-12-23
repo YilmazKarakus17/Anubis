@@ -88,7 +88,7 @@ public class FlyingEyeBoss : MonoBehaviour
             }
         }
         else {
-            if (this.countdownTimeBtwShots <=0){
+            if (this.countdownTimeBtwShots <=0 && player.GetComponent<Player>().isPlayerAlive()){
                 this.performAirAttack();
             }
             else{
@@ -98,7 +98,7 @@ public class FlyingEyeBoss : MonoBehaviour
         }
 
         this.movementDelayTimer -= Time.deltaTime;
-        if (this.movementDelayTimer <= 0){
+        if (this.movementDelayTimer <= 0 && player.GetComponent<Player>().isPlayerAlive()){
             if (Vector2.Distance(transform.position, this.locations[this.indexLocations].position) < 0.02f)
             {
                 this.indexLocations += 1;
@@ -107,9 +107,6 @@ public class FlyingEyeBoss : MonoBehaviour
             }
             
             transform.position = Vector2.MoveTowards(transform.position, locations[this.indexLocations].position, speed * Time.deltaTime);
-        }
-        else{
-            
         }
     }
 }

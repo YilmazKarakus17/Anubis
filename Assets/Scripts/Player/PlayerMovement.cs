@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate(){
         this.crntY = this.transform.position.y;
 
-        if (player.isPlayerAlive() && !player.knockedBack){
+        if (player.isPlayerAlive() && !player.isKockedBack()){
             //Regardless of whether the player is grounded or in the air, they must be allowed to move
             if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
                 this.move();

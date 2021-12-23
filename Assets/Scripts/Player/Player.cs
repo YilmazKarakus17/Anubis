@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,17 +22,12 @@ public class Player : MonoBehaviour
     private float staminaRegenCountDown;
     public float souls;
     
-
     //Boolean Variables
     private bool invulnerable;
     private bool alive;
     public bool disregardStamina = false;
-    public bool knockedBack;
-
-    // variables used to wait for the animation to finish before destroying player object
-    private bool alreadyCalledDeathMethod;
-    public float deathAnimationWaitTime;
-    private float timeOfDeath;
+    private bool knockedBack;
+    private bool playerDeathAlreadyPlayed;
 
     // health bar and stamina bar variables
     public HealthBar healthBar;
@@ -42,10 +38,10 @@ public class Player : MonoBehaviour
         return this.knockedBack;
     }
 
-
     private void updateAliveStatus(){
         if (this.currentHealth > 0){
             this.alive = true;
+            this.playerDeathAlreadyPlayed = false;
         }
         else{
             this.alive = false;
@@ -54,16 +50,9 @@ public class Player : MonoBehaviour
     }
     
     private void playerDeath(){
-        if (this.alreadyCalledDeathMethod == false){
-            this.timeOfDeath = 0;
-            this.animator.playDeathAnimation();
-            this.alreadyCalledDeathMethod = true;
-        }
-        this.timeOfDeath += Time.deltaTime;
-        if (this.timeOfDeath > this.deathAnimationWaitTime){
-            Destroy(gameObject);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
-            //Scene restart goes here.
+        if (!playerDeathAlreadyPlayed){
+            this.playerDeathAlreadyPlayed = true;
+            StartCoroutine(KillPlayer());
         }
     }
 
@@ -101,7 +90,7 @@ public class Player : MonoBehaviour
             }
             this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
-            StartCoroutine(ChangeColour());
+            StartCoroutine(HurtPlayer());
         } 
     }
 
@@ -116,13 +105,7 @@ public class Player : MonoBehaviour
         }
         this.updateHealthBar(); // updating the health bar health
         this.updateAliveStatus();
-        StartCoroutine(ChangeColour());
-    }
-
-    IEnumerator ChangeColour() {
-        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        yield return new WaitForSeconds(0.25f);
-        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        StartCoroutine(HurtPlayer());
     }
 
     //===== Kill player =====//
@@ -208,13 +191,6 @@ public class Player : MonoBehaviour
         this.rigidbody.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
     }
     
-
-    IEnumerator knockBack() {
-        this.knockedBack = true;
-        yield return new WaitForSeconds(0.3f);
-        this.knockedBack = false;
-    }
-
     /*============ Invulnerability Methods ============*/
     //Returns true if the player is still alive
     public bool isPlayerAlive()
@@ -227,6 +203,27 @@ public class Player : MonoBehaviour
         return this.invulnerable;
     }
 
+    /*========================== Coroutine Methods ==========================*/
+    //Coroutine for the knockback effect
+    IEnumerator knockBack() {
+        this.knockedBack = true;
+        yield return new WaitForSeconds(0.3f);
+        this.knockedBack = false;
+    }
+
+    //Coroutine for showing player is hurt
+    IEnumerator HurtPlayer() {
+        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        yield return new WaitForSeconds(0.25f);
+        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+    }
+
+    //Coroutine for killing the player
+    IEnumerator KillPlayer(){
+        this.animator.playDeathAnimation();
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
+    }
     /*========================== User Interface Methods ==========================*/
     public void updateHealthBar(){
         healthBar.setMaxHealth(maxHealth);
@@ -260,10 +257,9 @@ public class Player : MonoBehaviour
         //Instantiating 
         this.alive = true;
         this.invulnerable = false;
-        this.alreadyCalledDeathMethod = false;
-        this.deathAnimationWaitTime = 1f;
         this.staminaRegenCountDown = this.staminaRegenTime;
         this.knockedBack = false;
+        this.playerDeathAlreadyPlayed = false;
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);

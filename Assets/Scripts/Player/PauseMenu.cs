@@ -10,8 +10,6 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     public void Pause(InputAction.CallbackContext value) {
-        Debug.Log("Boogaloo");
-        Debug.Log(isPaused);
         if (value.performed && (isPaused==false)){
             pauseGame();
         }

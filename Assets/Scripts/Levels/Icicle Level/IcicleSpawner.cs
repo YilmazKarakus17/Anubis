@@ -16,7 +16,7 @@ public class IcicleSpawner : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherCollider){
         if (otherCollider.gameObject.tag == "Player"){
             this.generate = false;
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

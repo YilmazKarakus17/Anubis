@@ -495,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &224137772
 Transform:
   m_ObjectHideFlags: 0
@@ -854,8 +854,6 @@ MonoBehaviour:
   staminaRegenTime: 2
   souls: 0
   disregardStamina: 0
-  knockedBack: 0
-  deathAnimationWaitTime: 1
   healthBar: {fileID: 1034650351}
   staminaBar: {fileID: 2101663480}
 --- !u!114 &284938945
@@ -1151,7 +1149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284938942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8, y: -5.16, z: 0}
+  m_LocalPosition: {x: -5.04, y: -5.16, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children:
   - {fileID: 563523768}
@@ -2205,8 +2203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfaceArc: 125
-  collided: 0
-  drop: 0
+  allowedToDrop: 0
 --- !u!114 &465395847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3438,7 +3435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879443745}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 66.7, z: 1.2818611}
+  m_LocalPosition: {x: -2.06, y: 66.7, z: 1.2818611}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224137772}
@@ -4603,9 +4600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1333286968}
   - component: {fileID: 1333286967}
-  - component: {fileID: 1333286969}
   - component: {fileID: 1333286966}
-  - component: {fileID: 1333286970}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4678,32 +4673,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1333286969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333286965}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4876d94d0c0731a4cbbf269f8bf7d9f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  yOffset: 4
---- !u!114 &1333286970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333286965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2902b1d630c9e14faf43d2c3ebb4be4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1361572219
 GameObject:
   m_ObjectHideFlags: 0
@@ -5362,7 +5331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1739790968
 Transform:
   m_ObjectHideFlags: 0
