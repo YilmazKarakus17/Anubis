@@ -14,7 +14,8 @@ public class Shockwave : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D otherCollider) {
-        if (otherCollider.gameObject.tag == "Enemy") {
+        // Layer 10 is the enemy layer.
+        if (otherCollider.gameObject.layer == 10) {
             Destroy(gameObject);
             otherCollider.GetComponent<Enemy>().TakeDamage(player.attackDamage/5);
         }

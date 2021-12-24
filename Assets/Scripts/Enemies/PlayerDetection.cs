@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinotaurDetection : MonoBehaviour
+public class PlayerDetection : MonoBehaviour
 {
     public GameObject player;
     private EnemyActionManager actionManager;
     public float attackRate;
     private float timeBetweenAttacks;
-    public bool detectable;
+    private bool detectable;
     
     // Start is called before the first frame update
     void Start()
     {
         actionManager = transform.parent.gameObject.GetComponent<EnemyActionManager>();
         player = GameObject.Find("Player");
-        this.attackRate = 2.5f;
         this.timeBetweenAttacks = 0f;
         this.detectable = true;
     }
