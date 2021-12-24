@@ -5,7 +5,7 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     //GameObject Variables
-    private GameObject player;
+    [SerializeField] private GameObject player;
 
     [SerializeField] private GameObject projectile;
     
@@ -81,6 +81,7 @@ public class Goblin : MonoBehaviour
     void Start()
     {
         this.playerInRange = false;
+        this.performMeleeAttack = false;
         this.countdownTimeBtwShots = 0; //The goblin can immediately throw a bomb at the player
         this.countdownTimeBtwMeleeAttacks = 0; //The goblin can immediately attack the player
         this.animator = GetComponent<Animator>();

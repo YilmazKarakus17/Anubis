@@ -8089,6 +8089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc8c64ed6897c94abc532a5c9ee40bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 284938942}
   projectile: {fileID: 2621750073033344112, guid: d120ee3e8cfe31a41afad64b678c2b8a, type: 3}
   bombSpawn: {fileID: 101894522}
   timeBtwShots: 3
