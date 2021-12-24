@@ -885,6 +885,7 @@ MonoBehaviour:
   currentStamina: 0
   staminaRegenTime: 2
   souls: 0
+  coins: 0
   disregardStamina: 0
   healthBar: {fileID: 1034650351}
   staminaBar: {fileID: 2101663480}

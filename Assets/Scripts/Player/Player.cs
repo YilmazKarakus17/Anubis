@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public float staminaRegenTime;
     private float staminaRegenCountDown;
     public float souls;
+    public float coins;
     
     //Boolean Variables
     private bool invulnerable;
@@ -184,6 +185,41 @@ public class Player : MonoBehaviour
         this.updateStaminaBar();
     }
 
+    /*============ Increase player soul Methods ============*/
+    //Increases the players souls by the given amount
+    public void addSouls(float amount){ 
+        this.souls += amount;
+        //UPDATE SOUL UI
+        //STORE SOUL PERSISTENTLY
+    }
+
+    /*============ Decrease player soul Methods ============*/
+    //Sets the players soul count to 0
+    public void loseSouls(){ 
+        this.souls = 0;
+        //UPDATE SOUL UI
+        //STORE SOUL PERSISTENTLY
+        //<Optional> Instantiate Soul Prefab where the soul will travel upwards and will have a time to live before destroying itself.
+    }
+
+    //If the player has enough souls to purchase a item, then it will decrease the soul count by the amount given and will return true, else it will return false.
+    public bool purchaseWithSoul(float soulsRequired){
+        if (soulsRequired <= this.souls){
+            this.souls -= soulsRequired;
+            return true;
+        }
+        return false;
+    }
+
+
+    /*============ Player coin Methods ============*/
+    //Increases the players souls by the given amount
+    public void incrementCoinCount(){ 
+        this.coins += 1;
+        //UPDATE COIN UI
+        //STORE COIN PERSISTENTLY
+    }
+
     /*========================== Instance Methods ==========================*/
     /*============ Knockback Methods ============*/
     public void Knockback(float x, float y) {
@@ -234,8 +270,6 @@ public class Player : MonoBehaviour
         staminaBar.setMaxStamina(maxStamina);
         staminaBar.setStamina(this.currentStamina);
     }
-    
-
     /*========================== Special Unity Methods  ==========================*/
     // Start is called before the first frame update
     void Start()
@@ -254,11 +288,14 @@ public class Player : MonoBehaviour
         this.currentStamina = this.maxStamina;
         //this.souls = SaveManager.instance.playerSouls;
 
+        //INSTANTIATE SOULS THROUGH PERsistent data
+
         //Instantiating 
         this.alive = true;
         this.invulnerable = false;
         this.staminaRegenCountDown = this.staminaRegenTime;
         this.knockedBack = false;
+        this.souls = 0;
         this.playerDeathAlreadyPlayed = false;
 
         // setting the health bar
