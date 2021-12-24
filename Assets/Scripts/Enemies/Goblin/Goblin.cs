@@ -21,7 +21,6 @@ public class Goblin : MonoBehaviour
 
     //Animation Variables
     private Animator animator;
-    private string currentState;
     const string IDLE = "Idle";
     const string ATTACK_MELEE = "MeleeAttack";
     const string ATTACK_BOMB = "ThrowAttack";
