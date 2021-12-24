@@ -162,6 +162,7 @@ public class FlyingEyeBoss : MonoBehaviour
         this.playDeath1Animation();
         yield return new WaitForSeconds(5f);
         this.playIdleAnimation();
+        GetComponent<Enemy>().resetHealth();
         GetComponent<Enemy>().setIsDead(false);
         this.isResurrecting = false;
     }
