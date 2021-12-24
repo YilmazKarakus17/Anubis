@@ -15,6 +15,7 @@ public class PlayerActionManager : MonoBehaviour
     // Combat variables
     public float attackDamage = 25;
     private float horizontalDirection;
+    public bool applyDoubleDamage;
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
     public float attackRange = 1.25f;
@@ -51,7 +52,16 @@ public class PlayerActionManager : MonoBehaviour
         // Enemy hit detection with the sword swings. All of the enemies that intersect with the sword's radius will take damage.
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCentre.position+new Vector3(positionIncrease, 0, 0), attackRange+rangeIncrease, LayerMask.GetMask("Enemy"));
         for (int i = 0; i < enemiesHit.Length; i++) {
-            enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage);
+            Enemy enemy = enemiesHit[i].GetComponent<Enemy>();
+            // Dead enemies will not take any damage.
+            if (!enemy.getIsDeaded()) {
+                if (this.applyDoubleDamage) {
+                    enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage*2);
+                }
+                else {
+                    enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage);
+                }
+            }
         }
     }
 
@@ -93,8 +103,4 @@ public class PlayerActionManager : MonoBehaviour
             applyAttackThrust = false;
         }
     }
-
-    // void OnDrawGizmosSelected() {
-    //     Gizmos.DrawWireSphere(attackCentre.position, attackRange);
-    // }
 }

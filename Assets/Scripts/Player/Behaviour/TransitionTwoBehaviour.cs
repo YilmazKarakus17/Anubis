@@ -32,6 +32,7 @@ public class TransitionTwoBehaviour : StateMachineBehaviour
         }
         PlayerActionManager.instance.isAttacking = false;
         PlayerActionManager.instance.isShockwaveActive = false;
+        PlayerActionManager.instance.applyDoubleDamage = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -24,6 +24,7 @@ public class TransitionThreeBehaviour : StateMachineBehaviour
     {
         PlayerActionManager.instance.isAttacking = false;
         PlayerActionManager.instance.isShockwaveActive = false;
+        PlayerActionManager.instance.applyDoubleDamage = false;
         if (PlayerMovement.instance.getAllowedToHorizontallyMove() && (PlayerMovement.instance.getHorizontalMovementInput() != 0) && !PlayerActionManager.instance.isAttacking) {
             PlayerActionManager.instance.animator.Play("PlayerRun");
         }

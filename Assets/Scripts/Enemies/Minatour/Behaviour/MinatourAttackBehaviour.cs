@@ -19,8 +19,9 @@ public class MinatourAttackBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        MinatourActionManager.instance.setIsAttacking(false);
-        MinatourActionManager.instance.setIsCharging(false);
+        EnemyActionManager enemy = animator.transform.GetComponentInParent<EnemyActionManager>();
+        enemy.setIsAttacking(false);
+        enemy.setIsCharging(false);
         
     }
 

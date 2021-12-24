@@ -13,10 +13,10 @@ public class SkeletonIdleBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SkeletonActionManager enemy = SkeletonActionManager.instance;
+        EnemyActionManager enemy = animator.transform.GetComponentInParent<EnemyActionManager>();
         if (enemy.getIsAttacking()) {
             enemy.setIsCharging(true);
-            enemy.animator.Play("SkeletonAttack1");
+            enemy.playAnimation("SkeletonAttack1");
             enemy.ApplyDamage(0.5f, 0.6f);
         }
     }

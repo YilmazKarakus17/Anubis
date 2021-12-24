@@ -205,6 +205,17 @@
                 },
                 {
                     "name": "",
+                    "id": "08c877c6-3777-431f-83eb-eaac804f4d5e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "861ac30d-dd74-4879-8bc5-9b2d68afefaa",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

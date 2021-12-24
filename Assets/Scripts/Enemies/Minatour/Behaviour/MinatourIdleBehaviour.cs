@@ -13,10 +13,10 @@ public class MinatourIdleBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        MinatourActionManager enemy = MinatourActionManager.instance;
+        EnemyActionManager enemy = animator.transform.GetComponentInParent<EnemyActionManager>();
         if (enemy.getIsAttacking()) {
             enemy.setIsCharging(true);
-            enemy.animator.Play("MinatourAttack");
+            enemy.playAnimation("MinatourAttack");
             enemy.ApplyDamage(0.6f, 0.8f);
         }
     }

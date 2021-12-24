@@ -5,7 +5,7 @@ using UnityEngine;
 public class MinotaurDetection : MonoBehaviour
 {
     public GameObject player;
-    private MinatourActionManager actionManager;
+    private EnemyActionManager actionManager;
     public float attackRate;
     private float timeBetweenAttacks;
     public bool detectable;
@@ -13,9 +13,9 @@ public class MinotaurDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        actionManager = transform.parent.gameObject.GetComponent<MinatourActionManager>();
+        actionManager = transform.parent.gameObject.GetComponent<EnemyActionManager>();
         player = GameObject.Find("Player");
-        this.attackRate = 2.25f;
+        this.attackRate = 2.5f;
         this.timeBetweenAttacks = 0f;
         this.detectable = true;
     }

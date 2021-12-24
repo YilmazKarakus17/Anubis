@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkeletonDetection : MonoBehaviour
 {
     public GameObject player;
-    private SkeletonActionManager actionManager;
+    private EnemyActionManager actionManager;
     public float attackRate;
     private float timeBetweenAttacks;
     private bool detectable;
@@ -13,7 +13,7 @@ public class SkeletonDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        actionManager = transform.parent.gameObject.GetComponent<SkeletonActionManager>();
+        actionManager = transform.parent.gameObject.GetComponent<EnemyActionManager>();
         player = GameObject.Find("Player");
         this.attackRate = 3f;
         this.timeBetweenAttacks = 0f;

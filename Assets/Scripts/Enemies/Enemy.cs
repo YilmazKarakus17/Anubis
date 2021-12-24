@@ -10,11 +10,13 @@ public class Enemy : MonoBehaviour
     // Combat variables
     public float maxHealth = 100;
     public float health;
-    public float meleeAttackDamage = 25;
+    public float meleeAttackDamage;
 
     //Variables for Boss Enemies
     public bool isBoss;
-    public bool isDead;
+    public bool isDead; // FOR BOSSES
+    private bool isDeaded; // FOR NORMAL MOBS
+    private bool lockFlip;
 
     //Variable For looking at players direction
     public bool lookingLeft;
@@ -36,6 +38,10 @@ public class Enemy : MonoBehaviour
         this.isDead = status;
     }
 
+    public bool getIsDeaded(){
+        return this.isDeaded;
+    }
+
     public float getMeleeAttackDamage(){
         return this.meleeAttackDamage;
     }
@@ -50,7 +56,19 @@ public class Enemy : MonoBehaviour
                     this.isDead = true;
                 }
                 else{
-                    Destroy(gameObject);
+                    if (gameObject.GetComponent<EnemyActionManager>() != null) {
+                        // The player can no longer damage the dying enemy and dying enemies will not turn around.
+                        this.isDeaded = true;
+                        this.lockFlip = true;
+                        // So that the enemies dying body will not block the player.
+                        Destroy(gameObject.GetComponent<Rigidbody2D>()); 
+                        Destroy(gameObject.GetComponent<BoxCollider2D>());
+                         // Plays death animation (object is destroyed after a short delay).
+                        gameObject.GetComponent<EnemyActionManager>().playDeathAnimation();
+                    }
+                    else {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
@@ -89,17 +107,21 @@ public class Enemy : MonoBehaviour
 
     //Flips the Flying Eye horizontally
     void flip(){
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1;
-        transform.localScale = scaler;
+        if (!this.lockFlip) {
+            Vector3 scaler = transform.localScale;
+            scaler.x *= -1;
+            transform.localScale = scaler;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
-        this.isDead = false;
         this.health = this.maxHealth;
+        this.isDead = false;
+        this.isDeaded = false;
+        this.lockFlip = false;
     }
 
     // Update is called once per frame
