@@ -8,7 +8,7 @@ public class Goblin : MonoBehaviour
     [SerializeField] private GameObject player;
 
     [SerializeField] private GameObject projectile;
-    
+    [SerializeField] private float bombThrowRangeX;
     [SerializeField] private Transform bombSpawn;
     [SerializeField] private float timeBtwShots;
     [SerializeField] private float timeBtwMeleeAttacks;
@@ -41,6 +41,27 @@ public class Goblin : MonoBehaviour
         }
     }
 
+    float calculateAbsoluteXAxisDistance(){
+        //If the Player is to the right hand side then get the difference in x and times by -1 to get absolute value
+        if (((transform.position.x - this.player.transform.position.x) < 0)){
+            return (transform.position.x - this.player.transform.position.x) *-1;
+        }
+        //else return the position of the player must be to the left (i.e. x is smaller) so simply return the difference
+        return transform.position.x - this.player.transform.position.x;
+    }
+
+    //If the player's distance is less than the meleeAttackRange the performMeleeAttack variable is set to true
+    void checkInBombThrowRange(){
+        //Checks if the player is in distance in terms of the x axis
+        float dst = this.calculateAbsoluteXAxisDistance();
+        if (dst <= this.bombThrowRangeX){
+            this.playerInRange = true;
+        }
+        else{
+            this.playerInRange = false;
+        }
+    }
+
     //If the player's distance is less than the meleeAttackRange the performMeleeAttack variable is set to true
     void checkInMeleeAttackRange(){
         if (Vector2.Distance(transform.position, this.player.transform.position) < this.meleeAttackRange){
@@ -51,32 +72,6 @@ public class Goblin : MonoBehaviour
         }
     }
     //================================================ Unity Special Methods ================================================//
-    //If player is in the trigger collider of the goblin it records the player game object and that it's in range for an attack
-    void OnTriggerEnter2D(Collider2D other){
-        if (other.gameObject.tag == "Player"){
-            this.playerInRange = true;
-            this.player = other.gameObject;
-            this.checkInMeleeAttackRange();
-        }
-    }
-
-    //While the player is in the trigger collider of the goblin it records the player game object and that it's in range for an attack
-    void OnTriggerStay2D(Collider2D other){
-        if (other.gameObject.tag == "Player"){
-            this.playerInRange = true;
-            this.player = other.gameObject;
-            this.checkInMeleeAttackRange();
-        }
-    }
-
-    //If player exits the trigger collider of the goblin it records that the player is no longer in the range for throws
-    void OnTriggerExit2D(Collider2D otherCollider){
-        if (otherCollider.gameObject.tag == "Player"){
-            this.playerInRange = false;
-            this.checkInMeleeAttackRange();
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +85,8 @@ public class Goblin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.checkInBombThrowRange();
+        this.checkInMeleeAttackRange();
         this.countdownTimeBtwShots -= Time.deltaTime;
         this.countdownTimeBtwMeleeAttacks -= Time.deltaTime;
         if (this.countdownTimeBtwMeleeAttacks <=0 && this.player.GetComponent<Player>().isPlayerAlive() && this.performMeleeAttack){

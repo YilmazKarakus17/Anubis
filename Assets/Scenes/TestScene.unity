@@ -1180,7 +1180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284938942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.07, y: -4.67, z: 0}
+  m_LocalPosition: {x: -9.93, y: -4.56, z: 0}
   m_LocalScale: {x: 12, y: 12, z: 1}
   m_Children:
   - {fileID: 563523768}
@@ -7928,7 +7928,6 @@ GameObject:
   - component: {fileID: 2075329147}
   - component: {fileID: 2075329146}
   - component: {fileID: 2075329145}
-  - component: {fileID: 2075329144}
   - component: {fileID: 2075329143}
   - component: {fileID: 2075329148}
   - component: {fileID: 2075329149}
@@ -7958,32 +7957,6 @@ MonoBehaviour:
   isBoss: 0
   isDead: 0
   lookingLeft: 1
---- !u!61 &2075329144
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075329142}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.7914213, y: 0.02041012}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33, y: 0.36}
-    newSize: {x: 0.33, y: 0.36}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.9087801, y: 0.40082008}
-  m_EdgeRadius: 0
 --- !u!61 &2075329145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8070,7 +8043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075329142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.89, y: -4.84, z: 0}
+  m_LocalPosition: {x: 12.04, y: -2.08, z: 0}
   m_LocalScale: {x: -10, y: 10, z: 1}
   m_Children:
   - {fileID: 101894522}
@@ -8091,6 +8064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 284938942}
   projectile: {fileID: 2621750073033344112, guid: d120ee3e8cfe31a41afad64b678c2b8a, type: 3}
+  bombThrowRangeX: 13
   bombSpawn: {fileID: 101894522}
   timeBtwShots: 3
   timeBtwMeleeAttacks: 1
