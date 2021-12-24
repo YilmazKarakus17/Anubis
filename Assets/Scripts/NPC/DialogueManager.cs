@@ -61,17 +61,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     public void continueToNextMsg(InputAction.CallbackContext value)
     {
-        Debug.Log("you are pressing the button");
-        Debug.Log("isActive status: " + isActive);
 
         if (value.performed && isActive && !(PauseMenu.isPaused))
         {

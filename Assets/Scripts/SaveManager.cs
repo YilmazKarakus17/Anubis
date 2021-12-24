@@ -13,6 +13,9 @@ public class SaveManager : MonoBehaviour
     public float playerStamina;
     public float playerSouls;
 
+    public float testSceneCheckpointX;
+    public float testSceneCheckpointY;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -37,6 +40,8 @@ public class SaveManager : MonoBehaviour
             playerHealth = data.playerHealth;
             playerStamina = data.playerStamina;
             playerSouls = data.playerSouls;
+            testSceneCheckpointX = data.testSceneCheckpointX;
+            testSceneCheckpointY = data.testSceneCheckpointY;
 
             file.Close();
         }
@@ -53,6 +58,8 @@ public class SaveManager : MonoBehaviour
         data.playerHealth = playerHealth;
         data.playerStamina = playerStamina;
         data.playerSouls = playerSouls;
+        data.testSceneCheckpointX = testSceneCheckpointX;
+        data.testSceneCheckpointY = testSceneCheckpointY;
 
         bf.Serialize(file, data);
         file.Close();
@@ -68,4 +75,6 @@ class PlayerData_Storage
     public float playerHealth;
     public float playerStamina;
     public float playerSouls;
+    public float testSceneCheckpointX;
+    public float testSceneCheckpointY;
 }

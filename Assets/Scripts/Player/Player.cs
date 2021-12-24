@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
     IEnumerator KillPlayer(){
         this.animator.playDeathAnimation();
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     /*========================== User Interface Methods ==========================*/
     public void updateHealthBar(){
@@ -264,6 +264,7 @@ public class Player : MonoBehaviour
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);
         staminaBar.setMaxStamina(maxStamina);
+
     }
 
     void Update(){
