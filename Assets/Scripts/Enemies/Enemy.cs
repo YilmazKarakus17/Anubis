@@ -8,11 +8,33 @@ public class Enemy : MonoBehaviour
     public GameObject player;
 
     // Combat variables
-    public float health = 100;
+    public float maxHealth = 100;
+    public float health;
     public float meleeAttackDamage = 25;
+
+    //Variables for Boss Enemies
+    public bool isBoss;
+    public bool isDead;
 
     //Variable For looking at players direction
     public bool lookingLeft;
+
+    //========== Getter and Setters for Boss ===========//
+    public void resetHealth(){
+        this.health = this.maxHealth;
+    }
+
+    public void setIsBoss(){
+        this.isBoss = true;
+    }
+
+    public bool getisDead(){
+        return this.isDead;
+    }
+
+    public void setIsDead(bool status){
+        this.isDead = status;
+    }
 
     public float getMeleeAttackDamage(){
         return this.meleeAttackDamage;
@@ -20,10 +42,17 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float playerAttackDamage) {
         // The enemy takes damage and will die if its health reaches 0.
-        health -= playerAttackDamage;
-        StartCoroutine(ChangeColour());
-        if (health <= 0) {
-            Destroy(gameObject);
+        if (!this.isDead){
+            health -= playerAttackDamage;
+            StartCoroutine(ChangeColour());
+            if (health <= 0) {
+                if (this.isBoss){
+                    this.isDead = true;
+                }
+                else{
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 
@@ -69,6 +98,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        this.isDead = false;
+        this.health = this.maxHealth;
     }
 
     // Update is called once per frame

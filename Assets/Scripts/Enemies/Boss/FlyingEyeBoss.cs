@@ -7,6 +7,10 @@ public class FlyingEyeBoss : MonoBehaviour
     //GameObject Variables
     private GameObject player;
     [SerializeField] private GameObject projectile;
+
+    //Variables for Boss Deaths
+    private float numberOfDeaths;
+    private bool isResurrecting;
     
     //Variables for Air Attacks
     [SerializeField] private Transform eye;
@@ -29,9 +33,13 @@ public class FlyingEyeBoss : MonoBehaviour
     [SerializeField] private Animator animator;
     const string IDLE = "FlyingEyeIdle";
     const string ATTACK_MELEE = "FlyingEyeAttackMelee";
+    const string DEATH1 = "FlyingEyeResurrect";
+    const string DEATH2 = "FlyingEyeDeath";
     ///================================================ Animation Methods ================================================//
     public void playIdleAnimation(){ this.animator.Play(IDLE); }
     public void playMeleeAnimation(){ this.animator.Play(ATTACK_MELEE); }
+    public void playDeath1Animation(){ this.animator.Play(DEATH1); }
+    public void playDeath2Animation(){ this.animator.Play(DEATH2); }
 
     //================================================ Instance Methods ================================================//
     //Performs a air attack and plays its animation
@@ -71,38 +79,61 @@ public class FlyingEyeBoss : MonoBehaviour
         this.countdownTimeBtwMeleeAttacks = 0; //The goblin can immediately attack the player
         this.player = GameObject.FindGameObjectWithTag("Player");
         this.movementDelayTimer = this.movementDelay;
+        GetComponent<Enemy>().setIsBoss();
+        this.numberOfDeaths = 0;
+        this.isResurrecting = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //=========== Code for Attacks ===========//
-        this.countdownTimeBtwShots -= Time.deltaTime;
-        this.countdownTimeBtwMeleeAttacks -= Time.deltaTime;
-        if (this.player.GetComponent<Player>().isPlayerAlive()){
-            if (this.countdownTimeBtwMeleeAttacks <=0 && this.performMeleeAttack){
-                this.countdownTimeBtwMeleeAttacks = this.timeBtwMeleeAttacks;
-                StartCoroutine(MeleeAttack());
-                this.performMeleeAttack = false;
+        bool dead = GetComponent<Enemy>().getisDead();
+
+        //If Flying Eye is currently alive and has died less than 2 times
+        if (!dead && this.numberOfDeaths < 2){
+            //=========== Code for Attacks ===========//
+            this.countdownTimeBtwShots -= Time.deltaTime;
+            this.countdownTimeBtwMeleeAttacks -= Time.deltaTime;
+            if (this.player.GetComponent<Player>().isPlayerAlive()){
+                if (this.countdownTimeBtwMeleeAttacks <=0 && this.performMeleeAttack){
+                    this.countdownTimeBtwMeleeAttacks = this.timeBtwMeleeAttacks;
+                    StartCoroutine(MeleeAttack());
+                    this.performMeleeAttack = false;
+                }
+                else if (this.countdownTimeBtwShots <=0){
+                    this.performAirAttack();
+                }
             }
-            else if (this.countdownTimeBtwShots <=0){
-                this.performAirAttack();
+
+            //=========== Code for Movement ===========//
+            this.movementDelayTimer -= Time.deltaTime;
+
+            //The Flying Eye can only move if the player is still alive and if it's not currently performing a melee attack on the player and it has waited at the spot it's at for long enough
+            if (this.movementDelayTimer <= 0 && player.GetComponent<Player>().isPlayerAlive() && !this.performMeleeAttack){
+                if (Vector2.Distance(transform.position, this.locations[this.indexLocations].position) < 0.02f)
+                {
+                    this.indexLocations += 1;
+                    if (this.indexLocations==locations.Length-1){ this.indexLocations=0; }
+                    this.movementDelayTimer = this.movementDelay;
+                }
+                
+                transform.position = Vector2.MoveTowards(transform.position, locations[this.indexLocations].position, speed * Time.deltaTime);
             }
+
         }
-
-        //=========== Code for Movement ===========//
-        this.movementDelayTimer -= Time.deltaTime;
-
-        //The Flying Eye can only move if the player is still alive and if it's not currently performing a melee attack on the player and it has waited at the spot it's at for long enough
-        if (this.movementDelayTimer <= 0 && player.GetComponent<Player>().isPlayerAlive() && !this.performMeleeAttack){
-            if (Vector2.Distance(transform.position, this.locations[this.indexLocations].position) < 0.02f)
-            {
-                this.indexLocations += 1;
-                if (this.indexLocations==locations.Length-1){ this.indexLocations=0; }
-                this.movementDelayTimer = this.movementDelay;
-            }
-            
-            transform.position = Vector2.MoveTowards(transform.position, locations[this.indexLocations].position, speed * Time.deltaTime);
+        //If Flying eye is not alive but has 0 deaths, then resurrect and increcment the number of deaths to 1
+        else if (this.numberOfDeaths == 0 && dead){
+            this.numberOfDeaths += 1;
+           StartCoroutine(ResurrectFlyingEye());
+        }
+        //If Flying Eye is not alive and doesn't have any prior deaths and isn't in the process of being resurrected (i.e. has died once and was resurrected)
+        else if (this.numberOfDeaths == 1 && dead && !this.isResurrecting){
+            this.numberOfDeaths += 1;
+        }
+        //If the Flying Eye is on it's second death meaning it has now fully perished
+        else if (this.numberOfDeaths == 2){
+            this.numberOfDeaths += 1;
+            StartCoroutine(DeathOfFlyingEye());
         }
     }
 
@@ -123,5 +154,22 @@ public class FlyingEyeBoss : MonoBehaviour
     IEnumerator MeleeAttackReturnIdle() {
         yield return new WaitForSeconds(0.08f);
         this.playIdleAnimation();
+    }
+
+    //Coroutine for the waiting to resurrect the Flying Eye
+    IEnumerator ResurrectFlyingEye() {
+        this.isResurrecting = true;
+        this.playDeath1Animation();
+        yield return new WaitForSeconds(5f);
+        this.playIdleAnimation();
+        GetComponent<Enemy>().setIsDead(false);
+        this.isResurrecting = false;
+    }
+
+    //Coroutine for the waiting to play out the death of Flying Eye
+    IEnumerator DeathOfFlyingEye() {
+        this.playDeath2Animation();
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }
