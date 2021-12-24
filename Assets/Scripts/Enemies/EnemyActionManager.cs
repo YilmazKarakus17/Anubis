@@ -29,10 +29,10 @@ public class EnemyActionManager : MonoBehaviour
     }
 
     IEnumerator AddMovementDelay(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
         // A force should not be applied, if the enemy is about to attack but dies whilst charging their attack.
         // The Rigidbody2D component is destroyed, when the enemy's health reaches 0 (to allow the player to traverse through them).
         if (gameObject.GetComponent<Rigidbody2D>() != null) {
-            yield return new WaitForSeconds(waitTime);
             if (gameObject.GetComponent<Enemy>().lookingLeft) {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(xMagnitude*-1, yMagnitude), ForceMode2D.Impulse);
             }

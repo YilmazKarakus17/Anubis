@@ -50,16 +50,27 @@ public class PlayerActionManager : MonoBehaviour
     IEnumerator AddDelay(float positionIncrease, float rangeIncrease, float waitTime) {
         yield return new WaitForSeconds(waitTime);
         // Enemy hit detection with the sword swings. All of the enemies that intersect with the sword's radius will take damage.
+        // Wall hit detection with the sword swings. All of the walls that intersect with the sword's radius will take damage.
+        Collider2D[] wallsHit = Physics2D.OverlapCircleAll(attackCentre.position+new Vector3(positionIncrease, 0, 0), attackRange+rangeIncrease, LayerMask.GetMask("Destructible Wall"));
+        for (int i = 0; i < wallsHit.Length; i++) {
+            DestructibleWall wall = wallsHit[i].GetComponent<DestructibleWall>();
+            if (this.applyDoubleDamage) {
+                wall.TakeDamage(attackDamage*2);
+            }
+            else {
+                wall.TakeDamage(attackDamage);
+            }
+        }
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCentre.position+new Vector3(positionIncrease, 0, 0), attackRange+rangeIncrease, LayerMask.GetMask("Enemy"));
         for (int i = 0; i < enemiesHit.Length; i++) {
             Enemy enemy = enemiesHit[i].GetComponent<Enemy>();
             // Dead enemies will not take any damage.
             if (!enemy.getIsDeaded()) {
                 if (this.applyDoubleDamage) {
-                    enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage*2);
+                    enemy.TakeDamage(attackDamage*2);
                 }
                 else {
-                    enemiesHit[i].GetComponent<Enemy>().TakeDamage(attackDamage);
+                    enemy.TakeDamage(attackDamage);
                 }
             }
         }

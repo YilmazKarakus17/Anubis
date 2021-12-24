@@ -19,8 +19,9 @@ public class Shockwave : MonoBehaviour
             Destroy(gameObject);
             otherCollider.GetComponent<Enemy>().TakeDamage(player.attackDamage/5);
         }
-        else if ((otherCollider.gameObject.tag == "Wall")) {
+        else if ((otherCollider.gameObject.layer == 12)) {
             Destroy(gameObject);
+            otherCollider.GetComponent<DestructibleWall>().TakeDamage(player.attackDamage/5);
         }
     }
 
