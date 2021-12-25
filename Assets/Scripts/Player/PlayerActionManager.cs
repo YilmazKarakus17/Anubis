@@ -43,7 +43,7 @@ public class PlayerActionManager : MonoBehaviour
     public void ThunderStrike(InputAction.CallbackContext context) {
         if (context.performed) {
             GameObject thunderStrike;
-            thunderStrike = Instantiate(thunder, gameObject.transform.position+new Vector3(this.horizontalDirection*10,0.75f,0), Quaternion.Euler(0,0,0));
+            thunderStrike = Instantiate(thunder, gameObject.transform.position+new Vector3(this.horizontalDirection*10,1.5f,0), Quaternion.Euler(0,0,0));
         }
     }
 

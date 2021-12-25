@@ -47,12 +47,18 @@ TagManager:
   - name: Background
     uniqueID: 1071181929
     locked: 0
-  - name: Decorations
+  - name: Background Decorations
     uniqueID: 2072897849
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Lava
+    uniqueID: 867398257
+    locked: 0
   - name: Foreground
     uniqueID: 3537485395
+    locked: 0
+  - name: Foreground Decorations
+    uniqueID: 4281783133
     locked: 0
