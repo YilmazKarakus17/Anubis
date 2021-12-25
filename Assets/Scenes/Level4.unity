@@ -52016,7 +52016,7 @@ MonoBehaviour:
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
   jumpForce: 40
-  extra_jumps_allowed: 1
+  extra_jumps_allowed: 0
   feetPos: {fileID: 188460632}
   feetCheckRadius: 0.35
   whatIsGround:
@@ -52348,7 +52348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154580060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.55, y: -2.9, z: 0}
+  m_LocalPosition: {x: -36.2, y: 20.9, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 188460632}
