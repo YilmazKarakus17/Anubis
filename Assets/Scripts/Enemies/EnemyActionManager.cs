@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyActionManager : MonoBehaviour
 {
     public static EnemyActionManager instance;
+    private Player player;
     private Animator animator;
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
@@ -56,6 +57,12 @@ public class EnemyActionManager : MonoBehaviour
                 player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude*-1, 0);
             }
         }
+        if (gameObject.tag == "Fire Worm") {
+            RangedEnemy rangedEnemy = gameObject.GetComponent<RangedEnemy>();
+            GameObject fireball;
+            fireball = Instantiate(rangedEnemy.projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));
+            fireball.GetComponent<Rigidbody2D>().AddForce(new Vector2(rangedEnemy.getHorizontalDirection()*20, 0), ForceMode2D.Impulse);
+        }
     }
 
     /*========================== Setter and Getter Functions ==========================*/
@@ -86,11 +93,15 @@ public class EnemyActionManager : MonoBehaviour
         else if (gameObject.tag == "Skeleton") {
             playAnimation("SkeletonDeath");
         }
+        else if (gameObject.tag == "Fire Worm") {
+            playAnimation("FireWormDeath");
+        }
         StartCoroutine(AddDeathDelay(2f));
     }
 
     IEnumerator AddDeathDelay(float waitTime) {
         yield return new WaitForSeconds(waitTime);
+        player.addSouls(1);
         Destroy(gameObject);
     }
 
@@ -98,6 +109,7 @@ public class EnemyActionManager : MonoBehaviour
     void Start()
     {
         this.animator = GetComponent<Animator>();
+        this.player = GameObject.Find("Player").GetComponent<Player>();
         determineEnemy();
     }
 
@@ -106,13 +118,18 @@ public class EnemyActionManager : MonoBehaviour
     }
 
     void determineEnemy() {
-        if (gameObject.name == "Minotaur") {
+        if (gameObject.tag == "Minotaur") {
             xMagnitude = 3500f;
             yMagnitude = 1500f;
             playerKnockbackMagnitude = 20f;
         }
-        else if (gameObject.name == "Skeleton") {
-            xMagnitude = 1500;
+        else if (gameObject.tag == "Skeleton") {
+            xMagnitude = 1500f;
+            yMagnitude = 0;
+            playerKnockbackMagnitude = 10f;
+        }
+        else if (gameObject.tag == "FireWorm") {
+            xMagnitude = 0;
             yMagnitude = 0;
             playerKnockbackMagnitude = 10f;
         }
