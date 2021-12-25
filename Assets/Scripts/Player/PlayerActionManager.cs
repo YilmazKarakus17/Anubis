@@ -20,6 +20,7 @@ public class PlayerActionManager : MonoBehaviour
     public Transform attackCentre;
     public float attackRange = 1.25f;
     public GameObject projectile;
+    public GameObject thunder;
     public bool isShockwaveActive;
 
     void Awake() {
@@ -36,6 +37,13 @@ public class PlayerActionManager : MonoBehaviour
         if (context.performed && !isShockwaveActive) {
             isAttacking = true;
             isShockwaveActive = true;
+        }
+    }
+
+    public void ThunderStrike(InputAction.CallbackContext context) {
+        if (context.performed) {
+            GameObject thunderStrike;
+            thunderStrike = Instantiate(thunder, gameObject.transform.position+new Vector3(this.horizontalDirection*10,0.75f,0), Quaternion.Euler(0,0,0));
         }
     }
 
