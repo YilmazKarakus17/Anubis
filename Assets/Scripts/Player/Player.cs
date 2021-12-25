@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private float staminaRegenCountDown;
     public float souls;
     public float coins;
+    private float keysCollected;
     
     //Boolean Variables
     private bool invulnerable;
@@ -213,11 +214,26 @@ public class Player : MonoBehaviour
 
 
     /*============ Player coin Methods ============*/
-    //Increases the players souls by the given amount
+    //Increments the players souls by the given amount
     public void incrementCoinCount(){ 
         this.coins += 1;
         //UPDATE COIN UI
         //STORE COIN PERSISTENTLY
+    }
+
+    /*============ Player key Methods ============*/
+    //Increments the players key count
+    public void incrementKeyCount(){ 
+        this.keysCollected += 1;
+        //UPDATE Key UI
+    }
+
+    //returns true if the number of keys the player posses is enough based on the argument passed
+    public bool collectedAllKeys(float amount){
+        if (this.keysCollected >= amount){
+            return true;
+        }
+        return false;
     }
 
     /*========================== Instance Methods ==========================*/
@@ -297,6 +313,7 @@ public class Player : MonoBehaviour
         this.knockedBack = false;
         this.souls = 0;
         this.playerDeathAlreadyPlayed = false;
+        this.keysCollected = 0;
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);
