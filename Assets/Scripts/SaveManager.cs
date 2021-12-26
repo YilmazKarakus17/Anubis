@@ -11,10 +11,12 @@ public class SaveManager : MonoBehaviour
     public int currentDifficulty;
     public float playerHealth;
     public float playerStamina;
+    public float playerCoins;
     public float playerSouls;
 
     public float testSceneCheckpointX;
     public float testSceneCheckpointY;
+
 
     private void Awake()
     {
@@ -39,7 +41,10 @@ public class SaveManager : MonoBehaviour
             currentDifficulty = data.currentDifficulty;
             playerHealth = data.playerHealth;
             playerStamina = data.playerStamina;
+
+            playerCoins = data.playerCoins;
             playerSouls = data.playerSouls;
+
             testSceneCheckpointX = data.testSceneCheckpointX;
             testSceneCheckpointY = data.testSceneCheckpointY;
 
@@ -57,7 +62,10 @@ public class SaveManager : MonoBehaviour
         data.currentDifficulty = currentDifficulty;
         data.playerHealth = playerHealth;
         data.playerStamina = playerStamina;
+
+        data.playerCoins = playerCoins;
         data.playerSouls = playerSouls;
+
         data.testSceneCheckpointX = testSceneCheckpointX;
         data.testSceneCheckpointY = testSceneCheckpointY;
 
@@ -74,7 +82,9 @@ class PlayerData_Storage
     public int currentDifficulty;
     public float playerHealth;
     public float playerStamina;
+    public float playerCoins;
     public float playerSouls;
+
     public float testSceneCheckpointX;
     public float testSceneCheckpointY;
 }
