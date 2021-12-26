@@ -10,6 +10,7 @@ TagManager:
   - Minotaur
   - Skeleton
   - Fire Worm
+  - ProjectileDespawner
   layers:
   - Default
   - TransparentFX

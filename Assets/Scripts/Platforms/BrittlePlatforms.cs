@@ -8,7 +8,18 @@ public class BrittlePlatforms : MonoBehaviour
     private float countdownTimer;
     private bool startCountDown;
 
-    void OnTriggerEnter2D(Collider2D otherCollider){
+    private bool playerDetected;
+    [SerializeField] private float tiltAngle;
+    private float tilt;
+    private float direction;
+
+    void OnCollisionEnter2D(Collision2D otherCollider){
+        if (otherCollider.gameObject.tag == "Player"){
+            startCountDown = true;
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D otherCollider){
         if (otherCollider.gameObject.tag == "Player"){
             startCountDown = true;
         }
@@ -19,6 +30,8 @@ public class BrittlePlatforms : MonoBehaviour
     {
         this.countdownTimer = this.TTL;
         this.startCountDown = false;
+        this.playerDetected = false;
+        this.direction = 1;
     }
 
     // Update is called once per frame
@@ -26,6 +39,12 @@ public class BrittlePlatforms : MonoBehaviour
     {
         if (this.startCountDown){
             countdownTimer -= Time.deltaTime;
+            this.direction *= -1;
+            this.tilt = tiltAngle;
+            // Rotate the cube by converting the angles into a quaternion.
+            Quaternion target = Quaternion.Euler(0, 0, tilt*direction);
+            // Dampen towards the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime*5);
             if (this.countdownTimer <= 0){
                  Destroy(gameObject);
             }
