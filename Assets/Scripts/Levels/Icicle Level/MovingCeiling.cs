@@ -49,16 +49,10 @@ public class MovingCeiling : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.transform.position.y > transform.position.y)
-        {
-            collision.transform.SetParent(transform);
+    
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.tag == "Player"){
+            other.gameObject.GetComponent<Player>().killPlayerFORCE();
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        collision.transform.SetParent(null);
     }
 }
