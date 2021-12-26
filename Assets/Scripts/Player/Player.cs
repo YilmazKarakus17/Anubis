@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class Player : MonoBehaviour
     // health bar and stamina bar variables
     public HealthBar healthBar;
     public StaminaBar staminaBar;
+
+    // coin and soul count variables
+    public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI soulsText;
 
     /*========================== Instance Methods ==========================*/   
     public bool isKockedBack(){
@@ -188,18 +193,25 @@ public class Player : MonoBehaviour
     /*============ Increase player soul Methods ============*/
     //Increases the players souls by the given amount
     public void addSouls(float amount){ 
-        this.souls += amount;
-        //UPDATE SOUL UI
-        //STORE SOUL PERSISTENTLY
+        // increment and save soul count
+        SaveManager.instance.playerSouls += 1;
+        SaveManager.instance.Save();
+
+        this.souls = SaveManager.instance.playerSouls;
+        // update UI
+        soulsText.text = this.souls.ToString();
     }
 
     /*============ Decrease player soul Methods ============*/
     //Sets the players soul count to 0
     public void loseSouls(){ 
-        this.souls = 0;
-        //UPDATE SOUL UI
         //STORE SOUL PERSISTENTLY
-        //<Optional> Instantiate Soul Prefab where the soul will travel upwards and will have a time to live before destroying itself.
+        SaveManager.instance.playerSouls -= 1;
+        SaveManager.instance.Save();
+
+        this.souls = SaveManager.instance.playerSouls;
+        //UPDATE SOUL UI
+        soulsText.text = this.souls.ToString();
     }
 
     //If the player has enough souls to purchase a item, then it will decrease the soul count by the amount given and will return true, else it will return false.
@@ -215,9 +227,14 @@ public class Player : MonoBehaviour
     /*============ Player coin Methods ============*/
     //Increases the players souls by the given amount
     public void incrementCoinCount(){ 
-        this.coins += 1;
-        //UPDATE COIN UI
         //STORE COIN PERSISTENTLY
+        SaveManager.instance.playerCoins+=1;
+        SaveManager.instance.Save();
+
+        this.coins = SaveManager.instance.playerCoins;
+
+        //UPDATE COIN UI
+        coinsText.text = this.coins.ToString();
     }
 
     /*========================== Instance Methods ==========================*/
@@ -295,8 +312,14 @@ public class Player : MonoBehaviour
         this.invulnerable = false;
         this.staminaRegenCountDown = this.staminaRegenTime;
         this.knockedBack = false;
-        this.souls = 0;
         this.playerDeathAlreadyPlayed = false;
+
+
+        // setting the coins and souls 
+        this.coins = SaveManager.instance.playerCoins;
+        coinsText.text = this.coins.ToString();
+        this.souls = SaveManager.instance.playerSouls; 
+        soulsText.text = this.souls.ToString();
 
         // setting the health bar
         healthBar.setMaxHealth(maxHealth);
