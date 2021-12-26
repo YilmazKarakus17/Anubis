@@ -176,6 +176,9 @@ public class PlayerMovement : MonoBehaviour
             if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
                 this.move();
             }
+            else{
+                this.rigidbody.velocity = new Vector2(0,this.rigidbody.velocity.y);
+            }
 
             //isGrounded is only set to true if the feetPost collides with a ground object
             this.isGrounded = Physics2D.OverlapCircle(this.feetPos.position, this.feetCheckRadius, this.whatIsGround);

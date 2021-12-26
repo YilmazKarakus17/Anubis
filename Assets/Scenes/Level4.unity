@@ -52762,6 +52762,8 @@ MonoBehaviour:
   disregardStamina: 0
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
+  coinsText: {fileID: 0}
+  soulsText: {fileID: 0}
 --- !u!114 &1154580069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52982,7 +52984,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1154580060}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 715f797823fd2d94cb2165a85ad01cf8, type: 2}
+  m_Material: {fileID: 6200000, guid: b40074c89ce321d48afee31ff58f6e30, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
