@@ -7,11 +7,20 @@ public class SpikeTraps : MonoBehaviour
     private GameObject player;
 
     public bool instantKills;
+    public bool disregardInvulnerable = false;
     
     private bool initialDamage;
     private bool stayDamage;
     private bool currentlyDamagingForStaying;
     private bool exitDamage;
+
+    //If a player is hits the spike initially a lot of hp is taken away
+    void OnCollisionEnter2D(Collision2D other){
+        if (other.gameObject.tag == "Player"){
+            this.player = other.gameObject;
+            this.initialDamage = true;
+        }
+    }
 
     //If a player is hits the spike initially a lot of hp is taken away
     void OnTriggerEnter2D(Collider2D other){
@@ -74,7 +83,12 @@ public class SpikeTraps : MonoBehaviour
         }
         else{
             if ((this.initialDamage || this.stayDamage || this.exitDamage) && this.player.GetComponent<Player>().isPlayerAlive()){
-                this.player.GetComponent<Player>().killPlayer();
+                if (this.disregardInvulnerable){
+                    this.player.GetComponent<Player>().killPlayerFORCE();
+                }
+                else{
+                    this.player.GetComponent<Player>().killPlayer();
+                }
             }
         }
     }
