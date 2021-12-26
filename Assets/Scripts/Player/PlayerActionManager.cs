@@ -93,7 +93,7 @@ public class PlayerActionManager : MonoBehaviour
         else {
             shockwave = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));
         }
-        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(this.horizontalDirection*20, 0), ForceMode2D.Impulse);
+        shockwave.GetComponent<Rigidbody2D>().AddForce(new Vector2(this.horizontalDirection*40, 0), ForceMode2D.Impulse);
     }
 
     // Start is called before the first frame update
