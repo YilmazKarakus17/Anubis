@@ -14,16 +14,22 @@ public class PlayerMovement : MonoBehaviour
     //Particle Effect Variables
     public GameObject dashEffect;
 
-    //Horizontal Movement Variables
+    //Variables to not allow movement 
+    private bool allow_any_movement = true;
     private bool allowed_to_horizontally_move = true;
+
+    //Horizontal Movement Variables
     private float horizontal_movement_input;
     public float horizontal_movement_speed = 7;
     public float in_combat_horizontal_movement_speed = 2;
     public bool inCombat;
+    [SerializeField] private bool currentlyTouchingIce;
 
     //Player Jump Variables
     private bool jumpInput;
     public float jumpForce = 15;
+    private bool boostAllowed;
+    [SerializeField] private float boostForce = 15;
     private bool isGrounded;
     public int extra_jumps_allowed = 2;
     private int extra_jumps_remaining;
@@ -56,8 +62,32 @@ public class PlayerMovement : MonoBehaviour
         this.in_combat_horizontal_movement_speed = speed;
     }
 
+    public void setAllowedToMove(bool allowed){
+        this.allow_any_movement = allowed;
+    }
+
     public void setAllowedToHorizontallyMove(bool allowed){
         this.allowed_to_horizontally_move = allowed;
+    }
+
+    public void setHorizontalSpeed(float speed){
+        this.horizontal_movement_speed = speed;
+    }
+
+    public void setJumpForce(float force){
+        this.jumpForce = force;
+    }
+
+    public void setCurrentlyTouchingIce(bool status){
+        this.currentlyTouchingIce = status;
+    }
+
+    public void setBoostAllowed(bool status){
+        this.boostAllowed = status;
+    }
+
+    public void setBoostForce(float force){
+        this.boostForce = force;
     }
 
     public float getHorizontalMovementInput() {
@@ -92,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
     public void Dash(InputAction.CallbackContext value) {
         if (value.performed){
             this.dashInput = true;
-            this.player.decreaseStaminaByPoint(5); // BILAL CHANGED HERE!
         }
     }
 
@@ -107,7 +136,13 @@ public class PlayerMovement : MonoBehaviour
 
     //Applies vertical upwards force
     private void jump(){
-        this.rigidbody.velocity = Vector2.up*this.jumpForce;
+        if (this.boostAllowed){
+            this.rigidbody.velocity = Vector2.up*(this.jumpForce + this.boostForce);
+            this.boostAllowed = false;
+        }
+        else{
+            this.rigidbody.velocity = Vector2.up*this.jumpForce;
+        }
         this.extra_jumps_remaining--;
     }
 
@@ -140,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Checks if the player is allowed to perform a dash
     public bool isAllowedToDash(){
-        if (this.dashInput){
+        if (this.dashInput && this.dashTimeCounter > 0 && this.player.decreaseStaminaByPoint(5)){
             return true;
         }
         return false;
@@ -158,10 +193,12 @@ public class PlayerMovement : MonoBehaviour
         this.rigidbody = GetComponent<Rigidbody2D>();
         this.player = gameObject.GetComponent<Player>();
         this.animator = gameObject.GetComponent<PlayerAnimator>();
+        this.boostAllowed = false;
         this.extra_jumps_remaining = this.extra_jumps_allowed;
         this.dashTimeCounter = this.dashTime;
         this.inCombat = false;
         this.prevY = this.crntY = this.transform.position.y;
+        this.currentlyTouchingIce = false;
     }
 
     void Awake() {
@@ -171,13 +208,16 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate(){
         this.crntY = this.transform.position.y;
 
-        if (player.isPlayerAlive() && !player.isKockedBack()){
+        if (player.isPlayerAlive() && !player.isKockedBack() && this.allow_any_movement){
             //Regardless of whether the player is grounded or in the air, they must be allowed to move
             if (this.horizontal_movement_input != 0 && this.getAllowedToHorizontallyMove()){
                 this.move();
             }
             else{
-                this.rigidbody.velocity = new Vector2(0,this.rigidbody.velocity.y);
+                //If the player is touching ice the player shouldn't lose velocity because no friction
+                if (!this.currentlyTouchingIce){
+                    this.rigidbody.velocity = new Vector2(0,this.rigidbody.velocity.y);
+                }
             }
 
             //isGrounded is only set to true if the feetPost collides with a ground object
@@ -217,9 +257,12 @@ public class PlayerMovement : MonoBehaviour
                 this.jump();
             }
 
-            if (this.dashInput && this.dashTimeCounter > 0){
+            if (this.isAllowedToDash()){
                 this.dash();
             }
+        }
+        else{
+            this.animator.playIdleAnimation();
         }
 
         this.jumpInput = false;

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public float coins;
     
     //Boolean Variables
-    private bool invulnerable;
+    [SerializeField] private bool invulnerable;
     private bool alive;
     public bool disregardStamina = false;
     private bool knockedBack;
@@ -256,6 +256,11 @@ public class Player : MonoBehaviour
         return this.invulnerable;
     }
 
+    //Makes the player invulnerable for the time specified.
+    public void makePlayerInvulnerable(float sec){
+        StartCoroutine(invulnerabilityTimer(sec));
+    }
+
     /*========================== Coroutine Methods ==========================*/
     //Coroutine for the knockback effect
     IEnumerator knockBack() {
@@ -276,6 +281,13 @@ public class Player : MonoBehaviour
         this.animator.playDeathAnimation();
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    //Sets player as invulnerable for n amount of time then takes it off after the timer is reached
+    IEnumerator invulnerabilityTimer(float sec){
+        this.invulnerable = true;
+        yield return new WaitForSeconds(sec);
+        this.invulnerable = false;
     }
     /*========================== User Interface Methods ==========================*/
     public void updateHealthBar(){
