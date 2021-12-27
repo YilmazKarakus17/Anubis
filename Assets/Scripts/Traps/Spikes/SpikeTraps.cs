@@ -8,6 +8,10 @@ public class SpikeTraps : MonoBehaviour
 
     public bool instantKills;
     public bool disregardInvulnerable = false;
+
+    public float initialDamageAmount = 5;
+    public float stayDamageAmount = 2.5f;
+    public float exitDamageAmount = 10;
     
     private bool initialDamage;
     private bool stayDamage;
@@ -69,7 +73,7 @@ public class SpikeTraps : MonoBehaviour
     {
         if (!this.instantKills){
             if (this.initialDamage){
-                this.damagePlayer(10);
+                this.damagePlayer(this.initialDamageAmount);
                 this.initialDamage = false;
             }
             else if (this.stayDamage && !this.currentlyDamagingForStaying){
@@ -77,7 +81,7 @@ public class SpikeTraps : MonoBehaviour
                 StartCoroutine(onStayDamage());
             }
             else if (this.exitDamage){
-                this.damagePlayer(25);
+                this.damagePlayer(this.exitDamageAmount);
                 this.exitDamage = false;
             }
         }
@@ -96,8 +100,8 @@ public class SpikeTraps : MonoBehaviour
     
     IEnumerator onStayDamage() {
         this.currentlyDamagingForStaying = true;
-        this.damagePlayer(5);
-        yield return new WaitForSeconds(1f);
+        this.damagePlayer(this.stayDamageAmount);
+        yield return new WaitForSeconds(0.5f);
         this.currentlyDamagingForStaying = false;
     }
 }

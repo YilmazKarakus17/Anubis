@@ -317,8 +317,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1220666034}
-  - {fileID: 823231028}
   - {fileID: 1375707947}
+  - {fileID: 823231028}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -673,7 +673,7 @@ Transform:
   m_LocalScale: {x: 12, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 183760863}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823231029
 MonoBehaviour:
@@ -52726,7 +52726,9 @@ MonoBehaviour:
   horizontal_movement_speed: 14
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
+  currentlyTouchingIce: 0
   jumpForce: 40
+  boostForce: 15
   extra_jumps_allowed: 1
   feetPos: {fileID: 188460632}
   feetCheckRadius: 0.35
@@ -52759,6 +52761,7 @@ MonoBehaviour:
   staminaRegenTime: 2
   souls: 0
   coins: 0
+  invulnerable: 0
   disregardStamina: 0
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
@@ -53061,7 +53064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154580060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.44, y: 20.55, z: 0}
+  m_LocalPosition: {x: 36.8, y: 5.4, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 188460632}
@@ -53490,7 +53493,7 @@ Transform:
   m_LocalScale: {x: 4, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 183760863}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1375707948
 MonoBehaviour:

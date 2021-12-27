@@ -40,8 +40,11 @@ public class OneWayPlatform : MonoBehaviour
     public void Update(){
         if (this.collided && this.drop && this.allowedToDrop){
             GetComponent<PlatformEffector2D>().surfaceArc = 0f;
-            StartCoroutine(Wait());
             this.drop = false;
+            StartCoroutine(Wait());
+        }
+        else{
+            if (this.drop){this.drop=false;}
         }
     }
 
