@@ -232,7 +232,7 @@ TextureImporter:
     second: cavesofgallet_tiles_75
   - first:
       213: -8695525589499867688
-    second: cavesofgallet_tiles_76
+    second: Lava_2
   - first:
       213: -4331846575891580061
     second: cavesofgallet_tiles_77
@@ -1978,7 +1978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavesofgallet_tiles_76
+      name: Lava_2
       rect:
         serializedVersion: 2
         x: 32
