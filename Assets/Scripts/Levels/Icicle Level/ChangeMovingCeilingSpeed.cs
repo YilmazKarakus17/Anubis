@@ -19,7 +19,7 @@ public class ChangeMovingCeilingSpeed : MonoBehaviour
         if (other.gameObject.tag == "Player"){
             this.tileMap.GetComponent<MovingCeiling>().changeSpeed(this.exitSpeed);
             if (this.stopPlatformMoving){
-                this.tileMap.GetComponent<MovingCeiling>().stopMovingTrue();
+                this.tileMap.GetComponent<MovingCeiling>().finishMovingCeiling();
             }
         }
     }
