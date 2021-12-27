@@ -8,7 +8,6 @@ public class BrittlePlatforms : MonoBehaviour
     private float countdownTimer;
     private bool startCountDown;
 
-    private bool playerDetected;
     [SerializeField] private float tiltAngle;
     private float tilt;
     private float direction;
@@ -30,7 +29,6 @@ public class BrittlePlatforms : MonoBehaviour
     {
         this.countdownTimer = this.TTL;
         this.startCountDown = false;
-        this.playerDetected = false;
         this.direction = 1;
     }
 

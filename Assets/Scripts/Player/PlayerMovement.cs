@@ -267,9 +267,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else{
-            if (player.isPlayerAlive() && this.allow_any_movement)
+            if (player.isPlayerAlive() && !this.allow_any_movement)
             {
                 this.animator.playIdleAnimation();
+                this.rigidbody.velocity = Vector2.zero;
             }
             else if (!player.isPlayerAlive()){
                 this.rigidbody.velocity = new Vector2(0,this.rigidbody.velocity.y);
