@@ -141,7 +141,12 @@ public class PlayerMovement : MonoBehaviour
             this.boostAllowed = false;
         }
         else{
-            this.rigidbody.velocity = Vector2.up*this.jumpForce;
+            if (transform.localScale.y >= 0) { // Upright 
+                this.rigidbody.velocity = Vector2.up*this.jumpForce;
+            }
+            else { // Upside down
+                this.rigidbody.velocity = Vector2.down*this.jumpForce;
+            }
         }
         this.extra_jumps_remaining--;
     }
