@@ -10,6 +10,7 @@ public class EnemyActionManager : MonoBehaviour
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
     public GameObject soul;
+    public int numberOfSouls = 1;
     public float attackRange;
 
     // Enemy combat variables
@@ -104,7 +105,7 @@ public class EnemyActionManager : MonoBehaviour
     }
 
     IEnumerator AddDeathDelay(float waitTime) {
-        SpawnSouls(Random.Range(1, 6)); // An enemy can drop 1 to 5 souls.
+        SpawnSouls(this.numberOfSouls);
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
     }
