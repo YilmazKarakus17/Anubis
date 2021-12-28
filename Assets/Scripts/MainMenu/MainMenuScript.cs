@@ -10,6 +10,21 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
+    public void ToSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ToLevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelect");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
