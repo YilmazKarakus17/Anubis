@@ -214,7 +214,7 @@
                 {
                     "name": "",
                     "id": "08c877c6-3777-431f-83eb-eaac804f4d5e",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -226,6 +226,17 @@
                     "name": "",
                     "id": "861ac30d-dd74-4879-8bc5-9b2d68afefaa",
                     "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shockwave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5208d2dd-d2cd-4536-87b3-0644e099f564",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -258,7 +269,18 @@
                 {
                     "name": "",
                     "id": "17b7dd2a-4756-4554-b888-e2fb68f2105d",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thunder Strike",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2048fd4c-8dcd-4497-8fe9-fcacb9c4f8af",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
