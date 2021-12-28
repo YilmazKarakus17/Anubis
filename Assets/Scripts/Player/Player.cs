@@ -191,13 +191,14 @@ public class Player : MonoBehaviour
     }
 
     /*============ Increase player soul Methods ============*/
-    //Increases the players souls by the given amount
-    public void addSouls(float amount){ 
-        // increment and save soul count
-        SaveManager.instance.playerSouls += 1;
+    //Increments the players souls.
+    public void incrementSouls() {
+        this.souls += 1;
+
+        // Saves soul count
+        SaveManager.instance.playerSouls = this.souls;
         SaveManager.instance.Save();
 
-        this.souls = SaveManager.instance.playerSouls;
         // update UI
         soulsText.text = this.souls.ToString();
     }

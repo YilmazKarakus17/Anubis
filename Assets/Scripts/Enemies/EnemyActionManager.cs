@@ -49,13 +49,16 @@ public class EnemyActionManager : MonoBehaviour
         // Enemy hit detection with the sword swings. All of the enemies that intersect with the sword's radius will take damage.
         Collider2D[] player = Physics2D.OverlapCircleAll(attackCentre.position, attackRange, LayerMask.GetMask("Player"));
         for (int i = 0; i < player.Length; i++) {
-            player[i].GetComponent<Player>().decreaseHealthByPoint(this.attackDamage);
-            // If the enemy is left of the player, knockback the player to the right and vice versa.
-            if (transform.position.x < player[i].transform.position.x) {
-                player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude, 0);
-            }
-            else {
-                player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude*-1, 0);
+            // Because there is only one player
+            if (i < 1) {
+                player[i].GetComponent<Player>().decreaseHealthByPoint(this.attackDamage);
+                // If the enemy is left of the player, knockback the player to the right and vice versa.
+                if (transform.position.x < player[i].transform.position.x) {
+                    player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude, 0);
+                }
+                else {
+                    player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude*-1, 0);
+                }
             }
         }
         if (gameObject.tag == "Fire Worm") {
