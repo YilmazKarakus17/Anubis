@@ -710,6 +710,7 @@ MonoBehaviour:
   points:
   - {fileID: 1947952230}
   - {fileID: 1298761427}
+  allowedToMove: 1
 --- !u!61 &279869518
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1715,6 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCentre: {fileID: 5919433}
+  soul: {fileID: 141659067095408290, guid: 4e8e1dee45141ae49b43b083ff2e3be0, type: 3}
   attackRange: 2.25
   attackDamage: 20
 --- !u!1 &345752515
@@ -2433,7 +2435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &501823182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2804,7 +2806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627147530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.34, y: -5.35, z: 0}
+  m_LocalPosition: {x: -14.71, y: -5.35, z: 0}
   m_LocalScale: {x: 4, y: 5, z: 1}
   m_Children:
   - {fileID: 355963897}
@@ -2910,6 +2912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCentre: {fileID: 355963897}
+  soul: {fileID: 141659067095408290, guid: 4e8e1dee45141ae49b43b083ff2e3be0, type: 3}
   attackRange: 2
   attackDamage: 10
 --- !u!1 &714971265
@@ -3435,6 +3438,7 @@ MonoBehaviour:
   points:
   - {fileID: 1556071415}
   - {fileID: 1952475681}
+  allowedToMove: 1
 --- !u!61 &841020270
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6171,6 +6175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCentre: {fileID: 1522680664}
+  soul: {fileID: 141659067095408290, guid: 4e8e1dee45141ae49b43b083ff2e3be0, type: 3}
   attackRange: 0
   attackDamage: 10
 --- !u!114 &1584595087

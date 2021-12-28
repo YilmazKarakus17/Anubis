@@ -9,6 +9,7 @@ public class EnemyActionManager : MonoBehaviour
     private Animator animator;
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
+    public GameObject soul;
     public float attackRange;
 
     // Enemy combat variables
@@ -100,9 +101,17 @@ public class EnemyActionManager : MonoBehaviour
     }
 
     IEnumerator AddDeathDelay(float waitTime) {
+        SpawnSouls(Random.Range(1, 6)); // An enemy can drop 1 to 5 souls.
         yield return new WaitForSeconds(waitTime);
-        player.addSouls(1);
         Destroy(gameObject);
+    }
+
+    void SpawnSouls(int range) {
+        GameObject[] souls = new GameObject[range];
+        for (int i = 0; i < souls.Length; i++) {
+            souls[i] = Instantiate(soul, transform.position, Quaternion.Euler(0,0,0));
+            souls[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.5f, 2.5f), Random.Range(2.5f, 7.5f)), ForceMode2D.Impulse);
+        }
     }
 
     // Start is called before the first frame update
