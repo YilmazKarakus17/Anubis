@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     public float speed;
     public int startingPoint;
     public Transform[] points;
+    [SerializeField] private bool allowedToMove = true;
 
     private int i; // index of an array
 
@@ -22,16 +23,18 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
-        {
-            i++;
-            if (i==points.Length)
+        if (this.allowedToMove){
+            if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
             {
-                i=0;
+                i++;
+                if (i==points.Length)
+                {
+                    i=0;
+                }
             }
+            
+            transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
         }
-        
-        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +43,8 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.transform.SetParent(transform);
         }
+
+        this.allowedToMove = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

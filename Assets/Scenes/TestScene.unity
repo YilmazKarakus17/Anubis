@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TTL: 1
+  tiltAngle: 0
 --- !u!61 &189810515
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -853,7 +854,9 @@ MonoBehaviour:
   horizontal_movement_speed: 12
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
+  currentlyTouchingIce: 0
   jumpForce: 40
+  boostForce: 15
   extra_jumps_allowed: 2
   feetPos: {fileID: 563523768}
   feetCheckRadius: 0.3
@@ -886,9 +889,12 @@ MonoBehaviour:
   staminaRegenTime: 2
   souls: 0
   coins: 0
+  invulnerable: 0
   disregardStamina: 0
   healthBar: {fileID: 1034650351}
   staminaBar: {fileID: 2101663480}
+  coinsText: {fileID: 0}
+  soulsText: {fileID: 0}
 --- !u!114 &284938945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2427,7 +2433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &501823182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3785,6 +3791,7 @@ MonoBehaviour:
   left: {fileID: 864546892}
   right: {fileID: 720410086}
   delay: 4
+  spawnAllowed: 1
 --- !u!61 &879443748
 BoxCollider2D:
   m_ObjectHideFlags: 0

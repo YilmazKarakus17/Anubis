@@ -401,6 +401,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f6ce88da-20fc-4698-b621-8be44538b271
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66792a17-4a0c-4fa7-948f-5071d3f868be
+    m_ActionName: Player/Thunder Strike[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3184,6 +3188,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f6ce88da-20fc-4698-b621-8be44538b271
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66792a17-4a0c-4fa7-948f-5071d3f868be
+    m_ActionName: Player/Thunder Strike[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5401,6 +5409,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantKills: 0
   disregardInvulnerable: 0
+  initialDamageAmount: 5
+  stayDamageAmount: 2.5
+  exitDamageAmount: 10
 --- !u!61 &1424287067
 BoxCollider2D:
   m_ObjectHideFlags: 0
