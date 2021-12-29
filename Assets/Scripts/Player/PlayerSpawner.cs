@@ -28,9 +28,13 @@ public class PlayerSpawner : MonoBehaviour
 
         if (activeSceneName == "Level3")
         {
-            transform.position = new Vector3 (SaveManager.instance.level3CheckpointX, SaveManager.instance.level3CheckpointY, 0);
-            Debug.Log(SaveManager.instance.level3CheckpointX);
-            Debug.Log(SaveManager.instance.level3CheckpointY);
+
+            if (SaveManager.instance.level3CheckpointX == 0 && SaveManager.instance.level3CheckpointY == 0){
+                transform.position = new Vector3 (-3.639997f, -1.184977f, 0);
+            }
+            else{
+                transform.position = new Vector3 (SaveManager.instance.level3CheckpointX, SaveManager.instance.level3CheckpointY, 0);
+            }
         }
 
         // if (activeSceneName == "Level4")
@@ -41,11 +45,13 @@ public class PlayerSpawner : MonoBehaviour
         if (activeSceneName == "Level5")
         {
             if (SaveManager.instance.level5CheckpointX == 0 && SaveManager.instance.level5CheckpointX == 0){
-                transform.position = new Vector3 (-57.2f, 74.2f, 0);
+                transform.position = new Vector3 (-57.2f, 80.7f, 0);
             }
             else{
                 transform.position = new Vector3 (SaveManager.instance.level5CheckpointX, SaveManager.instance.level5CheckpointY, 0);
             }
+            Debug.Log(SaveManager.instance.level5CheckpointX);
+            Debug.Log(SaveManager.instance.level5CheckpointY);
         }
 
         // if (activeSceneName == "Level6")
@@ -69,7 +75,7 @@ public class PlayerSpawner : MonoBehaviour
             
 
             if (SaveManager.instance.level8CheckpointX == 0 && SaveManager.instance.level8CheckpointY == 0){
-                transform.position = new Vector3 (0, -6f, 0);
+                transform.position = new Vector3 (0, -6.888125f, 0);
             }
             else{
                 transform.position = new Vector3 (SaveManager.instance.level8CheckpointX, SaveManager.instance.level8CheckpointY, 0);
