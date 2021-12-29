@@ -19,6 +19,10 @@ public class IcicleSpawner : MonoBehaviour
         this.spawnAllowed = true;
     }
 
+    public void stopSpawning(){
+        this.spawnAllowed = false;
+    }
+
     void OnTriggerEnter2D(Collider2D otherCollider){
         if (otherCollider.gameObject.tag == "Player"){
             this.generate = false;
