@@ -287,7 +287,9 @@ public class Player : MonoBehaviour
     //Sets player as invulnerable for n amount of time then takes it off after the timer is reached
     IEnumerator invulnerabilityTimer(float sec){
         this.invulnerable = true;
+        GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
         yield return new WaitForSeconds(sec);
+        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         this.invulnerable = false;
     }
     /*========================== User Interface Methods ==========================*/

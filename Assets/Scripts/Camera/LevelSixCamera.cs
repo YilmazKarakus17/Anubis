@@ -38,6 +38,8 @@ public class LevelSixCamera : MonoBehaviour
 
     void focusOnPlayer(){
         this.player.GetComponent<PlayerMovement>().setAllowedToMove(true);
+        this.player.GetComponent<PlayerMovement>().setAllowedToDash(true);
+
         Vector2 targetV2 = this.player.transform.position; // Gets the 2D coordinates of the 2D object that represents the end of the level.
         Vector3 targetV3 = transform.position; // Gets the current 3D position of the GameObject it's assigned to, in this case it's the camera
         //Only changes the x and y so that the cameras original z position isn't affected.

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     //Variables to not allow movement 
     private bool allow_any_movement = true;
     private bool allowed_to_horizontally_move = true;
+    [SerializeField] private bool allowed_to_dash = true;
 
     //Horizontal Movement Variables
     private float horizontal_movement_input;
@@ -88,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void setBoostForce(float force){
         this.boostForce = force;
+    }
+
+    public void setAllowedToDash(bool status){
+        this.allowed_to_dash = status;
     }
 
     public float getHorizontalMovementInput() {
@@ -180,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Checks if the player is allowed to perform a dash
     public bool isAllowedToDash(){
-        if (this.dashInput && this.dashTimeCounter > 0 && this.player.decreaseStaminaByPoint(5)){
+        if (this.dashInput && this.dashTimeCounter > 0 && this.player.decreaseStaminaByPoint(5) && this.allowed_to_dash){
             return true;
         }
         return false;
