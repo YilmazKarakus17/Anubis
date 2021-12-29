@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI soulsText;
 
+    // sound variables
+    public AudioSource damageTakenAudio;
+
     /*========================== Instance Methods ==========================*/   
     public bool isKockedBack(){
         return this.knockedBack;
@@ -96,6 +99,7 @@ public class Player : MonoBehaviour
             }
             this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
+            damageTakenAudio.Play();
             StartCoroutine(HurtPlayer());
         } 
     }
