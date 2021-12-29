@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpInput;
     public float jumpForce = 15;
     private bool boostAllowed;
+    private bool boostAllowedViaJumpPad;
     [SerializeField] private float boostForce = 15;
     private bool isGrounded;
     public int extra_jumps_allowed = 2;
@@ -85,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void setBoostAllowed(bool status){
         this.boostAllowed = status;
+    }
+    
+    public void setBoostAllowedViaJumpPad(bool status){
+        this.boostAllowedViaJumpPad = status;
     }
 
     public void setBoostForce(float force){
@@ -144,6 +149,10 @@ public class PlayerMovement : MonoBehaviour
         if (this.boostAllowed){
             this.rigidbody.velocity = Vector2.up*(this.jumpForce + this.boostForce);
             this.boostAllowed = false;
+        }
+        else if (this.boostAllowedViaJumpPad){
+            this.rigidbody.velocity = Vector2.up*(this.jumpForce + this.boostForce);
+            this.boostAllowedViaJumpPad = false;
         }
         else{
             if (transform.localScale.y >= 0) { // Upright 
@@ -209,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
         this.inCombat = false;
         this.prevY = this.crntY = this.transform.position.y;
         this.currentlyTouchingIce = false;
+        this.boostAllowedViaJumpPad = false;
     }
 
     void Awake() {
@@ -282,6 +292,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        this.boostAllowedViaJumpPad = false;
         this.jumpInput = false;
         this.dashInput = false;
         this.prevY = this.crntY;
