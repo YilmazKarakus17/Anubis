@@ -14,6 +14,7 @@ public class LevelSixCamera : MonoBehaviour
     private bool verticalCameraMovement;
 
     //Cinematic Camera Variables
+    public GameObject playerHUD;
     public Transform cinematicPoint;
     public float cinematicSpeed = 5;
     public float cinematicReturnSpeed = 14;
@@ -39,7 +40,7 @@ public class LevelSixCamera : MonoBehaviour
     void focusOnPlayer(){
         this.player.GetComponent<PlayerMovement>().setAllowedToMove(true);
         this.player.GetComponent<PlayerMovement>().setAllowedToDash(true);
-
+        this.playerHUD.SetActive(true);
         Vector2 targetV2 = this.player.transform.position; // Gets the 2D coordinates of the 2D object that represents the end of the level.
         Vector3 targetV3 = transform.position; // Gets the current 3D position of the GameObject it's assigned to, in this case it's the camera
         //Only changes the x and y so that the cameras original z position isn't affected.
@@ -63,6 +64,7 @@ public class LevelSixCamera : MonoBehaviour
     void cinematicShot(){
         Vector3 target = transform.position;
         this.player.GetComponent<PlayerMovement>().setAllowedToMove(false);
+        this.playerHUD.SetActive(false);
         target.x = cinematicPoint.position.x; target.y = cinematicPoint.position.y;
         if (Vector2.Distance(transform.position, target) < 0.02f)
         {
