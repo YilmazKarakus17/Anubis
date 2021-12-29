@@ -6,7 +6,12 @@ public class Goblin : MonoBehaviour
 {
     //GameObject Variables
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject soul;
 
+    //Soul Variables
+    [SerializeField] private int numberOfSouls = 1;
+
+    //Goblin Attack Variables
     [SerializeField] private GameObject projectile;
     [SerializeField] private float bombThrowRangeX;
     [SerializeField] private Transform bombSpawn;
@@ -24,11 +29,12 @@ public class Goblin : MonoBehaviour
     const string IDLE = "Idle";
     const string ATTACK_MELEE = "MeleeAttack";
     const string ATTACK_BOMB = "ThrowAttack";
+    const string DEATH = "Death";
     ///================================================ Animation Methods ================================================//
     public void playIdleAnimation(){ this.animator.Play(IDLE); }
     public void playMeleeAnimation(){ this.animator.Play(ATTACK_MELEE); }
     public void playBombThrowAnimation(){ this.animator.Play(ATTACK_BOMB); }
-
+    public void playDeathAnimation(){ this.animator.Play(DEATH); }
     //================================================ Instance Methods ================================================//
     //Creates a Globlin Bomb game object and throws it towards the players direction
     void performBombThrow(){
@@ -69,6 +75,20 @@ public class Goblin : MonoBehaviour
         }
         else{
             this.performMeleeAttack = false;
+        }
+    }
+
+    //Method that gets called when goblin dies
+    public void goblinDeath(){
+        StartCoroutine(GoblinDies());
+    }
+
+    //Instantiates n number of souls
+    void SpawnSouls(int range) {
+        GameObject[] souls = new GameObject[range];
+        for (int i = 0; i < souls.Length; i++) {
+            souls[i] = Instantiate(soul, transform.position, Quaternion.Euler(0,0,0));
+            souls[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.5f, 2.5f), Random.Range(2.5f, 7.5f)), ForceMode2D.Impulse);
         }
     }
     //================================================ Unity Special Methods ================================================//
@@ -121,5 +141,13 @@ public class Goblin : MonoBehaviour
     IEnumerator MeleeAttackReturnIdle() {
         yield return new WaitForSeconds(0.11f);
         this.playIdleAnimation();
+    }
+
+    //Coroutine for when the goblin dies
+    IEnumerator GoblinDies() {
+        this.playDeathAnimation();
+        yield return new WaitForSeconds(1f);
+        this.SpawnSouls(this.numberOfSouls);
+        Destroy(gameObject);
     }
 }

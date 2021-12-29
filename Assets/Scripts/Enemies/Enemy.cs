@@ -66,6 +66,9 @@ public class Enemy : MonoBehaviour
                          // Plays death animation (object is destroyed after a short delay).
                         gameObject.GetComponent<EnemyActionManager>().playDeathAnimation();
                     }
+                    else if (gameObject.GetComponent<Goblin>() != null){
+                        gameObject.GetComponent<Goblin>().goblinDeath();
+                    }
                     else {
                         Destroy(gameObject);
                     }

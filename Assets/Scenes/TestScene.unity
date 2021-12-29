@@ -822,6 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashEffect: {fileID: 3044135490299284828, guid: 45ed5608f79d5f444b2534e941de089a, type: 3}
+  allowed_to_dash: 1
   horizontal_movement_speed: 12
   in_combat_horizontal_movement_speed: 2
   inCombat: 0
@@ -7290,12 +7291,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 284938942}
+  soul: {fileID: 141659067095408290, guid: 4e8e1dee45141ae49b43b083ff2e3be0, type: 3}
+  numberOfSouls: 1
   projectile: {fileID: 2621750073033344112, guid: d120ee3e8cfe31a41afad64b678c2b8a, type: 3}
   bombThrowRangeX: 13
   bombSpawn: {fileID: 101894522}
   timeBtwShots: 3
   timeBtwMeleeAttacks: 1
-  meleeAttackRange: 3
+  meleeAttackRange: 2.5
 --- !u!95 &2075329149
 Animator:
   serializedVersion: 3
@@ -7650,6 +7653,10 @@ PrefabInstance:
     - target: {fileID: 7623689029744006786, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623689029744006786, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7623689029744006788, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: m_RootOrder
