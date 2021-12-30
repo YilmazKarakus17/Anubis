@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
             }
             this.updateHealthBar(); // updating the health bar health
             this.updateAliveStatus();
-            damageTakenAudio.Play();
+            //damageTakenAudio.Play(); //Bilal
             StartCoroutine(HurtPlayer());
         } 
     }
