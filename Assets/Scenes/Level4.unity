@@ -58290,6 +58290,7 @@ MonoBehaviour:
   staminaBar: {fileID: 93484954}
   coinsText: {fileID: 1871104917}
   soulsText: {fileID: 552640340}
+  damageTakenAudio: {fileID: 0}
 --- !u!114 &1154580069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63180,6 +63181,10 @@ PrefabInstance:
     - target: {fileID: 7623689029744006808, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623689029744006808, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
+      propertyPath: lookingLeft
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7623689029744006810, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: attackDamage

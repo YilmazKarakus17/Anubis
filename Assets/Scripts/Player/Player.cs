@@ -276,9 +276,9 @@ public class Player : MonoBehaviour
 
     //Coroutine for showing player is hurt
     IEnumerator HurtPlayer() {
-        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.25f);
-        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     //Coroutine for killing the player

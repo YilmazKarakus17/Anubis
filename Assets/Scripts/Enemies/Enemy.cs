@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private new Renderer renderer;
     public GameObject player;
 
     // Combat variables
@@ -89,9 +88,9 @@ public class Enemy : MonoBehaviour
     }
 
     IEnumerator ChangeColour() {
-        renderer.material.SetColor("_Color", Color.red);
+        GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.25f);
-        renderer.material.SetColor("_Color", Color.white);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     //Ensures the Flying Eye always looks at the direction of the player
@@ -120,7 +119,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        this.player = GameObject.FindGameObjectWithTag("Player");
         this.health = this.maxHealth;
         this.isDead = false;
         this.isDeaded = false;
