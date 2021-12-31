@@ -95,6 +95,7 @@ public class Goblin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.player = GameObject.FindGameObjectWithTag("Player");
         this.playerInRange = false;
         this.performMeleeAttack = false;
         this.countdownTimeBtwShots = 0; //The goblin can immediately throw a bomb at the player

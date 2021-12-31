@@ -276,9 +276,9 @@ public class Player : MonoBehaviour
 
     //Coroutine for showing player is hurt
     IEnumerator HurtPlayer() {
-        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.25f);
-        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     //Coroutine for killing the player
@@ -291,9 +291,9 @@ public class Player : MonoBehaviour
     //Sets player as invulnerable for n amount of time then takes it off after the timer is reached
     IEnumerator invulnerabilityTimer(float sec){
         this.invulnerable = true;
-        GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        GetComponent<SpriteRenderer>().color = Color.yellow;
         yield return new WaitForSeconds(sec);
-        GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        GetComponent<SpriteRenderer>().color = Color.white;
         this.invulnerable = false;
     }
     /*========================== User Interface Methods ==========================*/
