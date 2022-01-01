@@ -16,6 +16,12 @@ public class PlayerActionManager : MonoBehaviour
     public float attackDamage = 25;
     private float horizontalDirection;
     public bool applyDoubleDamage;
+
+    // Thunder strike cooldown-related variables
+    private bool thunderAvailable;
+    private float timeBetweenThunder;
+    private float thunderRate;
+
     // Attack range/radius and enemy detection variables
     public Transform attackCentre;
     public float attackRange = 1.25f;
@@ -41,9 +47,10 @@ public class PlayerActionManager : MonoBehaviour
     }
 
     public void ThunderStrike(InputAction.CallbackContext context) {
-        if (context.performed) {
+        if (context.performed && this.thunderAvailable) {
             GameObject thunderStrike;
             thunderStrike = Instantiate(thunder, gameObject.transform.position+new Vector3(this.horizontalDirection*10,1.5f,0), Quaternion.Euler(0,0,0));
+            this.thunderAvailable = false;
         }
     }
 
@@ -102,12 +109,21 @@ public class PlayerActionManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
         r2d = GetComponent<Rigidbody2D>();
+        this.thunderAvailable = false;
+        this.timeBetweenThunder = 0;
+        this.thunderRate = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!this.thunderAvailable && this.timeBetweenThunder > 0) {
+            timeBetweenThunder -= Time.deltaTime;
+        }
+        else if (this.timeBetweenThunder <= 0) {
+            this.thunderAvailable = true;
+            this.timeBetweenThunder = this.thunderRate;
+        }
     }
 
     void FixedUpdate() {
