@@ -324,8 +324,6 @@ public class Player : MonoBehaviour
         this.currentStamina = this.maxStamina;
         //this.souls = SaveManager.instance.playerSouls;
 
-        //INSTANTIATE SOULS THROUGH PERsistent data
-
         //Instantiating 
         this.alive = true;
         this.invulnerable = false;
