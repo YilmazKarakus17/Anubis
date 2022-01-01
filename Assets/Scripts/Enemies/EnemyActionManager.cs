@@ -65,7 +65,12 @@ public class EnemyActionManager : MonoBehaviour
         if (gameObject.tag == "Fire Worm") {
             RangedEnemy rangedEnemy = gameObject.GetComponent<RangedEnemy>();
             GameObject fireball;
-            fireball = Instantiate(rangedEnemy.projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));
+            if (rangedEnemy.getHorizontalDirection() > 0) {
+                fireball = Instantiate(rangedEnemy.projectile, gameObject.transform.position, Quaternion.Euler(0,0,0));    
+            }
+            else {
+                fireball = Instantiate(rangedEnemy.projectile, gameObject.transform.position, Quaternion.Euler(0,0,180));
+            }
             fireball.GetComponent<Rigidbody2D>().AddForce(new Vector2(rangedEnemy.getHorizontalDirection()*20, 0), ForceMode2D.Impulse);
         }
     }
