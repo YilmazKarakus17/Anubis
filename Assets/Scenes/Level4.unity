@@ -2677,6 +2677,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3521201640813490595, guid: 40ff30130284a09419c7e92c05f45bd7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40ff30130284a09419c7e92c05f45bd7, type: 3}
 --- !u!1001 &396989449
@@ -60793,6 +60797,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 502048412}
     m_Modifications:
+    - target: {fileID: -6182035863669627113, guid: 37d1949a4aadbce4b965186ea66d91d5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5847265580914889323, guid: 37d1949a4aadbce4b965186ea66d91d5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -63110,6 +63118,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 502048412}
     m_Modifications:
+    - target: {fileID: -880515104286336919, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7623689028817173018, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
