@@ -6262,7 +6262,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.2025423, y: -0.20909119}
+  m_Offset: {x: -2.5867624, y: -0.33338207}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6273,7 +6273,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.050623, y: 0.3358841}
+  m_Size: {x: 14.282183, y: 0.8330476}
   m_EdgeRadius: 0
 --- !u!4 &595810619 stripped
 Transform:
@@ -68716,7 +68716,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.2278538, y: -0.20909119}
+  m_Offset: {x: -3.2278538, y: -0.055933}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -68727,7 +68727,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 26.822834, y: 0.3358841}
+  m_Size: {x: 26.822834, y: 0.94851303}
   m_EdgeRadius: 0
 --- !u!1001 &817859432
 PrefabInstance:
@@ -135804,7 +135804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495989280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.34000397, z: -60.854378}
+  m_LocalPosition: {x: 1, y: -0.34000397, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1980588618}
@@ -135887,11 +135887,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  startingPoint: 0
+  startingPoint: 1
   points:
   - {fileID: 1495989281}
   - {fileID: 2105624788}
-  allowedToMove: 1
+  allowedToMove: 0
 --- !u!61 &1521764225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139942,7 +139942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105624787}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -99, y: -0.340004, z: -60.854378}
+  m_LocalPosition: {x: -99, y: -0.340004, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1980588618}

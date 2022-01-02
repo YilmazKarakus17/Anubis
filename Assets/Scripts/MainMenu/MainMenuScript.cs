@@ -5,6 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    void Start()
+    {
+        if(!PlayerPrefs.HasKey("musicVolume")){
+            PlayerPrefs.SetFloat("musicVolume",1);
+
+        }
+        else{
+            AudioListener.volume = PlayerPrefs.GetFloat("musicVolume");
+        }
+        
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);

@@ -50,8 +50,6 @@ public class PlayerSpawner : MonoBehaviour
             else{
                 transform.position = new Vector3 (SaveManager.instance.level5CheckpointX, SaveManager.instance.level5CheckpointY, 0);
             }
-            Debug.Log(SaveManager.instance.level5CheckpointX);
-            Debug.Log(SaveManager.instance.level5CheckpointY);
         }
 
         // if (activeSceneName == "Level6")
