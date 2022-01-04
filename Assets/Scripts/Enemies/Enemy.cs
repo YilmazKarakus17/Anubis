@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
         this.health = this.maxHealth;
     }
 
+    public void setHealth(float hp){
+        this.health = hp;
+    }
+
     public void setIsBoss(){
         this.isBoss = true;
     }

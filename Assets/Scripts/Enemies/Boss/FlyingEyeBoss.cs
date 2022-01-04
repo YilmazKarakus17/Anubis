@@ -7,10 +7,12 @@ public class FlyingEyeBoss : MonoBehaviour
     //GameObject Variables
     private GameObject player;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject exitDoor;
 
     //Variables for Boss Deaths
     private float numberOfDeaths;
     private bool isResurrecting;
+    [SerializeField] private float resurrectedHealth = 1000;
     
     //Variables for Air Attacks
     [SerializeField] private Transform eye;
@@ -162,15 +164,17 @@ public class FlyingEyeBoss : MonoBehaviour
         this.playDeath1Animation();
         yield return new WaitForSeconds(5f);
         this.playIdleAnimation();
-        GetComponent<Enemy>().resetHealth();
+        GetComponent<Enemy>().setHealth(this.resurrectedHealth);
         GetComponent<Enemy>().setIsDead(false);
         this.isResurrecting = false;
+        this.timeBtwShots = 0.4f;
     }
 
     //Coroutine for the waiting to play out the death of Flying Eye
     IEnumerator DeathOfFlyingEye() {
         this.playDeath2Animation();
         yield return new WaitForSeconds(1f);
+        this.exitDoor.SetActive(true);
         Destroy(gameObject);
     }
 }
