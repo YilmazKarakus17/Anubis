@@ -14,7 +14,9 @@ Anubis_v0.9 https://github.com/YilmazKarakus17/Anubis/tree/Anubis_v0.9
 ##### To Move Right: **D** or **Right Arrow**
 
 ##### To Dash: **L+Shift**
-##### To Attack: **Left Mouse Click**
+##### To Attack: **Left Mouse Click** or J
+##### To Shockwave: **Right Mouse Click** or K
+##### To Shockwave: **Middle Mouse Click** or L
 
 ### Powerups
 ##### Invulnerability: Makes the player invulnerable for a limited amount of time
