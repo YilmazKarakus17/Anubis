@@ -62172,7 +62172,7 @@ MonoBehaviour:
   attackCentre: {fileID: 735980091}
   attackRange: 1.25
   projectile: {fileID: 395255176371479993, guid: 3497c7a57dd30324b828d3a8f906c63d, type: 3}
-  thunder: {fileID: 0}
+  thunder: {fileID: 3172101072164632960, guid: 88d13f096842c7e4db6882eb527a6e07, type: 3}
   isShockwaveActive: 0
 --- !u!114 &1925633588
 MonoBehaviour:
@@ -62415,7 +62415,19 @@ MonoBehaviour:
     m_ActionId: 329b3367-706e-4f6b-bf51-72fbfc80b590
     m_ActionName: Player/ContinueDialogue[/Keyboard/enter,/Keyboard/space,/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1925633587}
+        m_TargetAssemblyTypeName: PlayerActionManager, Assembly-CSharp
+        m_MethodName: ThunderStrike
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 66792a17-4a0c-4fa7-948f-5071d3f868be
     m_ActionName: Player/Thunder Strike[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
