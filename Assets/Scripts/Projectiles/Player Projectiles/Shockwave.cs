@@ -23,12 +23,12 @@ public class Shockwave : MonoBehaviour
         // Layer 10 is the enemy layer.
         else if (otherCollider.gameObject.layer == 10) {
             Destroy(gameObject);
-            otherCollider.GetComponent<Enemy>().TakeDamage(player.attackDamage/5);
+            otherCollider.GetComponent<Enemy>().TakeDamage(player.attackDamage-10);
         }
         // Layer 12 is the destructible wall layer
         else if ((otherCollider.gameObject.layer == 12)) {
             Destroy(gameObject);
-            otherCollider.GetComponent<DestructibleWall>().TakeDamage(player.attackDamage/5);
+            otherCollider.GetComponent<DestructibleWall>().TakeDamage(player.attackDamage-10);
         }
     }
 
