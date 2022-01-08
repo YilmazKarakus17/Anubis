@@ -54,12 +54,13 @@ public class EnemyActionManager : MonoBehaviour
             // Because there is only one player
             if (i < 1) {
                 player[i].GetComponent<Player>().decreaseHealthByPoint(this.attackDamage);
-                Instantiate(this.attackEffect, this.transform.position, Quaternion.identity);
                 // If the enemy is left of the player, knockback the player to the right and vice versa.
                 if (transform.position.x < player[i].transform.position.x) {
+                    Instantiate(this.attackEffect, this.transform.position, Quaternion.Euler(0,0,180));
                     player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude, 0);
                 }
                 else {
+                    Instantiate(this.attackEffect, this.transform.position, Quaternion.identity);
                     player[i].GetComponent<Player>().Knockback(this.playerKnockbackMagnitude*-1, 0);
                 }
             }
