@@ -60182,7 +60182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5847265580914889334, guid: 37d1949a4aadbce4b965186ea66d91d5, type: 3}
       propertyPath: maxHealth
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5847265580914889335, guid: 37d1949a4aadbce4b965186ea66d91d5, type: 3}
       propertyPath: numberOfSouls
@@ -63278,11 +63278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7623689029744006808, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: health
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7623689029744006808, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7623689029744006810, guid: 1db571b36a8514f4fa2206a7da72b95f, type: 3}
       propertyPath: attackDamage

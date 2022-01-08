@@ -30,8 +30,10 @@ public class FinishCutSceneLevel : MonoBehaviour
         }
         else 
         {
+            SaveManager.instance.levelsComplete = 5;
+            SaveManager.instance.Save();
             // otherwise, load the next scene.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Level5");
         }
     }
 }
