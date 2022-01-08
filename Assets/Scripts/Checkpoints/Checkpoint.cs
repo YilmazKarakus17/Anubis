@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour
 {
+    [SerializeField] private int difficultyLevel = 2;
+
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -77,6 +79,43 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
+    void possibleDestoryGameObject(float x, float y){
+        int currentDifficulty = SaveManager.instance.currentDifficulty;
 
+        //Is this checkpoint the same checkpoint that the player most recently visited
+        if (this.gameObject.transform.position.x != x && this.gameObject.transform.position.y != y){
+            //Is the current checkpoint for a easier difficulty than the current difficulty
+            if (this.difficultyLevel < currentDifficulty){
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void Start(){
+        // sets the spawn location
+        string activeSceneName = SceneManager.GetActiveScene().name;
+
+        if (activeSceneName == "Level1")
+        {
+            this.possibleDestoryGameObject(SaveManager.instance.level1CheckpointX, SaveManager.instance.level1CheckpointY);
+        }
+        else if (activeSceneName == "Level3")
+        {
+            this.possibleDestoryGameObject(SaveManager.instance.level3CheckpointX, SaveManager.instance.level3CheckpointY);
+        }
+        else if (activeSceneName == "Level5")
+        {
+            this.possibleDestoryGameObject(SaveManager.instance.level5CheckpointX, SaveManager.instance.level5CheckpointY);
+        }
+        else if (activeSceneName == "Level7")
+        {
+            this.possibleDestoryGameObject(SaveManager.instance.level7CheckpointX, SaveManager.instance.level7CheckpointY);
+        }
+        else if (activeSceneName == "Level8")
+        {
+            this.possibleDestoryGameObject(SaveManager.instance.level8CheckpointX, SaveManager.instance.level8CheckpointY);
+        }
+
+    }
 }
 
