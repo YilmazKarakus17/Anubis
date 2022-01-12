@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelFourCinematicCamera : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class LevelFourCinematicCamera : MonoBehaviour
     public float cinematicSpeed = 5;
     public float cinematicReturnSpeed = 14;
     public GameObject playerHUD;
+    public GameObject spaceText;
+    public GameObject tabText;
 
 
     //Player Centering Variables
@@ -25,6 +28,25 @@ public class LevelFourCinematicCamera : MonoBehaviour
     private bool playerCenteredCameraMovement;
     private bool cinematicCameraMovement;
     private bool cinematicCameraReturnMovement;
+
+    public void fastForwardCutScene(InputAction.CallbackContext value) {
+        if (value.performed){
+            this.cinematicSpeed += 25;
+            this.cinematicReturnSpeed += 25;
+            this.spaceText.SetActive(false);
+            this.tabText.SetActive(false);
+        }
+    }
+
+    public void skipCutScene(InputAction.CallbackContext value) {
+        if (value.performed){
+            this.cinematicCameraMovement = false;
+            this.cinematicCameraReturnMovement= false;
+            this.playerCenteredCameraMovement = true;
+            this.spaceText.SetActive(false);
+            this.tabText.SetActive(false);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +89,8 @@ public class LevelFourCinematicCamera : MonoBehaviour
         Vector3 target = transform.position;
         this.player.GetComponent<PlayerMovement>().setAllowedToMove(false);
         this.playerHUD.SetActive(false);
+        this.spaceText.SetActive(true);
+        this.tabText.SetActive(true);
         target.x = cinematicPoint.position.x; target.y = cinematicPoint.position.y;
         if (Vector2.Distance(transform.position, target) < 0.02f)
         {
