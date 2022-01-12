@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelSixCamera : MonoBehaviour
 {
@@ -20,11 +21,21 @@ public class LevelSixCamera : MonoBehaviour
     public float cinematicReturnSpeed = 14;
     private bool cinematicCameraMovement;
     private bool cinematicCameraReturnMovement;
+    public GameObject tabText;
 
     //Player Centering Variables
     public GameObject player;
     public float yOffset;
     private bool playerCenteredCameraMovement;
+
+    public void skipCutScene(InputAction.CallbackContext value) {
+        if (value.performed){
+            this.cinematicCameraMovement = false;
+            this.cinematicCameraReturnMovement= false;
+            this.playerCenteredCameraMovement = true;
+            this.tabText.SetActive(false);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +76,7 @@ public class LevelSixCamera : MonoBehaviour
         Vector3 target = transform.position;
         this.player.GetComponent<PlayerMovement>().setAllowedToMove(false);
         this.playerHUD.SetActive(false);
+        this.tabText.SetActive(true);
         target.x = cinematicPoint.position.x; target.y = cinematicPoint.position.y;
         if (Vector2.Distance(transform.position, target) < 0.02f)
         {
