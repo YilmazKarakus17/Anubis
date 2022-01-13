@@ -8,6 +8,8 @@ public class SaveManager : MonoBehaviour
 
     public static SaveManager instance { get; private set; }
 
+    public int watchedIntro;
+
     public int currentDifficulty;
     public float playerHealth;
     public float playerStamina;
@@ -71,6 +73,8 @@ public class SaveManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
+            watchedIntro = data.watchedIntro;
+
             currentDifficulty = data.currentDifficulty;
             playerHealth = data.playerHealth;
             playerStamina = data.playerStamina;
@@ -120,6 +124,8 @@ public class SaveManager : MonoBehaviour
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
         PlayerData_Storage data = new PlayerData_Storage();
+
+        data.watchedIntro = watchedIntro;
 
         data.currentDifficulty = currentDifficulty;
         data.playerHealth = playerHealth;
@@ -172,6 +178,8 @@ public class SaveManager : MonoBehaviour
 [Serializable]
 class PlayerData_Storage
 {
+    public int watchedIntro;
+
     public int currentDifficulty;
     public float playerHealth;
     public float playerStamina;

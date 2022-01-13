@@ -28,17 +28,22 @@ public class LevelSelect : MonoBehaviour
 
     public void startLevel1()
     {
-
-        if (SaveManager.instance.playerHealth == 0)
-        {
-            SaveManager.instance.playerHealth = 200;
+        if(SaveManager.instance.watchedIntro == 0){
+            SaveManager.instance.watchedIntro = 1;
+            SceneManager.LoadScene("IntroScene");
         }
-        if (SaveManager.instance.playerStamina == 0)
-        {
-            SaveManager.instance.playerStamina = 100;
+        else{
+            if (SaveManager.instance.playerHealth == 0)
+            {
+                SaveManager.instance.playerHealth = 200;
+            }
+            if (SaveManager.instance.playerStamina == 0)
+            {
+                SaveManager.instance.playerStamina = 100;
+            }
+            
+            SceneManager.LoadScene("Level1");
         }
-        
-        SceneManager.LoadScene("Level1");
     }
 
     public void startLevel2()
