@@ -9,6 +9,9 @@ public class FlyingEyeBeam : MonoBehaviour
     private Transform player;
     private Vector2 target;
 
+    //Particle Effect Variables
+    public GameObject explosionEffect;
+
     void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Player")){
             other.gameObject.GetComponent<Player>().decreaseHealthByPoint(5);
@@ -17,6 +20,7 @@ public class FlyingEyeBeam : MonoBehaviour
     }
 
     public void DestroyProjectile(){
+        Instantiate(this.explosionEffect, this.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
