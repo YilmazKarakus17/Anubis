@@ -30,6 +30,10 @@ public class FlyingEyeBoss : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform[] locations;
     private int indexLocations;
+    
+    //Sound variables
+    public AudioSource phase1;
+    public AudioSource phase2;
 
     //Animation Variables
     [SerializeField] private Animator animator;
@@ -84,6 +88,7 @@ public class FlyingEyeBoss : MonoBehaviour
         GetComponent<Enemy>().setIsBoss();
         this.numberOfDeaths = 0;
         this.isResurrecting = false;
+        this.phase1.Play();
     }
 
     // Update is called once per frame
@@ -168,6 +173,7 @@ public class FlyingEyeBoss : MonoBehaviour
         GetComponent<Enemy>().setIsDead(false);
         this.isResurrecting = false;
         this.timeBtwShots = 0.4f;
+        this.phase2.Play();
     }
 
     //Coroutine for the waiting to play out the death of Flying Eye
