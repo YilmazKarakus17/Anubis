@@ -212,17 +212,19 @@ MonoBehaviour:
     Yilmaz Karakus
 
 
-    Imaru
-    Lewis
+    Talha
+    Samin
+
+    Imaru Lewis
 
     Gorkem Huyesin
 
     Darius Ju-Pierre
 
-    Daniel Litvinuic
-
     Daniel
-    Ismaili'
+    Litvinuic
+
+    Daniel Ismaili'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 99fec38021d0c6547975b83fa4b88c41, type: 2}
   m_sharedMaterial: {fileID: 3474365627004673081, guid: 99fec38021d0c6547975b83fa4b88c41, type: 2}
@@ -249,8 +251,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -333,7 +335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 227, y: -1923}
+  m_AnchoredPosition: {x: 227, y: -2094}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &394317588
@@ -383,8 +385,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 350
-  m_fontSizeBase: 350
+  m_fontSize: 300
+  m_fontSizeBase: 300
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -716,8 +718,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -966,8 +968,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 180
+  m_fontSizeBase: 180
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1265,7 +1267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2458}
+  m_AnchoredPosition: {x: 0, y: -2623}
   m_SizeDelta: {x: 1103.184, y: 328.7804}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1626645237
