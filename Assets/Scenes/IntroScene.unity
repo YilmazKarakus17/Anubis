@@ -2982,12 +2982,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "The world of humankind is tormented by beings beyond the grasp of ordinary
-    intelligence.\n\nAnubis. Ra. Zeus. Hades. Thor. Odin.\n\nGods.\n\nThey rule different
-    aspects of the plane of man.\r\n\r\nThey all dueled once and the gods of Egypt
-    ruled. \n\nAfter the war, the monsters of various underworlds were released.\r\n\r\nMinotaurs,
-    Skeletons, Goblins, Flaming Worms. \n\nThey were all unleashed upon this world.
-    Humankind faught back, but the war was a labour.\r\n\nDreous, a soldier, died
-    during that war... but Anubis had other plans for him."
+    intelligence.\n\n\nAnubis. Ra. Zeus. Hades. Thor. Odin.\n\nGods.\n\n\nThey rule
+    different aspects of the Earthly plane.\r\n\r\n\nThey all dueled once and the
+    gods of Egypt ruled. \n\n\nAfter the war, the monsters of various underworlds
+    were released.\r\n\r\n\nMinotaurs, Skeletons, Goblins, Flaming Worms. \n\n\nThey
+    were all unleashed upon this world. Humankind faught back, but the war was a
+    labour.\r\n\n\nDreous, a soldier, died during that war... but Anubis had other
+    plans for him."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
