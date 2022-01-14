@@ -5,7 +5,7 @@ A 2D action/adventure platformer for our Multi-Platform Games Development (ECS65
 https://yilmazkarakus17.github.io/Anubis/build/index.html
 
 ## Most Recent Branch
-Anubis_v1.2 https://github.com/YilmazKarakus17/Anubis/tree/Anubis_v1.2
+Anubis https://github.com/YilmazKarakus17/Anubis/edit/Anubis
 
 ## Instructions
 ### Movement Keys
