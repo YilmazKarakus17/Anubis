@@ -9,20 +9,23 @@ Anubis_v1.2 https://github.com/YilmazKarakus17/Anubis/tree/Anubis_v1.2
 
 ## Instructions
 ### Movement Keys
-##### To Move Up: **W** or **Space Bar** or **Up Arrow**
 ##### To Move Left: **A** or **Left Arrow**
 ##### To Move Right: **D** or **Right Arrow**
+##### To Jump: **W** or **Space Bar** or **Up Arrow**
+##### To Dash: **L + Shift**
+
 
 ##### To Start a Conversation with NPCs: **Left Mouse Click**
 ##### To Skip Continue Dialog with NPCs: **Tap**
 
-##### To Dash: **L + Shift**
 ##### To Attack: **Left Mouse Click** or J
-##### To Shockwave: **Right Mouse Click** or K
-##### To Shockwave: **Middle Mouse Click** or L
+##### To Chain Attack: Repeatedly press **Left Mouse Click** or J
+##### To Create Shockwaves: **Right Mouse Click** or K
+##### To Create Thunder Strike: **Middle Mouse Click** or L
 
 ### Powerups
 ##### Invulnerability: Makes the player invulnerable for a limited amount of time
+##### Gravity Reverse: Reverses the player's gravity and orientation (anti-gravity)
 ##### Jump Boost: Allows for greater jump magnitude.
 
 ### Level 1 is the scene that needs to be run first
