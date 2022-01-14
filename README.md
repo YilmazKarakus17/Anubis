@@ -28,8 +28,6 @@ Anubis_v1.2 https://github.com/YilmazKarakus17/Anubis/tree/Anubis_v1.2
 ##### Gravity Reverse: Reverses the player's gravity and orientation (anti-gravity)
 ##### Jump Boost: Allows for greater jump magnitude.
 
-### Level 1 is the scene that needs to be run first
-
 ## Game Design
 The base game concept that our group has decided to design and implement from is concept number 4. The game is to be a 2D combat-based platformer where the player defeats enemies, in order to proceed higher and higher. The will of the gods shall not determine the fate of our protagonist. Defy the gods and ascend higher than the gods themselves!
 
