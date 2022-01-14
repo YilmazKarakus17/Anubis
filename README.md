@@ -58,22 +58,22 @@ The base game concept that our group has decided to design and implement from is
 * The player can save the state of the game and continue from wherever they left of from.
 
 ## References 
-Animated Pixel Adventurer by rvros: https://rvros.itch.io/animated-pixel-hero
-2D Pixel Art Minotaur Sprites by Elthen's Pixel Art Shop: https://elthen.itch.io/2d-pixel-art-minotaur-sprites
-Free Pixel Font - Thaleah | 2D Fonts | Unity Asset Store: https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059
-2D Pixel Item Asset Pack | 2D Icons | Unity Asset Store: https://assetstore.unity.com/packages/2d/gui/icons/2d-pixel-item-asset-pack-99645
-Pixel Art Platformer - Village Props | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/pixel-art-platformer-village-props-166114
-Platformer Set | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/platformer-set-150023
-2D Ice World | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/2d-ice-world-106818
-Platformer Fantasy SET1 | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/platformer-fantasy-set1-159063
-Monsters Creatures Fantasy by LuizMelo: https://luizmelo.itch.io/monsters-creatures-fantasy
-Fire Worm by LuizMelo: https://luizmelo.itch.io/fire-worm
-Thunder Spell Effect 02 by pimen: https://pimen.itch.io/thunder-spell-effect-02
-Cavernas by Adam Saltsman: https://adamatomic.itch.io/cavernas
-Mossy Cavern by Maaot: https://maaot.itch.io/mossy-cavern
-Mountain Dusk Parallax background by ansimuz: https://ansimuz.itch.io/mountain-dusk-parallax-background
-Action RPG Music Free | Audio Music | Unity Asset Store: https://assetstore.unity.com/packages/audio/music/action-rpg-music-free-85434
-The Hero's Path (Free 16bit Adventure Game Music) | Audio Music | Unity Asset Store: https://assetstore.unity.com/packages/audio/music/the-hero-s-path-free-16bit-adventure-game-music-204232
+* Animated Pixel Adventurer by rvros: https://rvros.itch.io/animated-pixel-hero
+* 2D Pixel Art Minotaur Sprites by Elthen's Pixel Art Shop: https://elthen.itch.io/2d-pixel-art-minotaur-sprites
+* Free Pixel Font - Thaleah | 2D Fonts | Unity Asset Store: https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059
+* 2D Pixel Item Asset Pack | 2D Icons | Unity Asset Store: https://assetstore.unity.com/packages/2d/gui/icons/2d-pixel-item-asset-pack-99645
+* Pixel Art Platformer - Village Props | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/pixel-art-platformer-village-props-166114
+* Platformer Set | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/platformer-set-150023
+* 2D Ice World | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/2d-ice-world-106818
+* Platformer Fantasy SET1 | 2D Environments | Unity Asset Store: https://assetstore.unity.com/packages/2d/environments/platformer-fantasy-set1-159063
+* Monsters Creatures Fantasy by LuizMelo: https://luizmelo.itch.io/monsters-creatures-fantasy
+* Fire Worm by LuizMelo: https://luizmelo.itch.io/fire-worm
+* Thunder Spell Effect 02 by pimen: https://pimen.itch.io/thunder-spell-effect-02
+* Cavernas by Adam Saltsman: https://adamatomic.itch.io/cavernas
+* Mossy Cavern by Maaot: https://maaot.itch.io/mossy-cavern
+* Mountain Dusk Parallax background by ansimuz: https://ansimuz.itch.io/mountain-dusk-parallax-background
+* Action RPG Music Free | Audio Music | Unity Asset Store: https://assetstore.unity.com/packages/audio/music/action-rpg-music-free-85434
+* The Hero's Path (Free 16bit Adventure Game Music) | Audio Music | Unity Asset Store: https://assetstore.unity.com/packages/audio/music/the-hero-s-path-free-16bit-adventure-game-music-204232
 
 
 
